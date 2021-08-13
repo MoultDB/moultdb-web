@@ -1,0 +1,10 @@
+{
+  "short_name": "MoultDb",
+  "name": "MoultDb",
+  "description": "Resource on moulting in arthropods (from paleontology to genomics).",
+  "lang": "en",
+  "dir": "rtl",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff"
+}

@@ -1,0 +1,14 @@
+#moultdb-footer {
+    font-size: 0.8em;
+    min-height: 30px;
+    width: 100%;
+}
+
+#moultdb-footer p, #moultdb-footer a {
+    color: white;
+    margin-bottom: 0;
+}
+
+#moultdb-footer p:hover, #moultdb-footer a:hover {
+    color: var(--main-medium-color);
+}

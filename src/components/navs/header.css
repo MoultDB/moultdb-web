@@ -1,0 +1,21 @@
+#moultdb-header {
+    background-color: var(--main-dark-color);
+    padding: 0;
+}
+
+#moultdb-header span.moultdb-name {
+    line-height: 40px;
+    margin-left: 10px;
+}
+
+#moultdb-header a.navbar-brand {
+    padding: 0;
+}
+
+#moultdb-header .nav-link {
+    color: white;
+}
+#moultdb-header .nav-link:hover, #moultdb-header .nav-link:focus {
+    color: var(--main-light-color);
+    text-decoration: underline;
+}

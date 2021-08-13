@@ -1,0 +1,43 @@
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+}
+
+ul.timeline:before {
+    background: #d4d9df;
+    content: ' ';
+    display: inline-block;
+    height: 100%;
+    left: 29px;
+    position: absolute;
+    width: 2px;
+    z-index: 400;
+}
+
+ul.timeline > li {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+
+ul.timeline > li:before {
+    background: white;
+    border: 3px solid var(--main-medium-color);
+    border-radius: 50%;
+    content: ' ';
+    display: inline-block;
+    height: 20px;
+    left: 20px;
+    position: absolute;
+    width: 20px;
+    z-index: 400;
+}
+
+.item-title {
+    font-weight: bold;
+}
+
+.item-date {
+    color: var(--lightest-grey-color);
+    font-size: 0.8em;
+    margin-left: 0.5em;
+}

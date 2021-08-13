@@ -1,0 +1,62 @@
+/* FIXME: choose between green and brown colors */
+:root {
+  --main-dark-color:#653800;
+  --main-medium-color:#A26938;
+  --main-light-color:#FFD0A9;
+  --lightest-grey-color: #767676; /* lightest gray acceptable so that the contrast with the white background is sufficient for color blind */
+}
+:root {
+  --main-dark-color:#08786E;
+  --main-medium-color:#138379;
+  --main-light-color:#FFE8D3;
+  --lightest-grey-color: #767676; /* lightest gray acceptable so that the contrast with the white background is sufficient for color blind */
+}
+
+body {
+  margin: 0;
+}
+
+#moultdb-content {
+  font-size: 0.9em;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+#moultdb-body h1, #moultdb-body h2, #moultdb-body h3 {
+  font-weight: bold;
+}
+
+#moultdb-body h1 {
+  color: var(--main-dark-color);
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+#moultdb-body h2 {
+  border-bottom: 2px var(--main-medium-color) solid; /* Set color for browsers that do not support gradients */
+  border-image: linear-gradient(to right, var(--main-medium-color) 70%, rgba(146, 2, 9, 0)) 1;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  font-size: 1.2em;
+  margin: 1em 0 1em 0;
+  width: 100%;
+}
+#moultdb-body h3 {
+  font-size: 1.1em;
+  margin: 2em 0 1em 0;
+}
+#moultdb-body h4 {
+  font-size: 1em;
+  font-weight: bold;
+  margin: 2em 0 1em 0;
+}
+#moultdb-body h5 {
+  font-size: 1em;
+  margin: 1em 0 1em 0;
+}
+#moultdb-body a {
+  color: var(--main-medium-color);
+}

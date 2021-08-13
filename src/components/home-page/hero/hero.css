@@ -1,0 +1,10 @@
+.moultdb-hero {
+  align-items: center;
+  background-color: var(--main-light-color);
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  justify-content: center;
+  min-height: 20vh;
+  text-align: center;
+}
