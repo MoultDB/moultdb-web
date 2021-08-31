@@ -19,3 +19,10 @@
     color: var(--main-light-color);
     text-decoration: underline;
 }
+
+#moultdb-header a.navbar-brand img {
+    height: 30px;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}

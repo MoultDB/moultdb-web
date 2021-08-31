@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import './header.css';
+import Logo from "../../assets/images/moultdb_logo_white_light.png";
 
 export default function Header() {
     return (
@@ -13,6 +14,7 @@ export default function Header() {
                         <span className="navbar-toggler-icon"/>
                     </button>
                     <Link to="/" className="navbar-brand">
+                        <img src={Logo} className="d-inline-block align-top" alt="MoutlDB logo"/>
                         <span className="moultdb-name">MoultDB</span>
                     </Link>
                     <div className="collapse navbar-collapse" id="navbarCollapse">

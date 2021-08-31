@@ -2,6 +2,13 @@
   "short_name": "MoultDb",
   "name": "MoultDb",
   "description": "Resource on moulting in arthropods (from paleontology to genomics).",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "16x16",
+      "type": "image/x-icon"
+    }
+  ],
   "lang": "en",
   "dir": "rtl",
   "start_url": ".",
