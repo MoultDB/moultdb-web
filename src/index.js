@@ -10,6 +10,7 @@ import Header from "./components/navs/header";
 import HomePage from "./components/home-page/home-page";
 import News from "./components/about/news";
 import Notfound from "./components/notfound";
+import RelatedProjects from "./components/about/related-projects";
 
 const routing = (
     <Router basename={process.env.REACT_APP_ROUTER_BASE || ''}>
@@ -18,6 +19,7 @@ const routing = (
             <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route path="/about/moultdb" component={About} />
+                <Route path="/about/related-projects" component={RelatedProjects} />
                 <Route path="/about/news" component={News} />
                 <Route component={Notfound} />
             </Switch>
