@@ -8,7 +8,7 @@ const News = () => {
         <section className="moultdb-news">
             <h2>Last news</h2>
             <AdBlockDetect />
-            <div className="twitter-embed col-sm-10 col-xxl-9">
+            <div className="twitter-embed col-xl-10 col-xxl-9">
                 <TwitterTimelineEmbed sourceType="profile" screenName="moultdb" noHeader placeholder="Loading..."
                                       options={{tweetLimit: "5", lang: "en", dnt: "true", cards: "hidden"}}
                 />
