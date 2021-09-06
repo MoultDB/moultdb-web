@@ -27,6 +27,7 @@ export default function Header() {
                                 <div className="dropdown-menu" aria-labelledby="navbarAbout">
                                     <Link to="/about/moultdb" className="dropdown-item">MoultDB</Link>
                                     <Link to="/about/related-projects" className="dropdown-item">Related projects</Link>
+                                    <Link to="/about/privacy-notice" className="dropdown-item">Privacy notice</Link>
                                     <a href="https://github.com/MoultDB/" className="dropdown-item"
                                        target="_blank" rel="noopener noreferrer">Source code</a>
                                 </div>

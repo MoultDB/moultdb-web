@@ -10,6 +10,7 @@ import Header from "./components/navs/header";
 import HomePage from "./components/home-page/home-page";
 import Notfound from "./components/notfound";
 import RelatedProjects from "./components/about/related-projects";
+import PrivacyNotice from "./components/privacy-notice/privacy-notice";
 
 const routing = (
     <Router basename={process.env.REACT_APP_ROUTER_BASE || ''}>
@@ -19,6 +20,7 @@ const routing = (
                 <Route exact path="/" component={HomePage} />
                 <Route path="/about/moultdb" component={About} />
                 <Route path="/about/related-projects" component={RelatedProjects} />
+                <Route path="/about/privacy-notice" component={PrivacyNotice} />
                 <Route component={Notfound} />
             </Switch>
         </div>
