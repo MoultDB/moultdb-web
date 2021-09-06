@@ -8,7 +8,6 @@ import About from "./components/about/about";
 import Footer from "./components/navs/footer";
 import Header from "./components/navs/header";
 import HomePage from "./components/home-page/home-page";
-import News from "./components/about/news";
 import Notfound from "./components/notfound";
 import RelatedProjects from "./components/about/related-projects";
 
@@ -20,7 +19,6 @@ const routing = (
                 <Route exact path="/" component={HomePage} />
                 <Route path="/about/moultdb" component={About} />
                 <Route path="/about/related-projects" component={RelatedProjects} />
-                <Route path="/about/news" component={News} />
                 <Route component={Notfound} />
             </Switch>
         </div>

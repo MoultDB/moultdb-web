@@ -1,8 +1,8 @@
 import React from 'react';
 import './home-page.css';
 import Hero from "./hero/hero";
-import Section from "./intro-section/intro-section";
-import Timeline from "../timeline/timeline";
+import News from "./news/news";
+import IntroSection from "./intro-section/intro-section";
 
 export default function HomePage() {
     return (
@@ -11,17 +11,11 @@ export default function HomePage() {
             <div className="moultdb-section">
                 <div className="row ">
                     <div className="col-md-6">
-                        <Section />
+                        <IntroSection />
                     </div>
                     <div className="col-md-6">
-                        <Section />
+                        <News />
                     </div>
-                </div>
-                <div className="row">
-                    <section className="col-md-12 moultdb-news">
-                        <h2>Last news</h2>
-                        <Timeline count={2} />
-                    </section>
                 </div>
             </div>
         </main>
