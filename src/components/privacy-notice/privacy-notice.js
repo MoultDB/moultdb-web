@@ -71,7 +71,7 @@ export default class PrivacyNotice extends Component {
                     <p>Any requests of this kind should be sent by e-mail to:</p>
                     <p>
                         Marc Robinson-Rechavi, MoultDB Co-Principal Investigator and Professor at University of Lausanne (
-                        <Obfuscate email= {process.env.REACT_APP_PI1_EMAIL}
+                        <Obfuscate email= {process.env.REACT_APP_CONTACT_EMAIL}
                                    headers={{subject: '[MoultDB] Privacy notice'}}>e-mail</Obfuscate>)<br />
                         Department of Ecology and Evolution<br />
                         University of Lausanne, 1015 Lausanne, Switzerland
