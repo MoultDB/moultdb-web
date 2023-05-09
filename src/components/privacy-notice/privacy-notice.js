@@ -49,18 +49,18 @@ export default class PrivacyNotice extends Component {
                     <p>We do our utmost to ensure the security of your data and avoid any inappropriate access, use, modification or disclosure of your personal information. We also do our utmost to ensure that any third party to whom your data are process them securely to ensure their confidentiality and integrity.</p>
                     <p>MoultDB is stored on a secure University of Lausanne's server. Our website use TLS certificates authenticated by a third party to guarantee the confidentiality of the data exchanged, in particular during the delivery of an online service. These certificates also provide a means of checking that your computer is communicating correctly with the server. IP addresses are removed from log files or anonymized before being stored in case they are needed.</p>
 
-                    {/*<h2>Cookies</h2>*/}
-                    {/*<p>The user is informed that cookies may be stored on the hard drive of his/her/its computer to record information about his/her/its visits to this web site. Cookies are used to identify the user and to facilitate and customize this web site's use by memorizing certain parameters. Cookies are used, in particular, to obtain information on the visits to the pages of this web site and the date and time of consultation.</p>*/}
-                    {/*<p>The user can at any time prevent the recording and storage of cookies on her/his/its computer by disabling the option in her/his/its browser. However, some features of this web site may require the mandatory use of cookies (customization, warnings, etc.). Otherwise, the use of this web site may be impaired or even impossible.</p>*/}
-                    {/*<p>MoultDB uses Google Analytics as a third-party analytics service to collect information about website performance and how users navigate through and use our site to help us design better interfaces. The list below provides a summary of the type of data Google Analytics collects:</p>*/}
-                    {/*<ul>*/}
-                    {/*    <li>Geographical origin</li>*/}
-                    {/*    <li>Pages viewed and behavior flow</li>*/}
-                    {/*    <li>Date and time of a visit to the service</li>*/}
-                    {/*    <li>Operating system</li>*/}
-                    {/*    <li>Browser</li>*/}
-                    {/*</ul>*/}
-                    {/*<p>We do not use Google Analytics to track you individually or collect personal data. Personal data send to Google Analytics are anonymized upstream.</p>*/}
+                    <h2>Cookies</h2>
+                    <p>The user is informed that cookies may be stored on the hard drive of his/her/its computer to record information about his/her/its visits to this web site. Cookies are used to identify the user and to facilitate and customize this web site's use by memorizing certain parameters. Cookies are used, in particular, to obtain information on the visits to the pages of this web site and the date and time of consultation.</p>
+                    <p>The user can at any time prevent the recording and storage of cookies on her/his/its computer by disabling the option in her/his/its browser. However, some features of this web site may require the mandatory use of cookies (customization, warnings, etc.). Otherwise, the use of this web site may be impaired or even impossible.</p>
+                    <p>MoultDB uses Google Analytics as a third-party analytics service to collect information about website performance and how users navigate through and use our site to help us design better interfaces. The list below provides a summary of the type of data Google Analytics collects:</p>
+                    <ul>
+                        <li>Geographical origin</li>
+                        <li>Pages viewed and behavior flow</li>
+                        <li>Date and time of a visit to the service</li>
+                        <li>Operating system</li>
+                        <li>Browser</li>
+                    </ul>
+                    <p>We do not use Google Analytics to track you individually or collect personal data. Personal data send to Google Analytics are anonymized upstream.</p>
 
                     <h2>How long do we keep your personal data?</h2>
                     <p>Personal data are destroyed or made anonymous as soon as it is no longer necessary for the purpose for which they were collected.</p>
