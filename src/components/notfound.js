@@ -1,6 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 export default function Notfound() {
+
+    useEffect(() => {
+        document.title = "MoultDB - Not found"
+    }, []);
+
     return <div>
         <h1>404 - Page not found</h1>
         <div className="row">

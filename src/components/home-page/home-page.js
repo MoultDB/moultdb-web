@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './home-page.css';
 import Hero from "./hero/hero";
 import News from "./news/news";
 import IntroSection from "./intro-section/intro-section";
 
 export default function HomePage() {
+
+    useEffect(() => {
+        document.title = "MoultDB"
+    }, []);
+
     return (
         <main>
             <Hero />

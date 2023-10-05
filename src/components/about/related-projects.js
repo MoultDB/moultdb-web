@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 export default function RelatedProjects() {
+
+    useEffect(() => {
+        document.title = "MoultDB - Related projects"
+    }, []);
+
     return (
         <div className="row">
             <div className='col-sm-10 offset-sm-1'>
