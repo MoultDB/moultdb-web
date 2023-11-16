@@ -7,6 +7,7 @@ import PrivacyNotice from "./components/privacy-notice/privacy-notice";
 import Notfound from "./components/notfound";
 import CookieConsent from "react-cookie-consent";
 import Footer from "./components/navs/footer";
+import Species from "./components/species/species";
 
 function App() {
     return (
@@ -41,6 +42,7 @@ function CustomRoutes() {
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="about" element={<About />} />
+            <Route path="species/:path" element={<Species />} />
             <Route path="about/related-projects" element={<RelatedProjects />} />
             <Route path="about/privacy-notice" element={<PrivacyNotice />} />
             <Route path="404" element={<Notfound />} />
