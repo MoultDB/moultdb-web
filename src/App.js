@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Link, Route, Switch, useHistory} from "react-router-dom";
+import {BrowserRouter, Link, Navigate, Route, Routes} from "react-router-dom";
 import Header from "./components/navs/header";
 import HomePage from "./components/home-page/home-page";
 import About from "./components/about/about";
@@ -10,10 +10,10 @@ import Footer from "./components/navs/footer";
 
 function App() {
     return (
-        <Router>
+        <BrowserRouter>
             <Header />
             <div id="moultdb-body">
-                <Routes />
+                <CustomRoutes />
                 <CookieConsent
                     location="bottom"
                     buttonText="Do not show this banner again"
@@ -30,21 +30,22 @@ function App() {
                 </CookieConsent>
             </div>
             <Footer />
-        </Router>
+        </BrowserRouter>
     );
 }
 
 export default App;
 
-function Routes() {
+function CustomRoutes() {
     return (
-        <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/about/moultdb" component={About} />
-            <Route path="/about/related-projects" component={RelatedProjects} />
-            <Route path="/about/privacy-notice" component={PrivacyNotice} />
-            <Route component={Notfound} />
-        </Switch>
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="about" element={<About />} />
+            <Route path="about/related-projects" element={<RelatedProjects />} />
+            <Route path="about/privacy-notice" element={<PrivacyNotice />} />
+            <Route path="404" element={<Notfound />} />
+            <Route path="*" element={<Navigate replace to="/404" />} />
+        </Routes>
     );
 }
 
