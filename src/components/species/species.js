@@ -153,10 +153,10 @@ const Species = () => {
                             </div>
                         }
 
-                        <h2>Genome(s)</h2>
+                        <h2>Genome(s) <span className={"subtitle"}>(current taxon and its children)</span></h2>
                         <GenomeData taxonPath={taxon.path}/>
 
-                        <h2>Moulting characters</h2>
+                        <h2>Moulting characters <span className={"subtitle"}>(current taxon and its children)</span></h2>
                         <PhenotypicData taxonPath={taxon.path}/>
                     </div>
                 </div>
