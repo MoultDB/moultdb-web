@@ -43,7 +43,7 @@ function displayXref(taxon) {
                                 {groupedByDataSource[dataSourceName].map((element, index) => (
                                     <li key={index}>
                                         <a href={element.xrefURL} rel="noopener noreferrer" target="_blank">
-                                            {element.name}
+                                            {element.name} ({element.accession})
                                         </a>
                                         {index < groupedByDataSource[dataSourceName].length - 1 && '; '}
                                     </li>
