@@ -1,18 +1,23 @@
 {
   "name": "moultdb-web",
-  "version": "0.4.0",
+  "version": "0.5.0-SNAPSHOT",
   "license": "GPL-3.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "axios": "^1.6.2",
     "bootstrap": "^5.1.0",
+    "datatables.net-buttons-dt": "^2.4.2",
+    "datatables.net-dt": "^1.13.8",
+    "datatables.net-responsive-dt": "^2.5.0",
+    "jquery": "^3.7.1",
     "react": "^17.0.2",
     "react-cookie-consent": "^6.3.0",
     "react-dom": "^17.0.2",
     "react-obfuscate": "^3.6.8",
-    "react-router-dom": "^5.2.1",
+    "react-router-dom": "^6.18.0",
     "web-vitals": "^2.1.0"
   },
   "devDependencies": {
