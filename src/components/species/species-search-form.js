@@ -5,7 +5,7 @@ import {getMainUrl} from "../../common/taxon-utils";
 import Loading from "../data/loading";
 
 const examples = {
-    searchedText: ['Fuxianhuia protensa', 'Apis mellifera']
+    searchedText: ['Fuxianhuia protensa', 'Chionoecetes opilio']
 };
 
 class SpeciesSearchForm extends Component {
