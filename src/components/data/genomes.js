@@ -7,6 +7,8 @@ import {getMainUrl} from "../../common/taxon-utils";
 
 const $ = require('jquery');
 $.DataTable = require( 'datatables.net-dt' );
+$.DataTable = require( 'datatables.net-buttons-dt' );
+$.DataTable = require( 'datatables.net-buttons/js/buttons.html5.js' );
 
 const columns = [
     {
@@ -55,7 +57,7 @@ class GenomeData extends Component {
         $(this.refs.gdata).DataTable({
             order: [[1, 'asc'], [2, 'asc']],
             dom:"<'row'<'col-sm-4'l><'col-sm-4'i><'col-sm-4 browse-search'f>>" +
-                "<'row'<'data-table-wrapper col-sm-12'tr>>" +
+                "<'row my-1'<'data-table-wrapper col-sm-12'tr>>" +
                 "<'row'<'col-sm-6 btn-download'B><'col-sm-6'p>>",
             oLanguage: {
                 sSearch: "Filter:"
@@ -69,7 +71,20 @@ class GenomeData extends Component {
                 }
             },
             ordering: true,
-            data: this.props.genomeData
+            data: this.props.genomeData,
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy to clipboard'
+                },
+                {
+                    extend: 'csvHtml5',
+                    fieldSeparator: '\t',
+                    extension: '.tsv',
+                    text: 'TSV',
+                    title: 'MoultDB export - genomes'
+                }
+            ]
         });
     }
     componentWillUnmount(){

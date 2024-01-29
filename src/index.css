@@ -58,3 +58,7 @@ body {
   z-index: 1040 !important;
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+div.dt-buttons {
+  margin-top: 0.25em;
+}

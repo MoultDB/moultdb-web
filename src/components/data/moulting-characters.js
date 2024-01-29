@@ -6,8 +6,9 @@ import "datatables.net-responsive-dt/css/responsive.dataTables.css"
 
 const $ = require('jquery');
 $.DataTable = require( 'datatables.net-dt' );
-require( 'datatables.net-buttons-dt' );
-require( 'datatables.net-responsive-dt' )
+$.DataTable = require( 'datatables.net-buttons-dt' );
+$.DataTable = require( 'datatables.net-buttons/js/buttons.html5.js' );
+$.DataTable = require( 'datatables.net-responsive-dt' )
 
 const columns = [
     {
@@ -106,7 +107,7 @@ class MoultingCharacters extends Component {
         $(this.refs.mcharacters).DataTable({
             order: [[1, 'asc'], [2, 'asc']],
             dom:"<'row'<'col-sm-4'l><'col-sm-4'i><'col-sm-4 browse-search'f>>" +
-                "<'row'<'data-table-wrapper col-sm-12'tr>>" +
+                "<'row my-1'<'data-table-wrapper col-sm-12'tr>>" +
                 "<'row'<'col-sm-6 btn-download'B><'col-sm-6'p>>",
             oLanguage: {
                 sSearch: "Filter:"
@@ -120,7 +121,20 @@ class MoultingCharacters extends Component {
                 }
             },
             ordering: true,
-            data: this.props.mcData
+            data: this.props.mcData,
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy to clipboard'
+                },
+                {
+                    extend: 'csvHtml5',
+                    fieldSeparator: '\t',
+                    extension: '.tsv',
+                    text: 'TSV',
+                    title: 'MoultDB export - moulting characters'
+                }
+            ]
         });
     }
     componentWillUnmount(){
