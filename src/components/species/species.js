@@ -113,7 +113,7 @@ const Species = () => {
             }
         }
         fetchData();
-    }, []); // empty table [] means that this effect is executed only once when the component is assembled.
+    }, [params.datasource, params.accession]);
 
     return (
         <main className={"container "}>
