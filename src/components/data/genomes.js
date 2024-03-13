@@ -1,25 +1,19 @@
 import React, {Component} from 'react';
-import "datatables.net-dt/css/jquery.dataTables.min.css"
-import "datatables.net-buttons-dt/css/buttons.dataTables.min.css"
-import "datatables.net-responsive-dt/css/responsive.dataTables.css"
 import {getMainUrl} from "../../common/taxon-utils";
+import "datatables.net-dt/css/dataTables.dataTables.min.css"
+import "datatables.net-buttons-dt/css/buttons.dataTables.min.css"
+import "datatables.net-searchbuilder-dt/css/searchBuilder.dataTables.css"
+import "datatables.net-datetime/css/dataTables.dateTime.scss"
+import './data.css'
 
 
 const $ = require('jquery');
 $.DataTable = require( 'datatables.net-dt' );
 $.DataTable = require( 'datatables.net-buttons-dt' );
-$.DataTable = require( 'datatables.net-buttons/js/buttons.html5.js' );
+$.DataTable = require( 'datatables.net-searchbuilder-dt' );
+$.DataTable = require( 'datatables.net-datetime' );
 
 const columns = [
-    {
-        className: 'control',
-        orderable: false,
-        data: null,
-        render: function ( data, type, full ) {
-            return '';
-        },
-        targets:   -1
-    },
     { title: 'Species', data: 'taxon',
         render: function ( data, type, full ) {
             if (data) {
@@ -56,29 +50,36 @@ class GenomeData extends Component {
     componentDidMount() {
         $(this.refs.gdata).DataTable({
             order: [[1, 'asc'], [2, 'asc']],
-            dom:"<'row'<'col-sm-4'l><'col-sm-4'i><'col-sm-4 browse-search'f>>" +
-                "<'row my-1'<'data-table-wrapper col-sm-12'tr>>" +
-                "<'row'<'col-sm-6 btn-download'B><'col-sm-6'p>>",
+            scrollX: true,
+            dom:"<'row'<'col'Q>>" +
+                "<'row'<'col page-length'l><'col text-center'i><'col text-end'f>>" +
+                "<'row my-1'<'data-table-wrapper col'tr>>" +
+                "<'row'<'col'B><'col text-end'p>>",
+            language: {
+                searchBuilder: {
+                    add: 'Add filter',
+                    clearAll: 'Reset filters',
+                    data: 'Column',
+                    title: {
+                        0: '',
+                        _: 'Filters (%d)'
+                    },
+                }
+            },
             oLanguage: {
-                sSearch: "Filter:"
+                sSearch: "Global filter:"
             },
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
             columns,
-            responsive: {
-                details: {
-                    type: 'column',
-                    target: 'tr'
-                }
-            },
             ordering: true,
             data: this.props.genomeData,
             buttons: [
                 {
-                    extend: 'copyHtml5',
+                    extend: 'copy',
                     text: 'Copy to clipboard'
                 },
                 {
-                    extend: 'csvHtml5',
+                    extend: 'csv',
                     fieldSeparator: '\t',
                     extension: '.tsv',
                     text: 'TSV',
@@ -93,12 +94,8 @@ class GenomeData extends Component {
 
     render() {
         return (<div>
-                <div className={"result-info mb-3"}>
-                    <p>Clicking on the <span className={"open-row"}/> sign shows the full information for each row.</p>
-                </div>
-
                 <table id="genome-result" ref="gdata"
-                       className={'table table-sm table-striped table-bordered table-hover responsive '}>
+                       className={'table table-sm table-striped table-bordered table-hover'}>
                 </table>
             </div>
         )
