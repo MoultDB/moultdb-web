@@ -101,7 +101,7 @@ const Species = () => {
             if (responseData) {
                 await MoultdbService.getTaxonLineage(responseData.path)
                     .then(response => {
-                        if (response.data) {
+                        if (response?.data?.data?.length > 0) {
                             setLineage(response.data.data);
                         }
                     })
