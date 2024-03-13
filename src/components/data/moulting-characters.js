@@ -34,10 +34,10 @@ const columns = [
     { title: 'Geological age', data: 'sampleSet.timePeriod',
         render: function ( data, type, full ) {
             if (data) {
-                if (data.geologicalAgeFrom.name === data.geologicalAgeFrom.name) {
+                if (data.geologicalAgeFrom.name === data.geologicalAgeTo.name) {
                     return data.geologicalAgeFrom.name;
                 }
-                return data.geologicalAgeFrom.name + " - " + data.geologicalAgeFrom.name;
+                return data.geologicalAgeFrom.name + " - " + data.geologicalAgeTo.name;
             }
             return '';
         }
