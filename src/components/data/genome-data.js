@@ -27,7 +27,7 @@ export const GenomeData = (props) => {
         }
 
         fetchData();
-    }, []); // empty table [] means that this effect is executed only once when the component is assembled.
+    }, [props.taxonPath]);
 
     return (<div>
             { error && <div className={"container alert alert-danger"} role="alert">{error}</div> }

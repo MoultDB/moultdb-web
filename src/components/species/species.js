@@ -101,7 +101,7 @@ const Species = () => {
             if (responseData) {
                 await MoultdbService.getTaxonLineage(responseData.path)
                     .then(response => {
-                        if (response.data) {
+                        if (response?.data?.data?.length > 0) {
                             setLineage(response.data.data);
                         }
                     })
@@ -113,7 +113,7 @@ const Species = () => {
             }
         }
         fetchData();
-    }, []); // empty table [] means that this effect is executed only once when the component is assembled.
+    }, [params.datasource, params.accession]);
 
     return (
         <main className={"container "}>
