@@ -9,6 +9,7 @@ import './data.css'
 const $ = require('jquery');
 $.DataTable = require( 'datatables.net-dt' );
 $.DataTable = require( 'datatables.net-buttons-dt' );
+$.DataTable = require( 'datatables.net-buttons/js/buttons.html5.js' );
 $.DataTable = require( 'datatables.net-responsive-dt' )
 $.DataTable = require( 'datatables.net-searchbuilder-dt' );
 
@@ -139,11 +140,11 @@ class MoultingCharacters extends Component {
             data: this.props.mcData,
             buttons: [
                 {
-                    extend: 'copy',
+                    extend: 'copyHtml5',
                     text: 'Copy to clipboard'
                 },
                 {
-                    extend: 'csv',
+                    extend: 'csvHtml5',
                     fieldSeparator: '\t',
                     extension: '.tsv',
                     text: 'TSV',
