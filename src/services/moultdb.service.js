@@ -4,22 +4,22 @@ class TaxonAnnotationService {
 
 
     getTaxonByText(searchedText) {
-        return axios.get("/taxon/search?text=" + searchedText);
+        return axios.get("/taxa/search?text=" + searchedText);
     }
     getTaxonByDbXref(datasource, accession) {
-        return axios.get("/taxon/dbxref?datasource=" + datasource + "&accession=" + accession);
+        return axios.get("/taxa?datasource=" + datasource + "&accession=" + accession);
     }
 
     getTaxonLineage(taxonPath) {
-        return axios.get("/taxon/lineage?path=" + taxonPath);
+        return axios.get("/taxa/" + taxonPath + "/lineage");
     }
     
     getTaxAnnotationsByTaxonPath(taxonPath) {
-        return axios.get("/taxon-annotation/species/path?taxonPath=" + taxonPath);
+        return axios.get("/taxon-annotations/species?taxonPath=" + taxonPath);
     }
     
     getGenomesByTaxonPath(taxonPath) {
-        return axios.get("/genome/taxon?withSubspeciesGenomes=true&taxonPath=" + taxonPath);
+        return axios.get("/genomes?withSubspeciesGenomes=true&taxonPath=" + taxonPath);
     }
 }
 
