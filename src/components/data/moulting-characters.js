@@ -26,7 +26,6 @@ const columns = [
     { title: 'Taxon', data: 'taxon',
         render: function ( data, type, full ) {
             if (data) {
-                // return data.scientificName;
                 return '<a href='+getMainUrl(data)+'>' + data.scientificName + '</a>'
             }
             return '';
