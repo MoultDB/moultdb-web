@@ -21,6 +21,10 @@ class TaxonAnnotationService {
     getGenomesByTaxonPath(taxonPath) {
         return axios.get("/genomes?withSubspeciesGenomes=true&taxonPath=" + taxonPath);
     }
+    
+    getMoultingGenesByTaxonPath(taxonPath) {
+        return axios.get("/genes?inAMoultingPathway=true&taxonPath=" + taxonPath);
+    }
 }
 
 /* eslint import/no-anonymous-default-export: [2, {"allowNew": true}] */

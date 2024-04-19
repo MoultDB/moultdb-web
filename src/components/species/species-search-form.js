@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './species-search.css'
 import MoultdbService from "../../services/moultdb.service";
-import {getMainUrl} from "../../common/taxon-utils";
+import {getMainLink, getMainUrl} from "../../common/taxon-utils";
 import Loading from "../data/loading";
 
 const examples = {
@@ -75,6 +75,7 @@ class SpeciesSearchForm extends Component {
     }
 
     getResultDisplay() {
+        let self = this;
         let result = "";
         if (this.state.isLoaded) {
             if (this.state.data && this.state.data.length > 0) {
@@ -83,8 +84,7 @@ class SpeciesSearchForm extends Component {
                         <ul>
                             {this.state.data.map((element, index) => (
                                 <li key={index}>
-                                    {/*TODO replace <a> by <Link to={getMainUrl(element)} >{element.scientificName}</Link>*/}
-                                    <a href={getMainUrl(element)} >{element.scientificName}</a>
+                                    {getMainLink(element)}
                                 </li>))}
                         </ul>
                     </div>

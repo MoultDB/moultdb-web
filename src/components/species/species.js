@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useParams} from "react-router-dom";
 import './species.css';
-import {getMainUrl} from "../../common/taxon-utils";
+import {getMainLink} from "../../common/taxon-utils";
 import ChangePageTitle from "../../common/change-page-title";
 import PhenotypicData from "../data/phenotypic-data";
 import MoultdbService from "../../services/moultdb.service";
 import GenomeData from "../data/genome-data";
+import GeneData from "../data/gene-data";
 
 function displayXref(taxon) {
     const groupedByDataSource = taxon.dbXrefs
@@ -144,8 +145,7 @@ const Species = () => {
                                     <ol className="lineage">
                                         {lineage.map((element, index) => (
                                             <li key={index}>
-                                                {/*TODO replace <a> by <Link to={getMainUrl(element)} >{element.scientificName}</Link>*/}
-                                                <a href={getMainUrl(element)}>{element.scientificName}</a>
+                                                {getMainLink(element)}
                                                 {index < lineage.length - 1 && <span className="lineage-separator"/>}
                                             </li>))}
                                     </ol>
@@ -158,6 +158,9 @@ const Species = () => {
 
                         <h2>Moulting characters <span className={"subtitle"}>(current taxon and its children)</span></h2>
                         <PhenotypicData taxonPath={taxon.path}/>
+
+                        <h2>Gene(s) involved in a moulting pathway</h2>
+                        <GeneData taxonPath={taxon.path}/>
                     </div>
                 </div>
                 : <div>Unknown taxon</div> }
