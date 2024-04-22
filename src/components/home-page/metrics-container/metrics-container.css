@@ -1,0 +1,50 @@
+/* Metrics_container ##################################################################################################################### */
+
+.cid-u64l9cpLGq {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: #ffffff;
+}
+.cid-u64l9cpLGq .mbr-fallback-image.disabled {
+  display: none;
+}
+.cid-u64l9cpLGq .item-wrapper {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cid-u64l9cpLGq .mbr-fallback-image {
+  display: block;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+.cid-u64l9cpLGq .mbr-iconfont {
+  display: inline-flex;
+  font-size: 2rem;
+  color: var(--primary-color, #d70081);
+  width: 80px;
+  justify-content: center;
+  align-items: center;
+  background: #ffd7ef;
+  height: 80px;
+  border-radius: 50%;
+}
+.cid-u64l9cpLGq .card-title,
+.cid-u64l9cpLGq .iconfont-wrapper{
+  color: var(--primary-color, #d70081);
+  text-align: center;
+}
+.cid-u64l9cpLGq .card-text {
+  color: #000000;
+  text-align: center;
+}
+.cid-u64l9cpLGq .content-head {
+  max-width: 800px;
+}
+.cid-u64l9cpLGq .mbr-section-title {
+  color: #000000;
+}

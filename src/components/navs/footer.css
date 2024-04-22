@@ -1,14 +1,58 @@
-#moultdb-footer {
-    font-size: 0.8em;
-    min-height: 30px;
-    width: 100%;
-}
+/* Footer  ##################################################################################################################### */
 
-#moultdb-footer p, #moultdb-footer a {
-    color: white;
-    margin-bottom: 0;
+.cid-u64l9croxI {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: #000000;
 }
-
-#moultdb-footer p:hover, #moultdb-footer a:hover {
-    color: var(--main-medium-color);
+.cid-u64l9croxI .social-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cid-u64l9croxI .social-row .soc-item {
+  margin: 8px;
+}
+.cid-u64l9croxI .social-row .soc-item a:hover .mbr-iconfont,
+.cid-u64l9croxI .social-row .soc-item a:focus .mbr-iconfont {
+  background-color: #ffffff;
+}
+.cid-u64l9croxI .social-row .soc-item a .mbr-iconfont {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  font-size: 32px;
+  background-color: #edefeb;
+  color: #000000;
+  transition: all 0.3s ease-in-out;
+}
+.cid-u64l9croxI .row-links {
+  width: 100%;
+  justify-content: center;
+}
+.cid-u64l9croxI .header-menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-bottom: 0;
+}
+.cid-u64l9croxI .header-menu li {
+  padding: 0 1rem 1rem 1rem;
+}
+.cid-u64l9croxI .header-menu li p {
+  margin: 0;
+}
+.cid-u64l9croxI .copyright {
+  margin-bottom: 0;
+  color: #ffffff;
+  text-align: center;
+}
+.cid-u64l9croxI .mbr-section-title {
+  color: #ffffff;
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import './moulting-characters.css';
 import {getMainUrl} from "../../common/taxon-utils";
-import "datatables.net-dt/css/jquery.dataTables.min.css"
+import "datatables.net-dt/css/dataTables.dataTables.min.css"
 import "datatables.net-buttons-dt/css/buttons.dataTables.min.css"
 import "datatables.net-responsive-dt/css/responsive.dataTables.css"
 
@@ -19,11 +20,11 @@ const columns = [
         },
         targets:   -1
     },
-    { title: 'Taxon', data: 'taxon',
-        render: function ( data, type, full ) {
+    {   title: 'Taxon <div class="custom-tooltip">Finest-grained taxonomic level of organism (ideally species)</div>', 
+        data: 'taxon',
+        render: function(data, type, full) {
             if (data) {
-                // return data.scientificName;
-                return '<a href='+getMainUrl(data)+'>' + data.scientificName + '</a>'
+                return `<a href=${getMainUrl(data)}>${data.scientificName}</a>`;
             }
             return '';
         }

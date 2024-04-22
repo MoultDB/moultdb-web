@@ -1,0 +1,44 @@
+ /* Social  ##################################################################################################################### */
+
+
+  .cid-u64l9cqTY6 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: #ffffff;
+}
+.cid-u64l9cqTY6 .social-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cid-u64l9cqTY6 .social-row .soc-item {
+  margin: 8px;
+}
+.cid-u64l9cqTY6 .social-row .soc-item a:hover .mbr-iconfont,
+.cid-u64l9cqTY6 .social-row .soc-item a:focus .mbr-iconfont {
+  background-color: #f7f7f7;
+}
+.cid-u64l9cqTY6 .social-row .soc-item a .mbr-iconfont {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  font-size: 32px;
+  background-color: #f7f7f7;
+  color: var(--primary-color, #393193);
+  transition: all 0.3s ease-in-out;
+}
+.cid-u64l9cqTY6 .row-links {
+  width: 100%;
+  justify-content: center;
+}
+.cid-u64l9cqTY6 .mbr-section-title {
+  color: #ffffff;
+}
+.cid-u64l9cqTY6 .mbr-section-title,
+.cid-u64l9cqTY6 .social-list {
+  color: #000000;
+}

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import "datatables.net-dt/css/jquery.dataTables.min.css"
-import "datatables.net-buttons-dt/css/buttons.dataTables.min.css"
-import "datatables.net-responsive-dt/css/responsive.dataTables.css"
+import "datatables.net-dt/css/dataTables.dataTables.min.css";
+import "datatables.net-buttons-dt/css/buttons.dataTables.min.css";
+import "datatables.net-responsive-dt/css/responsive.dataTables.css";
 import {getMainUrl} from "../../common/taxon-utils";
 
 

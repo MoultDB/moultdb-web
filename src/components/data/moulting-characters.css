@@ -1,0 +1,21 @@
+/* Stile del tooltip */
+.custom-tooltip {
+    display: none; /* Nasconde il tooltip di default */
+    position: absolute;
+    background-color: rgba(8, 120, 110, 1); /* Colore di sfondo del tooltip */
+    color: white; /* Colore del testo */
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 10px;
+    z-index: 100; /* Assicurati che il tooltip sia sopra altri elementi */
+    top: 100%; /* Posiziona il tooltip sotto l'elemento trigger */
+    left: 50%; /* Centra il tooltip */
+    font-size: 12px;
+    transform: translateX(-50%); /* Centra effettivamente il tooltip */
+    white-space: nowrap; /* Evita a capo nel testo del tooltip */
+}
+
+/* Mostra il tooltip quando l'intestazione della colonna è hover */
+th:hover .custom-tooltip {
+    display: block;
+}

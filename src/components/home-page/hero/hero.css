@@ -1,15 +1,49 @@
-.moultdb-hero {
-  align-items: center;
-  background-color: var(--main-light-color);
-  display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 1vmin);
-  justify-content: center;
-  min-height: 20vh;
-  text-align: center;
-}
+/* Hero  ##################################################################################################################### */
 
-.moultdb-logo {
-  height: 20vmin;
-  padding-top: 10px;
-}
+
+
+  .cid-u64l9coHiG {
+    display: flex;
+    background-image: url("../../../assets/images/large-4.jpeg");
+  }
+  .cid-u64l9coHiG .mbr-overlay {
+    background-color: #000000;
+    opacity: 0.5;
+  }
+  @media (min-width: 768px) {
+    .cid-u64l9coHiG {
+      align-items: flex-end;
+    }
+    .cid-u64l9coHiG .row {
+      justify-content: center;
+    }
+    .cid-u64l9coHiG .content-wrap {
+      padding: 1rem 3rem;
+    }
+  }
+  @media (max-width: 991px) and (min-width: 768px) {
+    .cid-u64l9coHiG .content-wrap {
+      min-width: 50%;
+    }
+  }
+  @media (max-width: 767px) {
+    .cid-u64l9coHiG {
+      -webkit-align-items: center;
+      align-items: flex-end;
+    }
+    .cid-u64l9coHiG .mbr-row {
+      -webkit-justify-content: center;
+      justify-content: center;
+    }
+    .cid-u64l9coHiG .content-wrap {
+      width: 100%;
+    }
+  }
+  .cid-u64l9coHiG .mbr-section-title,
+  .cid-u64l9coHiG .mbr-section-subtitle {
+    text-align: center;
+  }
+  .cid-u64l9coHiG .mbr-text,
+  .cid-u64l9coHiG .mbr-section-btn {
+    text-align: center;
+  }
