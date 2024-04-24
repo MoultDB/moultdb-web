@@ -7,8 +7,9 @@ import PrivacyNotice from "./components/privacy-notice/privacy-notice";
 import Notfound from "./components/notfound";
 import CookieConsent from "react-cookie-consent";
 import Footer from "./components/navs/footer";
-import Species from "./components/species/species";
-import Search from "./components/species/species-search";
+import Species from "./components/pages/species";
+import Search from "./components/pages/species-search";
+import Pathway from "./components/pages/pathway";
 
 function App() {
     return (
