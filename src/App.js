@@ -46,6 +46,7 @@ function CustomRoutes() {
             <Route path="about" element={<About />} />
             <Route path="species/search" element={<Search />} />
             <Route path="species/:datasource/:accession" element={<Species />} />
+            <Route path="pathway/:pathwayId" element={<Pathway />} />
             <Route path="about/related-projects" element={<RelatedProjects />} />
             <Route path="about/privacy-notice" element={<PrivacyNotice />} />
             <Route path="404" element={<Notfound />} />

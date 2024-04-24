@@ -21,9 +21,17 @@ class TaxonAnnotationService {
     getGenomesByTaxonPath(taxonPath) {
         return axios.get("/genomes?withSubspeciesGenomes=true&taxonPath=" + taxonPath);
     }
+
+    getPathway(pathwayId) {
+        return axios.get("/pathways?pathwayId=" + pathwayId);
+    }
     
     getMoultingGenesByTaxonPath(taxonPath) {
         return axios.get("/genes?inAMoultingPathway=true&taxonPath=" + taxonPath);
+    }
+
+    getMoultingGenesByPathway(pathwayId) {
+        return axios.get("/genes?pathwayId=" + pathwayId);
     }
 }
 
