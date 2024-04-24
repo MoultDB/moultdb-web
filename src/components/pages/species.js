@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import './species.css';
 import {getMainLink} from "../../common/taxon-utils";
 import ChangePageTitle from "../../common/change-page-title";
@@ -89,6 +88,7 @@ function displaySynonyms(taxon) {
 const Species = () => {
     const [taxon, setTaxon] = useState(null);
     const [lineage, setLineage] = useState(null);
+    const [genes, setGenes] = useState(null);
     const [error, setError] = useState(null);
     let params = useParams()
 
@@ -110,6 +110,17 @@ const Species = () => {
                         console.error('An error has occurred during taxon lineage upload :', error);
                         setError('An error has occurred during taxon lineage upload.');
                         setLineage(null);
+                    });
+                await MoultdbService.getMoultingGenesByTaxonPath(responseData.path)
+                    .then(response => {
+                        if (response.data?.data.length > 0) {
+                            setGenes(response.data.data);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('An error has occurred during genes upload :', error);
+                        setError('An error has occurred during genes upload.');
+                        setGenes(null);
                     });
             }
         }
@@ -160,7 +171,7 @@ const Species = () => {
                         <PhenotypicData taxonPath={taxon.path}/>
 
                         <h2>Gene(s) involved in a moulting pathway</h2>
-                        <GeneData taxonPath={taxon.path}/>
+                        <GeneData genes={genes}/>
                     </div>
                 </div>
                 : <div>Unknown taxon</div> }
