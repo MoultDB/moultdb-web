@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getMainUrl} from "../../common/taxon-utils";
+import {getSpeciesUrl} from "../../common/link-utils";
 import "datatables.net-dt/css/dataTables.dataTables.min.css"
 import "datatables.net-buttons-dt/css/buttons.dataTables.min.css"
 import "datatables.net-responsive-dt/css/responsive.dataTables.css"
@@ -26,7 +26,7 @@ const columns = [
     { title: 'Taxon', data: 'taxon',
         render: function ( data, type, full ) {
             if (data) {
-                return '<a href='+getMainUrl(data)+'>' + data.scientificName + '</a>'
+                return '<a href=' + getSpeciesUrl(data) + '>' + data.scientificName + '</a>'
             }
             return '';
         }

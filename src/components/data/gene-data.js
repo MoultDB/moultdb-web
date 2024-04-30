@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {getMainLink} from "../../common/taxon-utils";
+import {getSpeciesLink} from "../../common/link-utils";
 
 export const GeneData = ({ genes }) => {
     const [groupedGenes, setGroupedGenes] = useState(null);
@@ -12,7 +12,6 @@ export const GeneData = ({ genes }) => {
                 if (!acc[value]) {
                     acc[value] = [];
                 }
-                obj.displayedName = obj.annotatedName ? obj.annotatedName : obj.name ? obj.name : obj.locusTag ;
                 acc[value].push(obj);
                 return acc;
             }, {})
@@ -25,7 +24,7 @@ export const GeneData = ({ genes }) => {
                 <>
                     {Object.entries(groupedGenes).map(([taxonPath, genes]) => (
                         <div key={taxonPath}>
-                            <strong>{getMainLink(genes[0].taxon)}</strong>:
+                            <strong>{getSpeciesLink(genes[0].taxon)}</strong>:
                             <ul className="xref">
                                 {genes.map((gene, index) => (
                                     <li key={gene.id}>

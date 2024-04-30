@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './species-search.css'
 import MoultdbService from "../../services/moultdb.service";
-import {getMainLink, getMainUrl} from "../../common/taxon-utils";
+import {getSpeciesLink} from "../../common/link-utils";
 import Loading from "../data/loading";
 
 const examples = {
@@ -84,7 +84,7 @@ class SpeciesSearchForm extends Component {
                         <ul>
                             {this.state.data.map((element, index) => (
                                 <li key={index}>
-                                    {getMainLink(element)}
+                                    {getSpeciesLink(element)}
                                 </li>))}
                         </ul>
                     </div>

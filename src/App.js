@@ -10,6 +10,7 @@ import Footer from "./components/navs/footer";
 import Species from "./components/pages/species";
 import Search from "./components/pages/species-search";
 import Pathway from "./components/pages/pathway";
+import Gene from "./components/pages/gene";
 
 function App() {
     return (
@@ -47,6 +48,7 @@ function CustomRoutes() {
             <Route path="species/search" element={<Search />} />
             <Route path="species/:datasource/:accession" element={<Species />} />
             <Route path="pathway/:pathwayId" element={<Pathway />} />
+            <Route path="gene/:proteinId" element={<Gene />} />
             <Route path="about/related-projects" element={<RelatedProjects />} />
             <Route path="about/privacy-notice" element={<PrivacyNotice />} />
             <Route path="404" element={<Notfound />} />

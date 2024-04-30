@@ -26,6 +26,11 @@ class TaxonAnnotationService {
         return axios.get("/pathways?pathwayId=" + pathwayId);
     }
     
+    getGene(proteinId) {
+        /// FIXME should be by gene id not protein id
+        return axios.get("/genes?proteinId=" + proteinId);
+    }
+
     getMoultingGenesByTaxonPath(taxonPath) {
         return axios.get("/genes?inAMoultingPathway=true&taxonPath=" + taxonPath);
     }
