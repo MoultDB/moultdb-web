@@ -50,21 +50,14 @@ const Gene = () => {
                     <div className="col-md-12">
                         <h2>General information</h2>
                         <div className="key-value-pair">
-                            <span className="key">Gene name</span>
+                            <span className="key">Gene</span>
                             <span className="value">
                                 {getNCBIGeneLink(gene)}
                                 {gene.id && gene.locusTag && <>(locus tag: {gene.locusTag})</>}
-                                {!gene.id && gene.locusTag && gene.name && <>{gene.name} (locus tag: {gene.locusTag})</>}
+                                {!gene.id && gene.locusTag && gene.name && <>{gene.name} (locus
+                                    tag: {gene.locusTag})</>}
                                 {!gene.id && gene.locusTag && !gene.name && <>Locus tag: {gene.locusTag}</>}
                             </span>
-                        </div>
-                        <div className="key-value-pair">
-                            <span className="key">Moulting orthogroup</span>
-                            <span className="value">{gene.orthogroupName? gene.orthogroupName : "-"}</span>
-                        </div>
-                        <div className="key-value-pair">
-                            <span className="key">Species</span>
-                            <span className="value">{getSpeciesLink(gene.taxon)}</span>
                         </div>
                         <div className="key-value-pair">
                             <span className="key">Transcript</span>
@@ -76,8 +69,29 @@ const Gene = () => {
                                 {getNCBIProteinLink(gene)} {gene.proteinDescription} (length: {gene.proteinLength})</span>
                         </div>
                         <div className="key-value-pair">
-                            <span className="key">Domain(s)</span>
-                            <span className="value">{gene.geneDomains && gene.geneDomains.length > 0 ?
+                            <span className="key">Species</span>
+                            <span className="value">{getSpeciesLink(gene.taxon)}</span>
+                        </div>
+
+                        <h2>Moulting information</h2>
+
+                        <div className="key-value-pair">
+                            <span className="key">Moulting orthogroup name</span>
+                            <span className="value">{gene.orthogroupName ? gene.orthogroupName : "-"}</span>
+                        </div>
+                        <div className="key-value-pair">
+                            <span className="key">Pathway</span>
+                            <span className="value">
+                                {gene.pathway ?
+                                    <Link
+                                        to={"/pathway/" + gene.pathway.id}>{gene.pathway.name} ({gene.pathway.id})</Link>
+                                    : "-"}
+                            </span>
+                        </div>
+
+                        {gene.geneDomains && gene.geneDomains.length > 0 &&
+                            <>
+                                <h2>Domain(s)</h2>
                                 <ul>
                                     {gene.geneDomains.map((domain, index) => (
                                         <li key={"domain-" + index}>
@@ -85,17 +99,7 @@ const Gene = () => {
                                         </li>))
                                     }
                                 </ul>
-                                : "-"}
-                            </span>
-                        </div>
-                        <div className="key-value-pair">
-                            <span className="key">Pathway</span>
-                            <span className="value">
-                                {gene.pathway ?
-                                    <Link to={"/pathway/" + gene.pathway.id}>{gene.pathway.name} ({gene.pathway.id})</Link>
-                                    : "-"}
-                            </span>
-                        </div>
+                            </>}
                     </div>
                 </div>
                 : <div>Unknown gene</div>}
