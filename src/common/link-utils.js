@@ -28,9 +28,16 @@ export const getNCBIGeneLink = (gene) => {
 
 export const getNCBITranscriptLink = (gene) => {
     const link = "https://www.ncbi.nlm.nih.gov/nuccore/" + gene.transcriptUrlSuffix;
-    return <a href={link} rel="noopener noreferrer" target="_blank">
-        {gene.transcriptId ? gene.transcriptId : link}
-    </a>;
+    
+    if (gene.transcriptId) {
+        return <a href={link} rel="noopener noreferrer" target="_blank">
+            {gene.transcriptId}
+        </a>;
+    }
+
+    const id = gene.transcriptUrlSuffix.substring(0, gene.transcriptUrlSuffix.indexOf("?"));
+    const location = gene.transcriptUrlSuffix.substring(gene.transcriptUrlSuffix.indexOf("=") + 1, gene.transcriptUrlSuffix.indexOf("&"));
+    return <>{id} - Location: {location} (see <a href={link} rel="noopener noreferrer" target="_blank">CDS</a>)</>;
 };
 
 export const getNCBIGenomeLink = (accession) => {
