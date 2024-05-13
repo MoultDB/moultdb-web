@@ -66,9 +66,15 @@ const Pathway = () => {
                     <div className="col-md-12">
                         <h2>General information</h2>
                         <div className="key-value-pair">
-                            <span className="key">Pathway name</span> <span
-                            className="value">{pathway.name}</span>
+                            <span className="key">Pathway name</span>
+                            <span className="value">{pathway.name}</span>
                         </div>
+                        {pathway.description &&
+                            <div className="key-value-pair">
+                                <span className="key">Pathway description</span>
+                                <span className="value">{pathway.description}</span>
+                            </div>
+                        }
                         {displayArticle(pathway.article)}
 
                         <h2>Gene(s) involved in a moulting pathway</h2>
