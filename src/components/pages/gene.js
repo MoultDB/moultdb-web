@@ -34,12 +34,13 @@ const Gene = () => {
         fetchData();
     }, [params.proteinId]);
 
+    const h1Text = gene ? <>{gene.displayedName} - <i>{gene.taxon.scientificName}</i></> : params.proteinId;
     return (
         <main className={"container "}>
             <ChangePageTitle pageTitle={`${gene ? gene.displayedName : params.proteinId}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
-                    <h1>Gene: {gene ? gene.displayedName + " (" + gene.proteinId + ")" : params.proteinId}</h1>
+                    <h1>Gene: {h1Text}</h1>
                 </div>
             </div>
 
@@ -49,15 +50,12 @@ const Gene = () => {
                     <div className="col-md-12">
                         <h2>General information</h2>
                         <div className="key-value-pair">
-                            <span className="key">Gene</span>
+                            <span className="key">Gene name</span>
                             <span className="value">
                                 {getNCBIGeneLink(gene)}
-                                {gene.id && gene.locusTag &&
-                                    <>(locus tag: {gene.locusTag})</>}
-                                {!gene.id && gene.locusTag && gene.name &&
-                                    <>{gene.name} (locus tag: {gene.locusTag})</>}
-                                {!gene.id && gene.locusTag && !gene.name &&
-                                    <>Locus tag: {gene.locusTag}</>}
+                                {gene.id && gene.locusTag && <>(locus tag: {gene.locusTag})</>}
+                                {!gene.id && gene.locusTag && gene.name && <>{gene.name} (locus tag: {gene.locusTag})</>}
+                                {!gene.id && gene.locusTag && !gene.name && <>Locus tag: {gene.locusTag}</>}
                             </span>
                         </div>
                         <div className="key-value-pair">
