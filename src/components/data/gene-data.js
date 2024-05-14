@@ -28,7 +28,7 @@ export const GeneData = ({ genes }) => {
                             <ul className="xref">
                                 {genes.map((gene, index) => (
                                     <li key={gene.id}>
-                                        {gene.mainName} (<Link to="/gene/">{gene.id ? gene.id : gene.locusTag}</Link>)
+                                        {gene.mainName} (<Link to={"/gene/" + (gene.id ? "id/" + gene.id : "locus-tag/" + gene.locusTag)}>{gene.id ? gene.id : gene.locusTag}</Link>)
                                         {index < genes.length - 1 && '; '}
                                     </li>
                                 ))}

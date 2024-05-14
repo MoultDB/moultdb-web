@@ -25,18 +25,27 @@ class TaxonAnnotationService {
     getPathway(pathwayId) {
         return axios.get("/pathways?pathwayId=" + pathwayId);
     }
-    
-    getGene(proteinId) {
-        /// FIXME should be by gene id not protein id
+
+    getGeneByProteinId(proteinId) {
         return axios.get("/genes?proteinId=" + proteinId);
+    }
+    getGeneByGeneId(geneId) {
+        return axios.get("/genes?geneId=" + geneId);
+    }
+    getGeneByLocusTag(locusTag) {
+        return axios.get("/genes?locusTag=" + locusTag);
     }
 
     getMoultingGenesByTaxonPath(taxonPath) {
         return axios.get("/genes?inAMoultingPathway=true&taxonPath=" + taxonPath);
     }
 
-    getMoultingGenesByPathway(pathwayId) {
+    getGenesByPathway(pathwayId) {
         return axios.get("/genes?pathwayId=" + pathwayId);
+    }
+
+    getGenesByOrthogroup(orthogroupId) {
+        return axios.get("/genes?orthogroupId=" + orthogroupId);
     }
 }
 

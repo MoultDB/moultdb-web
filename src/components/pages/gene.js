@@ -9,30 +9,60 @@ import {
     getNCBITranscriptLink,
     getSpeciesLink
 } from "../../common/link-utils";
+import GeneData from "../data/gene-data";
 
 
 const Gene = () => {
     const [gene, setGene] = useState(null);
+    const [orthologs, setOrthologs] = useState(null);
     const [error, setError] = useState(null);
     let params = useParams()
 
     useEffect(() => {
         const fetchData = async () => {
             setError(null);
-            MoultdbService.getGene(params.proteinId)
-                .then(response => {
-                    if (response.data) {
-                        setGene(response.data.data);
-                    }
-                })
-                .catch(error => {
-                    console.error('An error has occurred during moulting characters upload :', error);
-                    setError('An error has occurred during moulting characters upload.');
-                    setGene(null);
-                });
+
+            let response;
+
+            if (params.type === "id") {
+                response = await MoultdbService.getGeneByGeneId(params.id)
+                    .catch(error => {
+                        setError('An error has occurred during gene upload.');
+                        setGene(null);
+                    });
+            } else if (params.type === "protein") {
+                response = await MoultdbService.getGeneByProteinId(params.id)
+                    .catch(error => {
+                        setError('An error has occurred during gene upload.');
+                        setGene(null);
+                    });
+            } else if (params.type === "locus") {
+                response = await MoultdbService.getGeneByLocusTag(params.id)
+                    .catch(error => {
+                        setError('An error has occurred during gene upload.');
+                        setGene(null);
+                    });
+            }
+            const responseData = response.data?.data;
+            setGene(responseData);
+
+            if (responseData && responseData.orthogroupId) {
+                await MoultdbService.getGenesByOrthogroup(responseData.orthogroupId)
+                    .then(response => {
+                        if (response?.data?.data?.length > 0) {
+                            // FIXME remove current gene
+                            setOrthologs(response.data.data);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('An error has occurred during orthologous genes upload :', error);
+                        setError('An error has occurred during orthologous genes upload.');
+                        setOrthologs(null);
+                    });
+            }
         }
         fetchData();
-    }, [params.proteinId]);
+    }, [params.type, params.id]);
 
     const h1Text = gene ? <>{gene.mainName} - <i>{gene.taxon.scientificName}</i></> : params.proteinId;
     return (
@@ -89,6 +119,12 @@ const Gene = () => {
                             </span>
                         </div>
 
+                        {orthologs &&
+                            <>
+                                <h2>Ortholog(s)</h2>
+                                <GeneData genes={orthologs}/>
+                            </>
+                        }
                         {gene.geneDomains && gene.geneDomains.length > 0 &&
                             <>
                                 <h2>Domain(s)</h2>

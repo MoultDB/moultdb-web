@@ -35,7 +35,7 @@ const Pathway = () => {
             setPathway(responseData);
 
             if (responseData) {
-                await MoultdbService.getMoultingGenesByPathway(params.pathwayId)
+                await MoultdbService.getGenesByPathway(params.pathwayId)
                     .then(response => {
                         if (response?.data?.data?.length > 0) {
                             setGenes(response.data.data);

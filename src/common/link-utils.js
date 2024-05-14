@@ -37,7 +37,7 @@ export const getNCBITranscriptLink = (gene) => {
 
     const id = gene.transcriptUrlSuffix.substring(0, gene.transcriptUrlSuffix.indexOf("?"));
     const location = gene.transcriptUrlSuffix.substring(gene.transcriptUrlSuffix.indexOf("=") + 1, gene.transcriptUrlSuffix.indexOf("&"));
-    return <>{id} - Location: {location} (see <a href={link} rel="noopener noreferrer" target="_blank">CDS</a>)</>;
+    return <>Locus: {id} - Location: {location} (see <a href={link} rel="noopener noreferrer" target="_blank">CDS</a>)</>;
 };
 
 export const getNCBIGenomeLink = (accession) => {
