@@ -92,13 +92,27 @@ const Gene = () => {
                         {gene.geneDomains && gene.geneDomains.length > 0 &&
                             <>
                                 <h2>Domain(s)</h2>
-                                <ul>
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">InterPro accession</th>
+                                        <th scope="col">Domain description</th>
+                                        <th scope="col">Start location</th>
+                                        <th scope="col">End location</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
                                     {gene.geneDomains.map((domain, index) => (
-                                        <li key={"domain-" + index}>
-                                            {getInterproDomainLink(domain)} - {domain.start} - {domain.end}
-                                        </li>))
+                                        <tr key={"domain-" + index}>
+                                            <th>{getInterproDomainLink(domain)}</th>
+                                            <td>{domain.domain.description} </td>
+                                            <td>{domain.start}</td>
+                                            <td>{domain.end}</td>
+                                        </tr>
+                                    ))
                                     }
-                                </ul>
+                                </tbody>
+                            </table>
                             </>}
                     </div>
                 </div>
