@@ -21,6 +21,7 @@ const Gene = () => {
     useEffect(() => {
         const fetchData = async () => {
             setError(null);
+            setGene(null);
 
             let response;
 
@@ -30,28 +31,33 @@ const Gene = () => {
                         setError('An error has occurred during gene upload.');
                         setGene(null);
                     });
-            } else if (params.type === "protein") {
+            } else if (params.type === "protein-id") {
                 response = await MoultdbService.getGeneByProteinId(params.id)
                     .catch(error => {
                         setError('An error has occurred during gene upload.');
                         setGene(null);
                     });
-            } else if (params.type === "locus") {
+            } else if (params.type === "locus-tag") {
                 response = await MoultdbService.getGeneByLocusTag(params.id)
                     .catch(error => {
                         setError('An error has occurred during gene upload.');
                         setGene(null);
                     });
+            } else {
+                setError('Unknown ID type: ' + params.type);
+                response = undefined;
             }
-            const responseData = response.data?.data;
+            const responseData = response?.data?.data;
             setGene(responseData);
 
             if (responseData && responseData.orthogroupId) {
                 await MoultdbService.getGenesByOrthogroup(responseData.orthogroupId)
                     .then(response => {
                         if (response?.data?.data?.length > 0) {
-                            // FIXME remove current gene
-                            setOrthologs(response.data.data);
+                            // Remove current gene
+                            const newArray = response.data.data
+                                .filter(item => item.id !== responseData.id || item.locusTag !== responseData.locusTag);
+                            setOrthologs(newArray);
                         }
                     })
                     .catch(error => {
@@ -64,18 +70,19 @@ const Gene = () => {
         fetchData();
     }, [params.type, params.id]);
 
-    const h1Text = gene ? <>{gene.mainName} - <i>{gene.taxon.scientificName}</i></> : params.proteinId;
+    const h1Text = gene ? <>: {gene.mainName} - <i>{gene.taxon.scientificName}</i></> : <>: {params.id}</>;
     return (
         <main className={"container "}>
-            <ChangePageTitle pageTitle={`Gene: ${gene ? gene.mainName + " - " + gene.taxon.scientificName : params.proteinId}`} />
+            <ChangePageTitle pageTitle={`Gene: ${gene ? gene.mainName + " - " + gene.taxon.scientificName : params.id}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
-                    <h1>Gene: {h1Text}</h1>
+                    <h1>Gene{h1Text}</h1>
                 </div>
             </div>
 
             { error && <div className={"container alert alert-danger"} role="alert">{error}</div> }
-            { gene ?
+            { !gene && !error && <div>Unknown gene</div>}
+            { gene &&
                 <div className="row">
                     <div className="col-md-12">
                         <h2>General information</h2>
@@ -152,7 +159,7 @@ const Gene = () => {
                             </>}
                     </div>
                 </div>
-                : <div>Unknown gene</div>}
+            }
         </main>
     );
 };
