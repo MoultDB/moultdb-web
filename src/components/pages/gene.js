@@ -3,7 +3,6 @@ import {Link, useParams} from "react-router-dom";
 import ChangePageTitle from "../../common/change-page-title";
 import MoultdbService from "../../services/moultdb.service";
 import {
-    getInterproDomainLink,
     getNCBIGeneLink,
     getNCBIProteinLink,
     getNCBITranscriptLink,
@@ -138,7 +137,7 @@ const Gene = () => {
                                 <table>
                                     <thead>
                                     <tr>
-                                        <th scope="col">InterPro accession</th>
+                                        <th scope="col">Domain accession</th>
                                         <th scope="col">Domain description</th>
                                         <th scope="col">Start location</th>
                                         <th scope="col">End location</th>
@@ -147,7 +146,7 @@ const Gene = () => {
                                     <tbody>
                                     {gene.geneDomains.map((domain, index) => (
                                         <tr key={"domain-" + index}>
-                                            <th>{getInterproDomainLink(domain)}</th>
+                                            <th><Link to={"/domain/" + domain.domain.id}>{domain.domain.id}</Link></th>
                                             <td>{domain.domain.description} </td>
                                             <td>{domain.start}</td>
                                             <td>{domain.end}</td>

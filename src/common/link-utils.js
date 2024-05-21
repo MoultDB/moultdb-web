@@ -49,7 +49,7 @@ export const getNCBIProteinLink = (gene) => {
               target="_blank" rel="noopener noreferrer">{gene.proteinId}</a>
 }
 
-export const getInterproDomainLink = (gene) => {
-    return <a href={"https://www.ebi.ac.uk/interpro/entry/InterPro/" + gene.domain.id + "/"}
-              target="_blank" rel="noopener noreferrer">{gene.domain.id}</a>
+export const getInterproDomainLink = (domainId) => {
+    return <a href={"https://www.ebi.ac.uk/interpro/entry/InterPro/" + domainId + "/"}
+              target="_blank" rel="noopener noreferrer">{domainId}</a>
 }

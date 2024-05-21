@@ -11,6 +11,7 @@ import Species from "./components/pages/species";
 import Search from "./components/pages/species-search";
 import Pathway from "./components/pages/pathway";
 import Gene from "./components/pages/gene";
+import Domain from "./components/pages/domain";
 
 function App() {
     return (
@@ -48,6 +49,7 @@ function CustomRoutes() {
             <Route path="species/search" element={<Search />} />
             <Route path="species/:datasource/:accession" element={<Species />} />
             <Route path="pathway/:pathwayId" element={<Pathway />} />
+            <Route path="domain/:domainId" element={<Domain />} />
             <Route path="gene/:type/:id" element={<Gene />} />
             <Route path="about/related-projects" element={<RelatedProjects />} />
             <Route path="about/privacy-notice" element={<PrivacyNotice />} />

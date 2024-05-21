@@ -26,6 +26,10 @@ class TaxonAnnotationService {
         return axios.get("/pathways?pathwayId=" + pathwayId);
     }
 
+    getDomain(domainId) {
+        return axios.get("/domains/" + domainId);
+    }
+
     getGeneByProteinId(proteinId) {
         return axios.get("/genes?proteinId=" + proteinId);
     }
@@ -46,6 +50,10 @@ class TaxonAnnotationService {
 
     getGenesByOrthogroup(orthogroupId) {
         return axios.get("/genes?orthogroupId=" + orthogroupId);
+    }
+
+    getGenesByDomain(domainId) {
+        return axios.get("/genes?domainId=" + domainId);
     }
 }
 
