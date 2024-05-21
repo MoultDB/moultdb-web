@@ -113,7 +113,7 @@ const Species = () => {
                     });
                 await MoultdbService.getMoultingGenesByTaxonPath(responseData.path)
                     .then(response => {
-                        if (response.data?.data.length > 0) {
+                        if (response?.data?.data.length > 0) {
                             setGenes(response.data.data);
                         }
                     })
