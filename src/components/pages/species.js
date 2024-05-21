@@ -129,7 +129,7 @@ const Species = () => {
 
     return (
         <main className={"container "}>
-            <ChangePageTitle pageTitle={`${taxon ? taxon.scientificName : params.datasource + ":" + params.accession}`} />
+            <ChangePageTitle pageTitle={`Taxon: ${taxon ? taxon.scientificName : params.datasource + ":" + params.accession}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
                     <h1>Taxon: {taxon ? taxon.scientificName : params.datasource + ":" + params.accession}</h1>
