@@ -113,7 +113,7 @@ const Gene = () => {
 
                         <div className="key-value-pair">
                             <span className="key">Moulting orthogroup name</span>
-                            <span className="value">{gene.orthogroupName ? gene.orthogroupName : "-"}</span>
+                            <span className="value">{gene.orthogroupName ? <Link to={"/orthogroup/" + gene.orthogroupId}>{gene.orthogroupName}</Link>: "-"}</span>
                         </div>
                         <div className="key-value-pair">
                             <span className="key">Pathway</span>
