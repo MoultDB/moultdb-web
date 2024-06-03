@@ -113,7 +113,7 @@ const Species = () => {
                     });
                 await MoultdbService.getMoultingGenesByTaxonPath(responseData.path)
                     .then(response => {
-                        if (response?.data?.data.length > 0) {
+                        if (response?.data?.data) {
                             setGenes(response.data.data);
                         }
                     })
@@ -170,9 +170,12 @@ const Species = () => {
                         <h2>Moulting characters <span className={"subtitle"}>(current taxon and its children)</span></h2>
                         <PhenotypicData taxonPath={taxon.path}/>
 
-                        <h2>Gene(s) involved in a moulting pathway</h2>
-                        <GeneData genes={genes}/>
-                    </div>
+                        {genes &&
+                            <div>
+                                <h2>Gene(s) involved in a moulting pathway</h2>
+                                <GeneData genes={genes}/>
+                            </div>
+                        }
                 </div>
                 : <div>Unknown taxon</div> }
             

@@ -21,7 +21,7 @@ const Domain = () => {
             if (responseData) {
                 await MoultdbService.getGenesByDomain(params.domainId)
                     .then(response => {
-                        if (response?.data?.data?.length > 0) {
+                        if (response?.data?.data) {
                             setGenes(response.data.data);
                         }
                     })
