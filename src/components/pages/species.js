@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import './species.css';
-import {getMainUrl} from "../../common/taxon-utils";
+import {getSpeciesLink} from "../../common/link-utils";
 import ChangePageTitle from "../../common/change-page-title";
 import PhenotypicData from "../data/phenotypic-data";
 import MoultdbService from "../../services/moultdb.service";
 import GenomeData from "../data/genome-data";
+import GeneData from "../data/gene-data";
 
 function displayXref(taxon) {
     const groupedByDataSource = taxon.dbXrefs
@@ -88,6 +88,7 @@ function displaySynonyms(taxon) {
 const Species = () => {
     const [taxon, setTaxon] = useState(null);
     const [lineage, setLineage] = useState(null);
+    const [genes, setGenes] = useState(null);
     const [error, setError] = useState(null);
     let params = useParams()
 
@@ -110,6 +111,17 @@ const Species = () => {
                         setError('An error has occurred during taxon lineage upload.');
                         setLineage(null);
                     });
+                await MoultdbService.getMoultingGenesByTaxonPath(responseData.path)
+                    .then(response => {
+                        if (response?.data?.data) {
+                            setGenes(response.data.data);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('An error has occurred during genes upload :', error);
+                        setError('An error has occurred during genes upload.');
+                        setGenes(null);
+                    });
             }
         }
         fetchData();
@@ -117,7 +129,7 @@ const Species = () => {
 
     return (
         <main className={"container "}>
-            <ChangePageTitle pageTitle={`${taxon ? taxon.scientificName : params.datasource + ":" + params.accession}`} />
+            <ChangePageTitle pageTitle={`Taxon: ${taxon ? taxon.scientificName : params.datasource + ":" + params.accession}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
                     <h1>Taxon: {taxon ? taxon.scientificName : params.datasource + ":" + params.accession}</h1>
@@ -144,8 +156,7 @@ const Species = () => {
                                     <ol className="lineage">
                                         {lineage.map((element, index) => (
                                             <li key={index}>
-                                                {/*TODO replace <a> by <Link to={getMainUrl(element)} >{element.scientificName}</Link>*/}
-                                                <a href={getMainUrl(element)}>{element.scientificName}</a>
+                                                {getSpeciesLink(element)}
                                                 {index < lineage.length - 1 && <span className="lineage-separator"/>}
                                             </li>))}
                                     </ol>
@@ -158,6 +169,13 @@ const Species = () => {
 
                         <h2>Moulting characters <span className={"subtitle"}>(current taxon and its children)</span></h2>
                         <PhenotypicData taxonPath={taxon.path}/>
+
+                        {genes &&
+                            <div>
+                                <h2>Gene(s) involved in a moulting pathway</h2>
+                                <GeneData genes={genes}/>
+                            </div>
+                        }
                     </div>
                 </div>
                 : <div>Unknown taxon</div> }

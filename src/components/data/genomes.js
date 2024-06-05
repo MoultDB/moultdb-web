@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getMainUrl} from "../../common/taxon-utils";
+import {getNCBIGenomeLink, getSpeciesUrl} from "../../common/link-utils";
 import "datatables.net-dt/css/dataTables.dataTables.min.css"
 import "datatables.net-buttons-dt/css/buttons.dataTables.min.css"
 import "datatables.net-searchbuilder-dt/css/searchBuilder.dataTables.css"
@@ -18,7 +18,7 @@ const columns = [
     { title: 'Species', data: 'taxon',
         render: function ( data ) {
             if (data) {
-                return '<a href='+getMainUrl(data)+'>' + data.scientificName + '</a>'
+                return '<a href=' + getSpeciesUrl(data) + '>' + data.scientificName + '</a>'
             }
             return '';
         }
@@ -26,8 +26,7 @@ const columns = [
     { title: 'GenBank/RefSeq', data: 'geneBankAcc',
         render: function ( data ) {
             if (data) {
-                return '<a href="https://www.ncbi.nlm.nih.gov/data-hub/genome/' + data 
-                    + '" target="_blank" rel="noopener noreferrer">' + data + '</a>'
+                return getNCBIGenomeLink(data) ;
             }
             return '';
         }

@@ -7,8 +7,12 @@ import PrivacyNotice from "./components/privacy-notice/privacy-notice";
 import Notfound from "./components/notfound";
 import CookieConsent from "react-cookie-consent";
 import Footer from "./components/navs/footer";
-import Species from "./components/species/species";
-import Search from "./components/species/species-search";
+import Species from "./components/pages/species";
+import Search from "./components/pages/species-search";
+import Pathway from "./components/pages/pathway";
+import Gene from "./components/pages/gene";
+import Domain from "./components/pages/domain";
+import Orthogroup from "./components/pages/orthogroup";
 
 function App() {
     return (
@@ -45,6 +49,10 @@ function CustomRoutes() {
             <Route path="about" element={<About />} />
             <Route path="species/search" element={<Search />} />
             <Route path="species/:datasource/:accession" element={<Species />} />
+            <Route path="pathway/:pathwayId" element={<Pathway />} />
+            <Route path="domain/:domainId" element={<Domain />} />
+            <Route path="orthogroup/:orthogroupId" element={<Orthogroup />} />
+            <Route path="gene/:type/:id" element={<Gene />} />
             <Route path="about/related-projects" element={<RelatedProjects />} />
             <Route path="about/privacy-notice" element={<PrivacyNotice />} />
             <Route path="404" element={<Notfound />} />

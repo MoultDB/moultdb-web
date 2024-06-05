@@ -4,22 +4,60 @@ class TaxonAnnotationService {
 
 
     getTaxonByText(searchedText) {
-        return axios.get("/taxon/search?text=" + searchedText);
+        return axios.get("/taxa/search?text=" + searchedText);
     }
     getTaxonByDbXref(datasource, accession) {
-        return axios.get("/taxon/dbxref?datasource=" + datasource + "&accession=" + accession);
+        return axios.get("/taxa?datasource=" + datasource + "&accession=" + accession);
     }
 
     getTaxonLineage(taxonPath) {
-        return axios.get("/taxon/lineage?path=" + taxonPath);
+        return axios.get("/taxa/" + taxonPath + "/lineage");
     }
     
     getTaxAnnotationsByTaxonPath(taxonPath) {
-        return axios.get("/taxon-annotation/species/path?taxonPath=" + taxonPath);
+        return axios.get("/taxon-annotations/species?taxonPath=" + taxonPath);
     }
     
     getGenomesByTaxonPath(taxonPath) {
-        return axios.get("/genome/taxon?withSubspeciesGenomes=true&taxonPath=" + taxonPath);
+        return axios.get("/genomes?withSubspeciesGenomes=true&taxonPath=" + taxonPath);
+    }
+
+    getPathway(pathwayId) {
+        return axios.get("/pathways?pathwayId=" + pathwayId);
+    }
+
+    getDomain(domainId) {
+        return axios.get("/domains/" + domainId);
+    }
+
+    getGeneByProteinId(proteinId) {
+        return axios.get("/genes?proteinId=" + proteinId);
+    }
+    getGeneByGeneId(geneId) {
+        return axios.get("/genes?geneId=" + geneId);
+    }
+    getGeneByLocusTag(locusTag) {
+        return axios.get("/genes?locusTag=" + locusTag);
+    }
+
+    getMoultingGenesByTaxonPath(taxonPath) {
+        return axios.get("/genes?inAMoultingPathway=true&taxonPath=" + taxonPath);
+    }
+
+    getGenesByPathway(pathwayId) {
+        return axios.get("/genes?pathwayId=" + pathwayId);
+    }
+
+    getGenesByOrthogroup(orthogroupId, proteinId) {
+        let url = "/genes?orthogroupId=" + orthogroupId;
+        if (proteinId) {
+            url = url + "&proteinId=" + proteinId;    
+        }
+        return axios.get(url);
+    }
+
+    getGenesByDomain(domainId) {
+        return axios.get("/genes?domainId=" + domainId);
     }
 }
 

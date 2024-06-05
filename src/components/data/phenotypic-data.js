@@ -19,8 +19,8 @@ export const PhenotypicData = (props) => {
                     }
                 })
                 .catch(error => {
-                    console.error('An error has occurred during taxon annotation upload :', error);
-                    setError('An error has occurred during taxon annotation upload.');
+                    console.error('An error has occurred during moulting characters upload :', error);
+                    setError('An error has occurred during moulting characters upload.');
                     setData(null);
                 });
         }
