@@ -9,22 +9,22 @@
     display: block;
 }
 
-.gene-data-table td, .gene-data-table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-.gene-data-table tr:nth-child(even){
-    background-color: #f2f2f2;
-}
-
-.gene-data-table tr:hover {
-    background-color: #ddd;
-}
-
 .gene-data-table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: lightgrey;
+    background-color: white;
+}
+
+.gene-data-table th, .gene-data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.gene-data-table tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.gene-data-table tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
 }
