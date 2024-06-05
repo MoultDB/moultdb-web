@@ -1,41 +1,57 @@
-import React from "react";
+import React from 'react';
 import {Link} from "react-router-dom";
-import './header.css';
-import Logo from "../../assets/images/moultdb_logo_white_light.png";
 
-export default function Header() {
-    return (
-        <header>
-            <nav id="moultdb-header" className="navbar navbar-expand-md navbar-dark fixed-top">
-                <div className="container-fluid">
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"/>
-                    </button>
-                    <Link to="/" className="navbar-brand">
-                        <img src={Logo} className="d-inline-block align-top" alt="MoutlDB logo"/>
-                        <span className="moultdb-name">MoultDB</span>
-                    </Link>
-                    <div className="collapse navbar-collapse" id="navbarCollapse">
-                        <ul className="navbar-nav me-auto">
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="/" id="navbarAbout" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    About
-                                </a>
-                                <div className="dropdown-menu" aria-labelledby="navbarAbout">
-                                    <Link to="/about" className="dropdown-item">MoultDB</Link>
-                                    <Link to="/about/related-projects" className="dropdown-item">Related projects</Link>
-                                    <Link to="/about/privacy-notice" className="dropdown-item">Privacy notice</Link>
-                                    <a href="https://github.com/MoultDB/" className="dropdown-item"
-                                       target="_blank" rel="noopener noreferrer">Source code</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-    );
-}
+import './header.css'
+import logo from '../../assets/images/logo.png';
+
+const Header = () => {
+  return (
+    <section className="menu menu2 header-section" >
+      <nav className="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+        <div className="container">
+          <div className="navbar-brand">
+            <span className="navbar-logo">
+              <Link to={"/"}>
+                <img src={logo} style={{height: '4.3rem'}} alt="MoultDB Logo" />
+              </Link>
+            </span>
+            <span className="navbar-caption-wrap">
+              <Link to={"/"} className="navbar-caption text-black display-4" >
+                MoultDB
+              </Link>
+            </span>
+          </div>
+          <button className="navbar-toggler" type="button" data-toggle="collapse"
+            data-bs-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <div className="hamburger">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
+              <li className="nav-item">
+                <Link to={"/species/search"} className="nav-link link text-black display-4">Genomics</Link>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link link text-black display-4" href="https://www.moulting.org" aria-expanded="false">Citizen Science</a>
+              </li>
+              <li className="nav-item">
+                <Link to={"/about"} className="nav-link link text-black display-4">About</Link>
+              </li>
+            </ul>
+            <div className="navbar-buttons mbr-section-btn">
+              <Link to={"/species/search"} className="btn btn-primary display-4">Explore</Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </section>
+  );
+};
+
+export default Header;

@@ -1,15 +1,46 @@
-.moultdb-hero {
-  align-items: center;
-  background-color: var(--main-light-color);
-  display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 1vmin);
-  justify-content: center;
-  min-height: 20vh;
-  text-align: center;
-}
 
-.moultdb-logo {
-  height: 20vmin;
-  padding-top: 10px;
-}
+  .custom-hero {
+    display: flex;
+    background-image: url("../../../assets/images/wallpaper.jpg");
+  }
+  .custom-hero .mbr-overlay {
+    background-color: #000000;
+    opacity: 0.5;
+  }
+  @media (min-width: 768px) {
+    .custom-hero {
+      align-items: flex-end;
+    }
+    .custom-hero .row {
+      justify-content: center;
+    }
+    .custom-hero .content-wrap {
+      padding: 1rem 3rem;
+    }
+  }
+  @media (max-width: 991px) and (min-width: 768px) {
+    .custom-hero .content-wrap {
+      min-width: 50%;
+    }
+  }
+  @media (max-width: 767px) {
+    .custom-hero {
+      -webkit-align-items: center;
+      align-items: flex-end;
+    }
+    .custom-hero .mbr-row {
+      -webkit-justify-content: center;
+      justify-content: center;
+    }
+    .custom-hero .content-wrap {
+      width: 100%;
+    }
+  }
+  .custom-hero .mbr-section-title,
+  .custom-hero .mbr-section-subtitle {
+    text-align: center;
+  }
+  .custom-hero .mbr-text,
+  .custom-hero .mbr-section-btn {
+    text-align: center;
+  }

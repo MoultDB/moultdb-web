@@ -1,12 +1,26 @@
 import React from 'react';
-import './hero.css';
-import logo from '../../../assets/images/moultdb_logo_green.png';
+import {Link} from "react-router-dom";
+import './hero.css'; 
 
-export default function Hero() {
-  return (
-      <div className="moultdb-hero">
-          <img src={logo} className="moultdb-logo m-2" alt="MoultDB logo" />
-          <h1>MoultDB: the arthropod moulting database</h1>
-      </div>
-  );
+function Hero() {
+    return (
+        <section className="custom-hero mbr-fullscreen" >
+            <div className="mbr-overlay" style={{ opacity: 0.3, backgroundColor: 'rgb(0, 0, 0)' }}></div>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="content-wrap col-12 col-md-10">
+                        <h1 className="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1">
+                            <strong>Moulting Wonders</strong>
+                        </h1>
+                        <p className="mbr-fonts-style mbr-text mbr-white mb-4 display-7">Dive into the mesmerizing world of arthropods shedding their old skins and revealing their true beauty.</p>
+                        <div className="mbr-section-btn">
+                            <Link to={"/species/search"} className="btn btn-white-outline display-7">Explore</Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 }
+
+export default Hero;

@@ -1,0 +1,44 @@
+ /* Social  ##################################################################################################################### */
+
+
+  .solcial-media-section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: #ffffff;
+}
+.solcial-media-section .social-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.solcial-media-section .social-row .soc-item {
+  margin: 8px;
+}
+.solcial-media-section .social-row .soc-item a:hover .mbr-iconfont,
+.solcial-media-section .social-row .soc-item a:focus .mbr-iconfont {
+  background-color: #f7f7f7;
+}
+.solcial-media-section .social-row .soc-item a .mbr-iconfont {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  font-size: 32px;
+  background-color: #f7f7f7;
+  color: var(--primary-color, #393193);
+  transition: all 0.3s ease-in-out;
+}
+.solcial-media-section .row-links {
+  width: 100%;
+  justify-content: center;
+}
+.solcial-media-section .mbr-section-title {
+  color: #ffffff;
+}
+.solcial-media-section .mbr-section-title,
+.solcial-media-section .social-list {
+  color: #000000;
+}
