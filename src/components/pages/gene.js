@@ -49,14 +49,11 @@ const Gene = () => {
             const responseData = response?.data?.data;
             setGene(responseData);
 
-            if (responseData && responseData.orthogroupId) {
-                await MoultdbService.getGenesByOrthogroup(responseData.orthogroupId)
+            if (responseData?.orthogroup?.id) {
+                await MoultdbService.getGenesByOrthogroup(responseData.orthogroup.id, responseData.proteinId)
                     .then(response => {
-                        if (response?.data?.data?.length > 0) {
-                            // Remove current gene
-                            const newArray = response.data.data
-                                .filter(item => item.id !== responseData.id || item.locusTag !== responseData.locusTag);
-                            setOrthologs(newArray);
+                        if (response?.data?.data) {
+                            setOrthologs(response.data.data);
                         }
                     })
                     .catch(error => {
@@ -113,7 +110,7 @@ const Gene = () => {
 
                         <div className="key-value-pair">
                             <span className="key">Moulting orthogroup name</span>
-                            <span className="value">{gene.orthogroupName ? <Link to={"/orthogroup/" + gene.orthogroupId}>{gene.orthogroupName}</Link>: "-"}</span>
+                            <span className="value">{gene.orthogroup?.name ? <Link to={"/orthogroup/" + gene.orthogroup.id}>{gene.orthogroup.name}</Link>: "-"}</span>
                         </div>
                         <div className="key-value-pair">
                             <span className="key">Pathway</span>

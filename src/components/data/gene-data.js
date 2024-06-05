@@ -19,10 +19,12 @@ export const GeneData = ({ genes }) => {
         const taxa = Object.keys(genes[pathway]);
         const orthogroups = new Set();
 
-        taxa.forEach(taxon => {
-            Object.keys(genes[pathway][taxon]).forEach(og => orthogroups.add(og));
-        });
-
+        if (pathway !== "null") {
+            taxa.forEach(taxon => {
+                Object.keys(genes[pathway][taxon]).forEach(og => orthogroups.add(og));
+            });
+        }
+        
         const sortedOrthogroups = Array.from(orthogroups).sort();
 
         return (
@@ -30,21 +32,34 @@ export const GeneData = ({ genes }) => {
                 <thead>
                 <tr>
                     <th>Species / Orthogroups</th>
-                    {sortedOrthogroups.map(og => <th key={og}><Link to={"/orthogroup/" + og}>{og}</Link></th>)}
+                    {sortedOrthogroups.length > 0 ?
+                        (sortedOrthogroups.map(ogKey => {
+                            const og = JSON.parse(ogKey);
+                            return (<th key={og.id}>
+                                <Link to={"/orthogroup/" + og.id}>{og.name}</Link>
+                            </th>);
+                        }))
+                        :
+                        <th key={"og-null"}></th>
+                    }
                 </tr>
                 </thead>
                 <tbody>
                 {taxa.map(taxonKey => {
                     const taxon = JSON.parse(taxonKey);
-
                     return (
                         <tr key={taxon.id}>
                             <td>{getSpeciesLink(taxon)}</td>
-                            {sortedOrthogroups?.map(og =>
-                                <td key={pathway + ""+og}>
-                                    {genes[pathway][taxonKey][og]?.map(gene => renderGeneDetails(gene)) || '-'}
+                            {sortedOrthogroups.length > 0 ?
+                                (sortedOrthogroups.map(og =>
+                                    <td key={pathway + ""+og}>
+                                        {genes[pathway][taxonKey][og]?.map(gene => renderGeneDetails(gene)) || '-'}
+                                    </td>
+                                ))
+                                :
+                                <td key={"og-null"}>{Object.values(genes[pathway][taxonKey]).map(t => t.map(gene => renderGeneDetails(gene)))}
                                 </td>
-                            )}
+                            }
                         </tr>
                     );
                 })}

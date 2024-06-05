@@ -48,8 +48,12 @@ class TaxonAnnotationService {
         return axios.get("/genes?pathwayId=" + pathwayId);
     }
 
-    getGenesByOrthogroup(orthogroupId) {
-        return axios.get("/genes?orthogroupId=" + orthogroupId);
+    getGenesByOrthogroup(orthogroupId, proteinId) {
+        let url = "/genes?orthogroupId=" + orthogroupId;
+        if (proteinId) {
+            url = url + "&proteinId=" + proteinId;    
+        }
+        return axios.get(url);
     }
 
     getGenesByDomain(domainId) {
