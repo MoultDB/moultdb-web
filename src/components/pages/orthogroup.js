@@ -15,7 +15,7 @@ const Orthogroup = () => {
             setError(null);
             MoultdbService.getGenesByOrthogroup(params.orthogroupId)
                 .then(response => {
-                    setGenes(response.data.data);
+                    setGenes(response.data?.data);
                     if (response.data) {
                         setOrthogroup(response.data.data);
                     }

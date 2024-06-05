@@ -176,6 +176,7 @@ const Species = () => {
                                 <GeneData genes={genes}/>
                             </div>
                         }
+                    </div>
                 </div>
                 : <div>Unknown taxon</div> }
             

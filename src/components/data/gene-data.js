@@ -10,7 +10,7 @@ export const GeneData = ({ genes }) => {
         const geneAcc = gene.id ? gene.id : gene.locusTag;
         return (
             <div key={`${geneAcc}`}>
-                <Link to={"/gene/" +  gene.id ? "id/" + gene.id : "locus-tag/" + gene.locusTag}>{geneAcc}</Link>
+                <Link to={"/gene/" +  (gene.id ? "id/" + gene.id : "locus-tag/" + gene.locusTag)}>{geneAcc}</Link>
             </div>
         );
     };
