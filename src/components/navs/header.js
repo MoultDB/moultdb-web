@@ -35,7 +35,7 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
               <li className="nav-item">
-                <Link to={"/species/search"} className="nav-link link text-black display-4">Genomics</Link>
+                <Link to={"/species/search"} className="nav-link link text-black display-4">Data</Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link link text-black display-4" href="https://www.moulting.org" aria-expanded="false">Citizen Science</a>

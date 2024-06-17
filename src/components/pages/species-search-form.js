@@ -57,7 +57,7 @@ class SpeciesSearchForm extends Component {
         var exampleLinks = [];
         for (const el of examples[id]) {
             exampleLinks.push(
-                <button className="btn btn-link btn-sm no-style" type="button"
+                <button className="btn btn-link btn-sm " type="button"
                         onClick={(e) => {
                             this.updateValue(id, el) }}>
                     {el}
@@ -109,7 +109,7 @@ class SpeciesSearchForm extends Component {
                 <div className={"col-4 offset-4 mb-3"}>
                     <form onSubmit={this.handleSubmit}>
                         {this.getInput('searchedText', 'Taxon name')}
-                        <button className="btn btn-sm btn-custom col-sm-2 offset-sm-5" type='submit'>Submit</button>
+                        <button className="btn btn-sm btn-primary col-sm-2 offset-sm-5" type='submit'>Submit</button>
                     </form>
                     {result}
                 </div>

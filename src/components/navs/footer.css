@@ -56,3 +56,14 @@
 .footer-section .mbr-section-title {
   color: #ffffff;
 }
+
+.footer-section .copyright img {
+  height: 22px!important;
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  width: auto;
+}
+
+.footer-section .copyright a {
+  display: inline-flex;
+}

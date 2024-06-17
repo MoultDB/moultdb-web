@@ -11,7 +11,7 @@ function Footer() {
                     <div className="row-links">
                         <ul className="header-menu">
                             <li className="header-menu-item mbr-fonts-style display-5">
-                                <Link to="/species/search" className="text-white">Genomics</Link>
+                                <Link to="/species/search" className="text-white">Data</Link>
                             </li>
                             <li className="header-menu-item mbr-fonts-style display-5">
                                 <a className="text-white" href="https://www.moulting.org"aria-expanded="false">Citizen Science</a>

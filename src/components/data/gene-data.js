@@ -75,7 +75,7 @@ export const GeneData = ({ genes }) => {
                 if (pathway) {
                     return (
                         <div key={pathway.id}>
-                            <h3>Pathway:
+                            <h3>Pathway&nbsp;
                                 <Link to={"/pathway/" + pathway.id}>{pathway.name} ({pathway.id})</Link>
                             </h3>
                             {renderTable(pathwayKey)}

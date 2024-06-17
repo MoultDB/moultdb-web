@@ -1,11 +1,8 @@
-.btn-custom {
-    color: var(--main-dark-color);
-    background-color: var(--main-light-color);
-    border-color: var(--main-dark-color);
+.btn-link {
+    text-decoration: none;
+    color: var(--primary-color, #9fe870);
 }
 
-.btn-custom:hover {
-    color: var(--main-light-color);
-    background-color: var(--main-dark-color);
-    border-color: var(--main-light-color);
+.btn-link:hover {
+    color: var(--secondary-color);
 }
