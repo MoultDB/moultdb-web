@@ -31,7 +31,7 @@ export const GenomeData = (props) => {
 
     return (<div>
             { error && <div className={"container alert alert-danger"} role="alert">{error}</div> }
-            { data && data.content && data.content.length > 0 ?
+            { data && data.content?.length > 0 ?
                 <Genomes genomeData={data.content}/>
                 : <div>No data</div> }
         </div>

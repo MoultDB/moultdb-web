@@ -7,7 +7,7 @@ export const GeneData = ({ genes }) => {
 
 
     const renderGeneDetails = (gene) => {
-        const geneAcc = gene.id ? gene.id : gene.locusTag;
+        const geneAcc = gene.name ?? gene.id ?? gene.locusTag;
         return (
             <div key={`${geneAcc}`}>
                 <Link to={"/gene/" +  (gene.id ? "id/" + gene.id : "locus-tag/" + gene.locusTag)}>{geneAcc}</Link>

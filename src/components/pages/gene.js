@@ -128,7 +128,7 @@ const Gene = () => {
                                 <GeneData genes={orthologs}/>
                             </>
                         }
-                        {gene.geneDomains && gene.geneDomains.length > 0 &&
+                        {gene.geneDomains?.length > 0 &&
                             <>
                                 <h2>Domain(s)</h2>
                                 <table>

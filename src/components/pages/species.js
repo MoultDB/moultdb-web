@@ -57,7 +57,7 @@ function displayXref(taxon) {
     );
 }
 function displaySynonyms(taxon) {
-    if (taxon.dbXrefs && taxon.dbXrefs.filter(element => element.accession == null).length > 0) {
+    if (taxon.dbXrefs?.filter(element => element.accession == null).length > 0) {
         const filteredAndSortedElements = taxon.dbXrefs
             .filter(element => element.accession == null)
             .sort((a, b) => a.name.localeCompare(b.name));
@@ -170,7 +170,7 @@ const Species = () => {
                         <h2>Moulting characters <span className={"subtitle"}>(current taxon and its children)</span></h2>
                         <PhenotypicData taxonPath={taxon.path}/>
 
-                        {genes &&
+                        {genes && Object.keys(genes).length > 0 &&
                             <div>
                                 <h2>Gene(s) involved in a moulting pathway</h2>
                                 <GeneData genes={genes}/>

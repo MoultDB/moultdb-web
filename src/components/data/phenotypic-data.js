@@ -30,7 +30,7 @@ export const PhenotypicData = (props) => {
 
     return (<div>
             { error && <div className={"container alert alert-danger"} role="alert">{error}</div> }
-            { data && data.content && data.content.length > 0 ?
+            { data && data.content?.length > 0 ?
                 <MoultingCharacters mcData={data.content}/>
                 : <div>No data</div> }
         </div>

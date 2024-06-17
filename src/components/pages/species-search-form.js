@@ -78,7 +78,7 @@ class SpeciesSearchForm extends Component {
         let self = this;
         let result = "";
         if (this.state.isLoaded) {
-            if (this.state.data && this.state.data.length > 0) {
+            if (this.state.data?.length > 0) {
                 result =
                     <div>
                         <ul>
