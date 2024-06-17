@@ -29,31 +29,27 @@ function Footer() {
                         </ul>
                     </div>
 
+                     {/*TODO: refactor with SocialMediaItem */}
                     <div className="col-12 mt-4">
                         <div className="social-row">
                             <div className="soc-item">
-                                <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer">
+                                <a href="https://www.facebook.com/groups/402623715250579" target="_blank" rel="noopener noreferrer">
                                     <span className="mbr-iconfont socicon socicon-facebook display-7"></span>
                                 </a>
                             </div>
                             <div className="soc-item">
-                                <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+                                <a href="https://x.com/moultdb" target="_blank" rel="noopener noreferrer">
                                     <span className="mbr-iconfont socicon-twitter socicon"></span>
                                 </a>
                             </div>
                             <div className="soc-item">
-                                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer">
+                                <a href="https://www.instagram.com/moultdb/" target="_blank" rel="noopener noreferrer">
                                     <span className="mbr-iconfont socicon-instagram socicon"></span>
                                 </a>
                             </div>
                             <div className="soc-item">
-                                <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">
+                                <a href="https://ecoevo.social/@moultdb" target="_blank" rel="noopener noreferrer">
                                     <span className="mbr-iconfont socicon socicon-mastodon"></span>
-                                </a>
-                            </div>
-                            <div className="soc-item">
-                                <a href="https://twitch.tv/" target="_blank" rel="noopener noreferrer">
-                                    <span className="mbr-iconfont socicon socicon-twitch"></span>
                                 </a>
                             </div>
                         </div>

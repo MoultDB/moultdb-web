@@ -13,11 +13,10 @@ function SocialMediaItem({ icon, link }) {
 
 function SocialMediaSection() {
   const socialMediaLinks = [
-    { icon: 'socicon-facebook', link: '#' },
-    { icon: 'socicon-twitter', link: '#' },
-    { icon: 'socicon-instagram', link: '#' },
-    { icon: 'socicon-mastodon', link: '#' },
-    { icon: 'socicon-twitch', link: '#' },
+    { icon: 'socicon-facebook', link: 'https://www.facebook.com/groups/402623715250579' },
+    { icon: 'socicon-twitter', link: 'https://x.com/moultdb' },
+    { icon: 'socicon-instagram', link: 'https://www.instagram.com/moultdb/' },
+    { icon: 'socicon-mastodon', link: 'https://ecoevo.social/@moultdb' },
   ];
 
   return (
