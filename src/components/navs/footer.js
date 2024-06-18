@@ -11,10 +11,15 @@ function Footer() {
                     <div className="row-links">
                         <ul className="header-menu">
                             <li className="header-menu-item mbr-fonts-style display-5">
-                                <Link to="/species/search" className="text-white">Data</Link>
+                                <Link to="/species/gbif/54" className="text-white">Browse</Link>
                             </li>
                             <li className="header-menu-item mbr-fonts-style display-5">
-                                <a className="text-white" href="https://www.moulting.org"aria-expanded="false">Citizen Science</a>
+                                <Link to="/species/search" className="text-white">Search</Link>
+                            </li>
+                            <li className="header-menu-item mbr-fonts-style display-5">
+                                <a className="text-white" href="https://www.moulting.org" aria-expanded="false">
+                                    Citizen Science
+                                </a>
                             </li>
                             <li className="header-menu-item mbr-fonts-style display-5">
                                 <Link to="/about" className="text-white">About</Link>

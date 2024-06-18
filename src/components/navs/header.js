@@ -35,18 +35,19 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
               <li className="nav-item">
-                <Link to={"/species/search"} className="nav-link link text-black display-4">Data</Link>
+                <Link to={"/species/gbif/54"} className="nav-link link text-black display-4">Browse</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link link text-black display-4" href="https://www.moulting.org" aria-expanded="false">Citizen Science</a>
+                <Link to={"/species/search"} className="nav-link link text-black display-4">Search</Link>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link link text-black display-4" href="https://www.moulting.org" aria-expanded="false">Citizen
+                  Science</a>
               </li>
               <li className="nav-item">
                 <Link to={"/about"} className="nav-link link text-black display-4">About</Link>
               </li>
             </ul>
-            <div className="navbar-buttons mbr-section-btn">
-              <Link to={"/species/search"} className="btn btn-primary display-4">Explore</Link>
-            </div>
           </div>
         </div>
       </nav>

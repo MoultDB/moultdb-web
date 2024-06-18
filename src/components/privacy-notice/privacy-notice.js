@@ -8,7 +8,7 @@ export default function PrivacyNotice() {
     }, []);
 
     return (
-        <div className={'row'}>
+        <main className={'row'}>
             <div className={'col-sm-10 offset-sm-1'}>
                 <h1>MoultDB privacy notice</h1>
 
@@ -125,5 +125,5 @@ export default function PrivacyNotice() {
 
                 <p>Additional terms: privacy policy</p>
             </div>
-        </div>);
+        </main>);
 }

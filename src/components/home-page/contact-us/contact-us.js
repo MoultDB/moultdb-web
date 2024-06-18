@@ -12,14 +12,14 @@ function ContactUs() {
               <h5 className="mbr-section-title mbr-fonts-style mt-0 mb-4 display-2">
                 <strong>Contact Us</strong>
               </h5>
-              <p className="mbr-section-subtitle mbr-fonts-style mt-0 mb-4 display-7">
+              <p className="mbr-section-subtitle mbr-fonts-style mt-0 mb-4 display-7 text-center">
                 You can contact us by&nbsp;
                   <Obfuscate email={process.env.REACT_APP_CONTACT_EMAIL}
                              headers={{subject: '[moultdb] '}}>
                     e-mail
                   </Obfuscate>.
               </p>
-              <p className="mbr-section-subtitle mbr-fonts-style mt-0 mb-4 display-7">
+              <p className="mbr-section-subtitle mbr-fonts-style mt-0 mb-4 display-7 text-center">
                 Don't hesitate !</p>
             </div>
           </div>

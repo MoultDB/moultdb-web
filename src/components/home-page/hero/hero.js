@@ -14,7 +14,7 @@ function Hero() {
                         </h1>
                         <p className="mbr-fonts-style mbr-text mbr-white mb-4 display-7">Dive into the mesmerizing world of arthropods shedding their old skins and revealing their true beauty.</p>
                         <div className="mbr-section-btn">
-                            <Link to={"/species/search"} className="btn btn-white-outline display-7">Explore</Link>
+                            <Link to={"/species/search"} className="btn btn-white-outline display-7">Search</Link>
                         </div>
                     </div>
                 </div>

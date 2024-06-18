@@ -1,51 +1,38 @@
 import React from 'react';
 import "./team-section.css";
-import pi_photo_1 from '../../../assets/images/marc.jpg';
-import pi_photo_2 from '../../../assets/images/rob.jpg';
-import pi_photo_3 from '../../../assets/images/ariel.jpg';
-import pi_photo_4 from '../../../assets/images/allison.jpeg';
-
-
-function TeamMember({ name, role, imageSrc }) {
-  return (
-    <div className="item col-12 col-md-6 col-lg-3">
-      <div className="item-wrapper">
-        <div className="item-img mb-3">
-          <img src={imageSrc} alt={name} />
-        </div>
-        <div className="item-content align-left">
-          <h6 className="item-subtitle mbr-fonts-style display-5">
-            <strong>{name}</strong>
-          </h6>
-          <p className="mbr-text mbr-fonts-style display-7">{role}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
+import team_photo from '../../../assets/images/sinergia_team.jpeg';
+import config from '../../../config.json';
 
 function TeamSection() {
   return (
-    <section className="team-section">
-      <div className="container-fluid">
-        <div className="row justify-content-center">
-          <div className="col-12 content-head">
-            <div className="mbr-section-head mb-5">
-              <h4 className="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-                <strong>Our group leaders</strong>
-              </h4>
+
+      <section className="project-presentation-section">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-12 col-lg-6 image-wrapper">
+              <img className="w-100" src={team_photo} alt="MoultDB Project"/>
+            </div>
+            <div className="col-12 col-md-12 col-lg">
+              <div className="text-wrapper align-left">
+                <h1 className="mbr-section-title mbr-fonts-style mb-4 display-2">
+                  <strong>Our group</strong>
+                </h1>
+                <p className="mbr-text mbr-fonts-style mb-3 display-7">
+                  MoultDB is developed by :
+                  <ul>
+                  {config.team.map((item) => (
+                      <li>the <a href={item.link} rel="noopener noreferrer" target="_blank">{item.name}</a>
+                        at {item.location}</li>
+                  ))}
+                  </ul>
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <div className="row">
-          <TeamMember name="Marc Robinson-Rechavi" role="Chief Arthropologist" imageSrc={pi_photo_1} />
-          <TeamMember name="Robert Waterhouse" role="Genomics Guru" imageSrc={pi_photo_2} />
-          <TeamMember name="Ariel Chipman" role="Moulting Maestro" imageSrc={pi_photo_3} />
-          <TeamMember name="Allison C. Daley" role="Fossil Diva" imageSrc={pi_photo_4} />
-        </div>
-      </div>
-    </section>
+      </section>
   );
 }
+
 
 export default TeamSection;
