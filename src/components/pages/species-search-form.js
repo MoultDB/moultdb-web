@@ -65,8 +65,8 @@ class SpeciesSearchForm extends Component {
             )
         }
         return <div>
-            <label htmlFor={id} className="col-form-label">{label}</label>
             <input id={id} className="form-control form-control-sm" type="text"
+                   placeholder="Taxon scientific name" aria-label="Taxon scientific name"
                    onChange={(e) => {
                        this.handleChange(id, e.target.value)
                    }}/>
@@ -106,10 +106,12 @@ class SpeciesSearchForm extends Component {
         let result = this.getResultDisplay();
         return (
             <div className='row'>
-                <div className={"col-4 offset-4 mb-3"}>
+                <div className={"col-4 offset-4 mb-3 mt-5"}>
                     <form onSubmit={this.handleSubmit}>
                         {this.getInput('searchedText', 'Taxon name')}
-                        <button className="btn btn-sm btn-primary col-sm-2 offset-sm-5" type='submit'>Submit</button>
+                        <p className={"text-center"}>
+                            <button className="btn btn-sm btn-primary" type='submit'>Submit</button>
+                        </p>
                     </form>
                     {result}
                 </div>
