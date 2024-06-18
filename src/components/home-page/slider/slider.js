@@ -1,12 +1,12 @@
 import React from 'react';
 import './slider.css';
 
-import image1 from '../../../assets/images/photo-1582003360187-e2dff91a5df5.jpeg';
-import image2 from '../../../assets/images/photo-1633862168536-1a7bea3d2ec6.jpeg';
-import image3 from '../../../assets/images/photo-1683083904064-433c78ad0e82.jpeg';
-import image4 from '../../../assets/images/photo-1644400367717-05cffecd430d.jpeg';
+import image1 from '../../../assets/images/picture_1.jpeg';
+import image2 from '../../../assets/images/picture_2.jpeg';
+import image3 from '../../../assets/images/picture_3.jpeg';
+import image4 from '../../../assets/images/picture_4.jpeg';
 
-const images = [image1, image2, image3, image4];
+const images = [image3, image1, image4, image2];
 
 function Slider() {
 

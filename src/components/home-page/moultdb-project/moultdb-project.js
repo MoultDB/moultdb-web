@@ -1,8 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import './moultdb-project.css'
-import moultDbImage from '../../../assets/images/photo-1669275371255-3ae9608f420c.jpeg';
-
+import moultDbImage from '../../../assets/images/picture_3_high.jpg';
 
 function MoultDBProject() {
     return (
