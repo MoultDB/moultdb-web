@@ -22,7 +22,7 @@ function Slider() {
         </div>
         <div className="row mx-1">
           {images.map((src, index) => (
-              <div key={index} className="col-3" >
+              <div key={index} className="col-sm-6 col-md-3 mb-1" >
                 <div className="item-wrapper">
                   <img src={src} style={{margin: "auto"}} alt={`Slide ${index + 1}`} />
                 </div>

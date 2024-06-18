@@ -16,15 +16,14 @@ const Header = () => {
               </Link>
             </span>
             <span className="navbar-caption-wrap">
-              <Link to={"/"} className="navbar-caption text-black display-4" >
+              <Link to={"/"} className="navbar-caption text-black display-4">
                 MoultDB
               </Link>
             </span>
           </div>
-          <button className="navbar-toggler" type="button" data-toggle="collapse"
-            data-bs-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false"
-            aria-label="Toggle navigation">
+          <button className="navbar-toggler" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <div className="hamburger">
               <span></span>
               <span></span>
