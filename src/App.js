@@ -13,6 +13,7 @@ import Pathway from "./components/pages/pathway";
 import Gene from "./components/pages/gene";
 import Domain from "./components/pages/domain";
 import Orthogroup from "./components/pages/orthogroup";
+import Maintenance from "./components/pages/maintenance";
 
 function App() {
     return (
@@ -53,6 +54,12 @@ function CustomRoutes() {
             <Route path="domain/:domainId" element={<Domain />} />
             <Route path="orthogroup/:orthogroupId" element={<Orthogroup />} />
             <Route path="gene/:type/:id" element={<Gene />} />
+            {/*<Route path="species/search" element={<Maintenance />} />*/}
+            {/*<Route path="species/:datasource/:accession" element={<Maintenance />} />*/}
+            {/*<Route path="pathway/:pathwayId" element={<Maintenance />} />*/}
+            {/*<Route path="domain/:domainId" element={<Maintenance />} />*/}
+            {/*<Route path="orthogroup/:orthogroupId" element={<Maintenance />} />*/}
+            {/*<Route path="gene/:type/:id" element={<Maintenance />} />*/}
             <Route path="about/related-projects" element={<RelatedProjects />} />
             <Route path="about/privacy-notice" element={<PrivacyNotice />} />
             <Route path="404" element={<Notfound />} />
