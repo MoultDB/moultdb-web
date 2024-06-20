@@ -23,15 +23,6 @@ function ContactUs() {
                 Don't hesitate !</p>
             </div>
           </div>
-          {/*<div className="col-lg-8 side-features">*/}
-          {/*  <div className="google-map">*/}
-          {/*    <iframe */}
-          {/*      title="location" */}
-          {/*      frameBorder="0" */}
-          {/*      style={{ border:0, width: '100%', height: '400px' }} */}
-          {/*      src="https://www.google.com/maps/embed/v1/place?key&#x3D;AIzaSyCt1265A4qvZy9HKUeA8J15AOC4SrCyZe4&amp;q&#x3D;Lausanne%20Switzerland" allowFullScreen=""></iframe>*/}
-          {/*  </div>*/}
-          {/*</div>*/}
         </div>
       </div>
     </section>
