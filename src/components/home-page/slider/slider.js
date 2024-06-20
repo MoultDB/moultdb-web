@@ -16,7 +16,7 @@ function Slider() {
         <div className="row mb-5 justify-content-center">
           <div className="col-12 content-head">
             <h3 className="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-              <strong>Moulting Masterpieces</strong>
+              <strong>Moulting Insights</strong>
             </h3>
           </div>
         </div>
