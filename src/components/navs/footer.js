@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './footer.css';
 import Obfuscate from 'react-obfuscate';
+import config from '../../config.json';
 
 function Footer() {
     return (
@@ -34,29 +35,15 @@ function Footer() {
                         </ul>
                     </div>
 
-                     {/*TODO: refactor with SocialMediaItem */}
                     <div className="col-12 mt-4">
                         <div className="social-row">
-                            <div className="soc-item">
-                                <a href="https://www.facebook.com/groups/402623715250579" target="_blank" rel="noopener noreferrer">
-                                    <span className="mbr-iconfont socicon socicon-facebook display-7"></span>
-                                </a>
-                            </div>
-                            <div className="soc-item">
-                                <a href="https://x.com/moultdb" target="_blank" rel="noopener noreferrer">
-                                    <span className="mbr-iconfont socicon-twitter socicon"></span>
-                                </a>
-                            </div>
-                            <div className="soc-item">
-                                <a href="https://www.instagram.com/moultdb/" target="_blank" rel="noopener noreferrer">
-                                    <span className="mbr-iconfont socicon-instagram socicon"></span>
-                                </a>
-                            </div>
-                            <div className="soc-item">
-                                <a href="https://ecoevo.social/@moultdb" target="_blank" rel="noopener noreferrer">
-                                    <span className="mbr-iconfont socicon socicon-mastodon"></span>
-                                </a>
-                            </div>
+                            {config.socialMedia.map((item) => (
+                                <div className="soc-item">
+                                    <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                        <span className={"mbr-iconfont socicon display-7 " + item.icon }></span>
+                                    </a>
+                                </div>
+                                ))}
                         </div>
                     </div>
 

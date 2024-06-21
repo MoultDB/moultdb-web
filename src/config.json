@@ -20,5 +20,12 @@
             "location": "the SIB Swiss Institute of Bioinformatics",
             "link": "https://www.sib.swiss/environmental-bioinformatics"
         }
+    ],
+    "socialMedia": [
+        { "icon": "socicon-facebook", "link": "https://www.facebook.com/groups/402623715250579" },
+        { "icon": "socicon-twitter", "link": "https://x.com/moultdb" },
+        { "icon": "socicon-instagram", "link": "https://www.instagram.com/moultdb/" },
+        { "icon": "socicon-mastodon", "link": "https://ecoevo.social/@moultdb" },
+        { "icon": "socicon-github", "link": "https://github.com/MoultDB/" }
     ]
 }
