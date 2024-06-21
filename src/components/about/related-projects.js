@@ -7,7 +7,7 @@ export default function RelatedProjects() {
     }, []);
 
     return (
-        <div className="row">
+        <main className="row">
             <div className='col-sm-10 offset-sm-1'>
                 <h1>Related projects</h1>
 
@@ -39,6 +39,6 @@ export default function RelatedProjects() {
                     </dd>
                 </dl>
             </div>
-        </div>
+        </main>
     );
 }

@@ -1,0 +1,26 @@
+/* Get_in_touch  ##################################################################################################################### */
+
+  .get-in-touch-section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: transparent;
+}
+.get-in-touch-section .mbr-overlay {
+  background-color: #ffffff;
+  opacity: 0.4;
+}
+.get-in-touch-section form .mbr-section-btn {
+  text-align: center;
+  width: 100%;
+}
+.get-in-touch-section form .mbr-section-btn .btn {
+  display: inline-flex;
+}
+@media (max-width: 991px) {
+  .get-in-touch-section form .mbr-section-btn .btn {
+    width: 100%;
+  }
+}
+.get-in-touch-section .content-head {
+  max-width: 800px;
+}

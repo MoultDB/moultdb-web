@@ -1,3 +1,8 @@
 .dt-length label {
     margin-left: 10px;
 }
+
+#mc-result span, #genome-result span,
+#mc-result a, #genome-result a {
+    word-break: normal !important;
+}

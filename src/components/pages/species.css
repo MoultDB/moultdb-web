@@ -1,0 +1,42 @@
+#species-page span.subtitle {
+    color: var(--lightest-grey-color);
+    font-size: 0.8em;
+}
+
+
+#species-page ol,
+#species-page ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#species-page ul.xref li {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+
+#species-page ul.synonyms li {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#species-page ol.lineage li {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#species-page .lineage-separator::after {
+    content: " > ";
+}
+
+#species-page .synonyms-separator::after {
+    content: " ; ";
+}
+
+#species-page .open-row::after {
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.5);
+    content: "►";
+}

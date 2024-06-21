@@ -8,7 +8,7 @@ export default function PrivacyNotice() {
     }, []);
 
     return (
-        <div className={'row'}>
+        <main className={'row'}>
             <div className={'col-sm-10 offset-sm-1'}>
                 <h1>MoultDB privacy notice</h1>
 
@@ -39,14 +39,17 @@ export default function PrivacyNotice() {
                 <p>The list below provides a summary of the type of data we collect:</p>
                 <ul>
                     <li>IP address</li>
-                    <li>Email address</li>
-                    <li>Name</li>
+                    <li>Date and time of a visit to the service</li>
+                    <li>Operating system</li>
+                    <li>Browser</li>
+                    <li>Amount of data transmitted</li>
+                    <li>Name (help desk only)</li>
+                    <li>Email address (help desk only)</li>
                 </ul>
 
                 <h2>What are the reasons for which we might process it?</h2>
                 <p>Your personal data are processed by MoultDB for the following purposes:</p>
                 <ul>
-                    <li>To provide the user access to the service</li>
                     <li>To answer questions from users</li>
                     <li>To better understand the needs of the users and guide future improvements of the service</li>
                     <li>To conduct and monitor data protection activities</li>
@@ -125,5 +128,5 @@ export default function PrivacyNotice() {
 
                 <p>Additional terms: privacy policy</p>
             </div>
-        </div>);
+        </main>);
 }

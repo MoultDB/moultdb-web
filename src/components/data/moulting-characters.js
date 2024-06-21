@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {getMainUrl} from "../../common/taxon-utils";
+import "./moulting-characters.css"
 import "datatables.net-dt/css/dataTables.dataTables.min.css"
 import "datatables.net-buttons-dt/css/buttons.dataTables.min.css"
 import "datatables.net-responsive-dt/css/responsive.dataTables.css"
 import "datatables.net-searchbuilder-dt/css/searchBuilder.dataTables.css"
 import './data.css'
+import {getSpeciesUrl} from "../../common/link-utils";
 
 const $ = require('jquery');
 $.DataTable = require( 'datatables.net-dt' );
@@ -23,11 +24,11 @@ const columns = [
         },
         targets:   -1
     },
-    { title: 'Taxon', data: 'taxon',
-        render: function ( data, type, full ) {
+    {   title: 'Taxon <div class="custom-tooltip">Finest-grained taxonomic level of organism (ideally species)</div>', 
+        data: 'taxon',
+        render: function(data, type, full) {
             if (data) {
-                // return data.scientificName;
-                return '<a href='+getMainUrl(data)+'>' + data.scientificName + '</a>'
+                return '<a href=' + getSpeciesUrl(data) + '>' + data.scientificName + '</a>';
             }
             return '';
         }
@@ -164,9 +165,8 @@ class MoultingCharacters extends Component {
                     <p>Clicking on the <span className={"open-row"}/> sign shows the full information for each row.</p>
                 </div>
 
-                <table id="mc-result"
-                       className={'table table-sm table-striped table-bordered table-hover responsive'}
-                       ref="mcharacters">
+                <table id="mc-result" ref="mcharacters"
+                       className={'table table-sm table-striped table-bordered table-hover responsive'}>
                 </table>
             </div>);
     }

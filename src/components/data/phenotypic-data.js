@@ -4,11 +4,13 @@ import MoultdbService from "../../services/moultdb.service";
 
 export const PhenotypicData = (props) => {
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             setError(null);
+            setLoading(true);
             MoultdbService.getTaxAnnotationsByTaxonPath(props.taxonPath)
                 .then(response => {
                     if (response.data) {
@@ -17,20 +19,21 @@ export const PhenotypicData = (props) => {
                             content: response.data.data
                         }));
                     }
+                    setLoading(false)
                 })
                 .catch(error => {
-                    console.error('An error has occurred during taxon annotation upload :', error);
-                    setError('An error has occurred during taxon annotation upload.');
+                    console.error('An error has occurred during moulting characters upload :', error);
+                    setError('An error has occurred during moulting characters upload.');
                     setData(null);
+                    setLoading(false)
                 });
         }
-
         fetchData();
     }, [props.taxonPath]);
 
     return (<div>
             { error && <div className={"container alert alert-danger"} role="alert">{error}</div> }
-            { data && data.content && data.content.length > 0 ?
+            { data && data.content?.length > 0 ?
                 <MoultingCharacters mcData={data.content}/>
                 : <div>No data</div> }
         </div>

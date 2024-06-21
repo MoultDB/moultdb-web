@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getMainUrl} from "../../common/taxon-utils";
+import {getNCBIGenomeLink, getSpeciesUrl} from "../../common/link-utils";
 import "datatables.net-dt/css/dataTables.dataTables.min.css"
 import "datatables.net-buttons-dt/css/buttons.dataTables.min.css"
 import "datatables.net-searchbuilder-dt/css/searchBuilder.dataTables.css"
@@ -16,18 +16,17 @@ $.DataTable = require( 'datatables.net-datetime' );
 
 const columns = [
     { title: 'Species', data: 'taxon',
-        render: function ( data, type, full ) {
+        render: function ( data ) {
             if (data) {
-                return '<a href='+getMainUrl(data)+'>' + data.scientificName + '</a>'
+                return '<a href=' + getSpeciesUrl(data) + '>' + data.scientificName + '</a>'
             }
             return '';
         }
     },
-    { title: 'GenBank', data: 'geneBankAcc',
-        render: function ( data, type, full ) {
+    { title: 'GenBank/RefSeq', data: 'geneBankAcc',
+        render: function ( data ) {
             if (data) {
-                return '<a href="https://www.ncbi.nlm.nih.gov/data-hub/genome/' + data 
-                    + '" target="_blank" rel="noopener noreferrer">' + data + '</a>'
+                return getNCBIGenomeLink(data) ;
             }
             return '';
         }
@@ -39,18 +38,18 @@ const columns = [
     { title: 'Scaffold N50', data: 'scaffoldN50'},
     { title: 'Annotation Date', data: 'annotationDate'},
     { title: 'Total genes', data: 'totalGenes'},
-    { title: 'Arthropoda Complete', data: 'completeBusco'},
-    { title: 'Arthropoda Single', data: 'singleBusco'},
-    { title: 'Arthropoda Duplicated', data: 'duplicatedBusco'},
-    { title: 'Arthropoda Fragmented', data: 'fragmentedBusco'},
-    { title: 'Arthropoda Missing', data: 'missingBusco'},
+    { title: 'BUSCO Complete', data: 'completeBusco'},
+    { title: 'BUSCO Single', data: 'singleBusco'},
+    { title: 'BUSCO Duplicated', data: 'duplicatedBusco'},
+    { title: 'BUSCO Fragmented', data: 'fragmentedBusco'},
+    { title: 'BUSCO Missing', data: 'missingBusco'},
 ];
 
 class GenomeData extends Component {
 
     componentDidMount() {
         $(this.refs.gdata).DataTable({
-            order: [[1, 'asc'], [2, 'asc']],
+            order: [[0, 'asc']],
             scrollX: true,
             dom:"<'row'<'col'Q>>" +
                 "<'row'<'col page-length'l><'col text-center'i><'col text-end'f>>" +
