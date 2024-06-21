@@ -18,6 +18,8 @@ export default function About() {
                         <li><a href="#what-is-moultdb">What is MoultDB?</a></li>
                         <li><a href="#who-are-we">Who are we?</a></li>
                         <li><a href="#funding-sources">Funding source</a></li>
+                        <li><a href="#related-projects">Related projects</a></li>
+                        <li><a href="#privacy-notice">Privacy notice</a></li>
                     </ul>
                 </div>
                 <dl>
@@ -71,6 +73,14 @@ export default function About() {
                     <dd>MoultDB is the result of a <a href="http://p3.snf.ch/project-198691" rel="noopener noreferrer" target="_blank">
                         Sinergia collaborative project</a> funded by the <a href="https://www.snf.ch/en" rel="noopener noreferrer" target="_blank">
                         Swiss National Science Foundation</a>.
+                    </dd>
+                    <dt><h2 id={"related-projects"}>Related projects</h2></dt>
+                    <dd>You can find projects related to the MoultDB <a href="/about/related-projects">here</a>.
+                    </dd>
+                    <dt><h2 id={"privacy-notice"}>Privacy notice</h2></dt>
+                    <dd>This website requires cookies, and limited processing of your personal data in order to
+                        function. By using the site you are agreeing to this as outlined in our&nbsp;
+                        <a href="/about/privacy-notice">privacy notice</a>.
                     </dd>
                 </dl>
             </div>
