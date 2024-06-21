@@ -918,6 +918,7 @@ a[target*="_blank"]::after {
   padding-bottom: 12px;
   text-align: left;
   background-color: white;
+  white-space: nowrap;
 }
 
 .simple-table th, .simple-table td {

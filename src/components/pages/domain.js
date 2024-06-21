@@ -59,7 +59,7 @@ const Domain = () => {
                             <span className="value">{domain.description}</span>
                         </div>
                         <div className="key-value-pair">
-                            <span className="key">Interpro link</span>
+                            <span className="key">InterPro link</span>
                             <span className="value">{getInterproDomainLink(domain.id)}</span>
                         </div>
 
