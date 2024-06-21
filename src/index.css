@@ -889,3 +889,46 @@ a[target*="_blank"]::after {
 /*  background-size: contain;*/
 /*  display: inline-block;*/
 /*}*/
+.key-value-pair {
+  display: flex;
+  padding: 0.75rem;
+}
+
+.key {
+  font-weight: bold;
+  width: 25%;
+}
+ 
+.value {
+  width: 75%;
+}
+
+.simple-table {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  overflow-x: auto;
+  display: block;
+}
+
+.simple-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: white;
+}
+
+.simple-table th, .simple-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.simple-table tr:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.simple-table tr:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}

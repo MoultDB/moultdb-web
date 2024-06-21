@@ -5,7 +5,7 @@ import {getSpeciesLink} from "../../common/link-utils";
 import Loading from "../data/loading";
 
 const examples = {
-    searchedText: ['Fuxianhuia protensa', 'Chionoecetes opilio']
+    searchedText: ['Fuxianhuia protensa', 'Chionoecetes opilio', 'Arthropoda']
 };
 
 class SpeciesSearchForm extends Component {
@@ -57,7 +57,7 @@ class SpeciesSearchForm extends Component {
         var exampleLinks = [];
         for (const el of examples[id]) {
             exampleLinks.push(
-                <button className="btn btn-link btn-sm " type="button"
+                <button className="btn-link" type="button"
                         onClick={(e) => {
                             this.updateValue(id, el) }}>
                     {el}

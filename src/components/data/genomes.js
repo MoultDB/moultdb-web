@@ -49,7 +49,7 @@ class GenomeData extends Component {
 
     componentDidMount() {
         $(this.refs.gdata).DataTable({
-            order: [[1, 'asc'], [2, 'asc']],
+            order: [[0, 'asc']],
             scrollX: true,
             dom:"<'row'<'col'Q>>" +
                 "<'row'<'col page-length'l><'col text-center'i><'col text-end'f>>" +

@@ -165,9 +165,8 @@ class MoultingCharacters extends Component {
                     <p>Clicking on the <span className={"open-row"}/> sign shows the full information for each row.</p>
                 </div>
 
-                <table id="mc-result"
-                       className={'table table-sm table-striped table-bordered table-hover responsive'}
-                       ref="mcharacters">
+                <table id="mc-result" ref="mcharacters"
+                       className={'table table-sm table-striped table-bordered table-hover responsive'}>
                 </table>
             </div>);
     }

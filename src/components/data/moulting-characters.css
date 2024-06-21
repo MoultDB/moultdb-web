@@ -17,3 +17,7 @@
 th:hover .custom-tooltip {
     display: block;
 }
+
+#mc-result span {
+    word-break: normal !important;
+}

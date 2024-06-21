@@ -3,19 +3,6 @@
     font-size: 0.8em;
 }
 
-#species-page .key-value-pair {
-    display: flex;
-    padding: 0.75rem;
-}
-
-#species-page .key {
-    font-weight: bold;
-    width: 25%;
-}
-
-#species-page .value {
-    width: 75%;
-}
 
 #species-page ol,
 #species-page ul {
