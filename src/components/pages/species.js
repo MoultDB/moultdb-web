@@ -90,6 +90,7 @@ const Species = () => {
     const [taxon, setTaxon] = useState(null);
     const [lineage, setLineage] = useState(null);
     const [genes, setGenes] = useState(null);
+    const [geneLoading, setGeneLoading] = useState(null);
     const [error, setError] = useState(null);
     let params = useParams()
 
@@ -112,16 +113,19 @@ const Species = () => {
                         setError('An error has occurred during taxon lineage upload.');
                         setLineage(null);
                     });
+                setGeneLoading(true);
                 await MoultdbService.getMoultingGenesByTaxonPath(responseData.path)
                     .then(response => {
                         if (response?.data?.data) {
                             setGenes(response.data.data);
                         }
+                        setGeneLoading(false);
                     })
                     .catch(error => {
                         console.error('An error has occurred during genes upload :', error);
                         setError('An error has occurred during genes upload.');
                         setGenes(null);
+                        setGeneLoading(false);
                     });
             }
         }
@@ -175,7 +179,7 @@ const Species = () => {
                         {genes && Object.keys(genes).length > 0 ?
                             <GeneData genes={genes}/>
                             :
-                            <Loading />
+                            <div>{geneLoading ? <Loading/> : <div>No data</div>} </div>
                         }
                     </div>
                 </div>

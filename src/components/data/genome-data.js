@@ -21,13 +21,14 @@ export const GenomeData = (props) => {
                             content: response.data.data
                         }));
                     }
+                    setLoading(false);
                 })
                 .catch(error => {
                     console.error('An error has occurred during genome upload :', error);
                     setError('An error has occurred during genome upload.');
                     setData(null);
+                    setLoading(false);
                 })
-                .finally(setLoading(false));
         }
         fetchData();
     }, [props.taxonPath]);

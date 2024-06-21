@@ -19,13 +19,14 @@ export const PhenotypicData = (props) => {
                             content: response.data.data
                         }));
                     }
+                    setLoading(false)
                 })
                 .catch(error => {
                     console.error('An error has occurred during moulting characters upload :', error);
                     setError('An error has occurred during moulting characters upload.');
                     setData(null);
-                })
-                .finally(setLoading(false));
+                    setLoading(false)
+                });
         }
         fetchData();
     }, [props.taxonPath]);
