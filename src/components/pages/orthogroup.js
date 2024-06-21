@@ -30,7 +30,7 @@ const Orthogroup = () => {
     }, [params.orthogroupId]);
 
     return (
-        <main className={"container "}>
+        <main className={"container beta"}>
             <ChangePageTitle pageTitle={`Orthogroup: ${params.orthogroupId}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">

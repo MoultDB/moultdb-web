@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import ChangePageTitle from "../../common/change-page-title";
 import MoultdbService from "../../services/moultdb.service";
 import GeneData from "../data/gene-data";
+import Loading from "../data/loading";
 
 function displayArticle(article) {
     if (article) {
@@ -24,6 +25,7 @@ function displayArticle(article) {
 const Pathway = () => {
     const [pathway, setPathway] = useState(null);
     const [genes, setGenes] = useState(null);
+    const [geneLoading, setGeneLoading] = useState(null);
     const [error, setError] = useState(null);
     let params = useParams()
 
@@ -35,16 +37,19 @@ const Pathway = () => {
             setPathway(responseData);
 
             if (responseData) {
+                setGeneLoading(true);
                 await MoultdbService.getGenesByPathway(params.pathwayId)
                     .then(response => {
                         if (response?.data?.data) {
                             setGenes(response.data.data);
                         }
+                        setGeneLoading(false);
                     })
                     .catch(error => {
                         console.error('An error has occurred during pathway genes upload :', error);
                         setError('An error has occurred during pathway genes upload.');
                         setGenes(null);
+                        setGeneLoading(false);
                     });
             }
         }
@@ -52,7 +57,7 @@ const Pathway = () => {
     }, [params.pathwayId]);
 
     return (
-        <main className={"container "}>
+        <main className={"container beta"}>
             <ChangePageTitle pageTitle={`Pathway: ${pathway ? pathway.name : params.pathwayId}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
@@ -78,7 +83,7 @@ const Pathway = () => {
                         {displayArticle(pathway.article)}
 
                         <h2>Gene(s) involved in a moulting pathway</h2>
-                        <GeneData genes={genes} />
+                        { geneLoading ? <Loading /> : <GeneData genes={genes}/> }
                     </div>
                 </div>
                 : <div>Unknown pathway</div> }

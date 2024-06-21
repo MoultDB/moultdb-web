@@ -1,15 +1,18 @@
-import React, {useEffect, useState}  from "react";
+import React, {useEffect, useState} from "react";
 import MoultdbService from "../../services/moultdb.service";
 import Genomes from "./genomes";
+import Loading from "./loading";
 
 
 export const GenomeData = (props) => {
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             setError(null);
+            setLoading(true);
             MoultdbService.getGenomesByTaxonPath(props.taxonPath)
                 .then(response => {
                     if (response.data) {
@@ -18,22 +21,25 @@ export const GenomeData = (props) => {
                             content: response.data.data
                         }));
                     }
+                    setLoading(false);
                 })
                 .catch(error => {
                     console.error('An error has occurred during genome upload :', error);
                     setError('An error has occurred during genome upload.');
                     setData(null);
-                });
+                    setLoading(false);
+                })
         }
-
         fetchData();
     }, [props.taxonPath]);
 
     return (<div>
             { error && <div className={"container alert alert-danger"} role="alert">{error}</div> }
-            { data && data.content && data.content.length > 0 ?
+            { data?.content?.length > 0 ?
                 <Genomes genomeData={data.content}/>
-                : <div>No data</div> }
+                :
+                <div>{ loading ? <Loading/> : <div>No data</div> } </div>
+            }
         </div>
     )
 }

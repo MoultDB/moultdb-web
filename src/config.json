@@ -1,0 +1,31 @@
+{
+    "team": [
+        {
+            "name": "ANOM Lab",
+            "location": "the University of Lausanne",
+            "link": "https://wp.unil.ch/paleo/page-exemple/arthropod-moulting/"
+        },
+        {
+            "name": "Developmental & Evolutionary Biology group",
+            "location": "the Hebrew University of Jerusalem",
+            "link": "https://www.bio.huji.ac.il/en/content/chipman-ariel"
+        },
+        {
+            "name": "Evolutionary Bioinformatics group",
+            "location": "the University of Lausanne and the SIB Swiss Institute of Bioinformatics",
+            "link": "https://www.unil.ch/dee/robinson-rechavi-group"
+        },
+        {
+            "name": "Environmental Bioinformatics group",
+            "location": "the SIB Swiss Institute of Bioinformatics",
+            "link": "https://www.sib.swiss/environmental-bioinformatics"
+        }
+    ],
+    "socialMedia": [
+        { "icon": "socicon-facebook", "link": "https://www.facebook.com/groups/402623715250579" },
+        { "icon": "socicon-twitter", "link": "https://x.com/moultdb" },
+        { "icon": "socicon-instagram", "link": "https://www.instagram.com/moultdb/" },
+        { "icon": "socicon-mastodon", "link": "https://ecoevo.social/@moultdb" },
+        { "icon": "socicon-github", "link": "https://github.com/MoultDB/" }
+    ]
+}

@@ -1,0 +1,23 @@
+.custom-tooltip {
+    display: none;
+    position: absolute;
+    background-color: rgba(8, 120, 110, 1);
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 10px;
+    z-index: 100;
+    top: 100%;
+    left: 50%;
+    font-size: 12px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+th:hover .custom-tooltip {
+    display: block;
+}
+
+#mc-result span {
+    word-break: normal !important;
+}

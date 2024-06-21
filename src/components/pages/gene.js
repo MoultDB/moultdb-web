@@ -68,7 +68,7 @@ const Gene = () => {
 
     const h1Text = gene ? <>: {gene.mainName} - <i>{gene.taxon.scientificName}</i></> : <>: {params.id}</>;
     return (
-        <main className={"container "}>
+        <main className={"container beta"}>
             <ChangePageTitle pageTitle={`Gene: ${gene ? gene.mainName + " - " + gene.taxon.scientificName : params.id}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
@@ -122,16 +122,10 @@ const Gene = () => {
                             </span>
                         </div>
 
-                        {orthologs &&
-                            <>
-                                <h2>Ortholog(s)</h2>
-                                <GeneData genes={orthologs}/>
-                            </>
-                        }
-                        {gene.geneDomains && gene.geneDomains.length > 0 &&
+                        {gene.geneDomains?.length > 0 &&
                             <>
                                 <h2>Domain(s)</h2>
-                                <table>
+                                <table className="simple-table">
                                     <thead>
                                     <tr>
                                         <th scope="col">Domain accession</th>
@@ -143,16 +137,22 @@ const Gene = () => {
                                     <tbody>
                                     {gene.geneDomains.map((domain, index) => (
                                         <tr key={"domain-" + index}>
-                                            <th><Link to={"/domain/" + domain.domain.id}>{domain.domain.id}</Link></th>
+                                            <td><Link to={"/domain/" + domain.domain.id}>{domain.domain.id}</Link></td>
                                             <td>{domain.domain.description} </td>
                                             <td>{domain.start}</td>
                                             <td>{domain.end}</td>
                                         </tr>
-                                    ))
-                                    }
-                                </tbody>
-                            </table>
+                                    ))}
+                                    </tbody>
+                                </table>
                             </>}
+
+                        {orthologs &&
+                            <>
+                                <h2>Ortholog(s)</h2>
+                                <GeneData genes={orthologs}/>
+                            </>
+                        }
                     </div>
                 </div>
             }

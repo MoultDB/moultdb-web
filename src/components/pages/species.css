@@ -1,53 +1,41 @@
-span.subtitle {
+#species-page span.subtitle {
     color: var(--lightest-grey-color);
     font-size: 0.8em;
 }
 
-.key-value-pair {
-    display: flex;
-    padding: 0.75rem;
-}
 
-.key {
-    font-weight: bold;
-    width: 25%;
-}
-
-.value {
-    width: 75%;
-}
-
-ol, ul {
+#species-page ol,
+#species-page ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-ul.xref li {
+#species-page ul.xref li {
     display: inline-block;
     margin-right: 5px;
 }
 
 
-ul.synonyms li {
+#species-page ul.synonyms li {
     display: inline-block;
     margin-right: 5px;
 }
 
-ol.lineage li {
+#species-page ol.lineage li {
     display: inline-block;
     margin-right: 5px;
 }
 
-.lineage-separator::after {
+#species-page .lineage-separator::after {
     content: " > ";
 }
 
-.synonyms-separator::after {
+#species-page .synonyms-separator::after {
     content: " ; ";
 }
 
-.open-row::after {
+#species-page .open-row::after {
     display: inline-block;
     color: rgba(0, 0, 0, 0.5);
     content: "►";

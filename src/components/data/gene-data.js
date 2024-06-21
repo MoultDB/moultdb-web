@@ -1,13 +1,12 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {getSpeciesLink} from "../../common/link-utils";
-import './gene-data.css'
+import {getSpeciesUrl} from "../../common/link-utils";
 
 export const GeneData = ({ genes }) => {
 
 
     const renderGeneDetails = (gene) => {
-        const geneAcc = gene.id ? gene.id : gene.locusTag;
+        const geneAcc = gene.name ?? gene.id ?? gene.locusTag;
         return (
             <div key={`${geneAcc}`}>
                 <Link to={"/gene/" +  (gene.id ? "id/" + gene.id : "locus-tag/" + gene.locusTag)}>{geneAcc}</Link>
@@ -17,6 +16,14 @@ export const GeneData = ({ genes }) => {
 
     const renderTable = (pathway) => {
         const taxa = Object.keys(genes[pathway]);
+        const taxonCount = taxa.length;
+        taxa.sort((a, b) => {
+            const taxonA = JSON.parse(a);
+            const taxonB = JSON.parse(b);
+            return taxonA.scientificName.localeCompare(taxonB.scientificName)
+            // return taxonA.path.localeCompare(taxonB.path)
+        })
+
         const orthogroups = new Set();
 
         if (pathway !== "null") {
@@ -28,7 +35,7 @@ export const GeneData = ({ genes }) => {
         const sortedOrthogroups = Array.from(orthogroups).sort();
 
         return (
-            <table key={pathway} className="gene-data-table">
+            <table key={pathway} className="simple-table">
                 <thead>
                 <tr>
                     <th>Species / Orthogroups</th>
@@ -49,11 +56,12 @@ export const GeneData = ({ genes }) => {
                     const taxon = JSON.parse(taxonKey);
                     return (
                         <tr key={taxon.id}>
-                            <td>{getSpeciesLink(taxon)}</td>
+                            <td><a href={getSpeciesUrl(taxon)}>{taxon.scientificName}</a></td>
                             {sortedOrthogroups.length > 0 ?
                                 (sortedOrthogroups.map(og =>
-                                    <td key={pathway + ""+og}>
-                                        {genes[pathway][taxonKey][og]?.map(gene => renderGeneDetails(gene)) || '-'}
+                                    <td key={pathway + "" + og}>
+                                        {taxonCount > 1 && (genes[pathway][taxonKey][og] ? genes[pathway][taxonKey][og].length : 0)}
+                                        {taxonCount === 1 && (genes[pathway][taxonKey][og]?.map(gene => renderGeneDetails(gene)) || '-')}
                                     </td>
                                 ))
                                 :
@@ -75,7 +83,7 @@ export const GeneData = ({ genes }) => {
                 if (pathway) {
                     return (
                         <div key={pathway.id}>
-                            <h3>Pathway:
+                            <h3>Pathway&nbsp;
                                 <Link to={"/pathway/" + pathway.id}>{pathway.name} ({pathway.id})</Link>
                             </h3>
                             {renderTable(pathwayKey)}

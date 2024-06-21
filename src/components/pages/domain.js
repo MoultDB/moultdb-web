@@ -4,10 +4,12 @@ import ChangePageTitle from "../../common/change-page-title";
 import MoultdbService from "../../services/moultdb.service";
 import GeneData from "../data/gene-data";
 import {getInterproDomainLink} from "../../common/link-utils";
+import Loading from "../data/loading";
 
 const Domain = () => {
     const [domain, setDomain] = useState(null);
     const [genes, setGenes] = useState(null);
+    const [geneLoading, setGeneLoading] = useState(null);
     const [error, setError] = useState(null);
     let params = useParams()
 
@@ -19,16 +21,19 @@ const Domain = () => {
             setDomain(responseData);
 
             if (responseData) {
+                setGeneLoading(true);
                 await MoultdbService.getGenesByDomain(params.domainId)
                     .then(response => {
                         if (response?.data?.data) {
                             setGenes(response.data.data);
                         }
+                        setGeneLoading(false);
                     })
                     .catch(error => {
                         console.error('An error has occurred during domain genes upload :', error);
                         setError('An error has occurred during domain genes upload.');
                         setGenes(null);
+                        setGeneLoading(false);
                     });
             }
         }
@@ -54,12 +59,12 @@ const Domain = () => {
                             <span className="value">{domain.description}</span>
                         </div>
                         <div className="key-value-pair">
-                            <span className="key">Interpro link</span>
+                            <span className="key">InterPro link</span>
                             <span className="value">{getInterproDomainLink(domain.id)}</span>
                         </div>
 
                         <h2>Gene(s) matching this domain</h2>
-                        <GeneData genes={genes}/>
+                        { geneLoading ? <Loading /> : <GeneData genes={genes}/> }
                     </div>
                 </div>
                 : <div>Unknown domain</div>}

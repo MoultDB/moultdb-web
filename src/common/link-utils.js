@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 
 export const getSpeciesUrl = (taxon) => {
-    if (taxon.dbXrefs && taxon.dbXrefs.length > 0) {
+    if (taxon.dbXrefs?.length > 0) {
         return "/species/" + taxon.dbXrefs[0].dataSource.shortName + "/" + taxon.dbXrefs[0].accession;
     }
     // This should never happen, but it prevents errors
@@ -9,7 +9,7 @@ export const getSpeciesUrl = (taxon) => {
 }
 
 export const getSpeciesLink = (taxon) => {
-    if (taxon.dbXrefs && taxon.dbXrefs.length > 0)
+    if (taxon.dbXrefs?.length > 0)
         return <Link to={getSpeciesUrl(taxon)}>{taxon.scientificName}</Link>;
     // This should never happen, but it prevents errors
     return taxon.scientificName;
@@ -20,7 +20,7 @@ export const getNCBIGeneLink = (gene) => {
         {gene.id &&
             <a target="_blank" rel="noopener noreferrer"
                href={"https://www.ncbi.nlm.nih.gov/gene/" + gene.id}>
-                {gene.name ? gene.name : gene.id}
+                {gene.name ?? gene.id}
             </a>
         }
     </>

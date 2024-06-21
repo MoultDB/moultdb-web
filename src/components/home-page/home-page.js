@@ -1,8 +1,11 @@
 import React, {useEffect} from 'react';
-import './home-page.css';
-import Hero from "./hero/hero";
-import News from "./news/news";
-import IntroSection from "./intro-section/intro-section";
+import Hero from './hero/hero';
+import MoultDBProject from './moultdb-project/moultdb-project';
+import Slider from './slider/slider';
+import FAQSection from './faq-section/faq-section';
+import TeamSection from './team-section/team-section';
+import ContactUs from './contact-us/contact-us';
+
 
 export default function HomePage() {
 
@@ -10,19 +13,14 @@ export default function HomePage() {
         document.title = "MoultDB"
     }, []);
 
-    return (
-        <main>
-            <Hero />
-            <div className="moultdb-section">
-                <div className="row ">
-                    <div className="col-md-6">
-                        <IntroSection />
-                    </div>
-                    <div className="col-md-6">
-                        <News />
-                    </div>
-                </div>
-            </div>
-        </main>
-    );
+  return (
+    <div>
+        <Hero />
+        <MoultDBProject />
+        <Slider />
+        <TeamSection />
+        <FAQSection/>
+        <ContactUs/>
+    </div>
+  );
 }

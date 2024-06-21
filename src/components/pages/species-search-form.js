@@ -5,7 +5,7 @@ import {getSpeciesLink} from "../../common/link-utils";
 import Loading from "../data/loading";
 
 const examples = {
-    searchedText: ['Fuxianhuia protensa', 'Chionoecetes opilio']
+    searchedText: ['Fuxianhuia protensa', 'Chionoecetes opilio', 'Arthropoda']
 };
 
 class SpeciesSearchForm extends Component {
@@ -55,18 +55,18 @@ class SpeciesSearchForm extends Component {
 
     getInput(id, label) {
         var exampleLinks = [];
-        for (const el of examples[id]) {
+        examples[id].map((el, index) => (
             exampleLinks.push(
-                <button className="btn btn-link btn-sm no-style" type="button"
+                <button className="btn-link" type="button" key={"ex-"+index}
                         onClick={(e) => {
                             this.updateValue(id, el) }}>
                     {el}
                 </button>
             )
-        }
+        ))
         return <div>
-            <label htmlFor={id} className="col-form-label">{label}</label>
             <input id={id} className="form-control form-control-sm" type="text"
+                   placeholder="Taxon scientific name" aria-label="Taxon scientific name"
                    onChange={(e) => {
                        this.handleChange(id, e.target.value)
                    }}/>
@@ -78,7 +78,7 @@ class SpeciesSearchForm extends Component {
         let self = this;
         let result = "";
         if (this.state.isLoaded) {
-            if (this.state.data && this.state.data.length > 0) {
+            if (this.state.data?.length > 0) {
                 result =
                     <div>
                         <ul>
@@ -106,10 +106,12 @@ class SpeciesSearchForm extends Component {
         let result = this.getResultDisplay();
         return (
             <div className='row'>
-                <div className={"col-4 offset-4 mb-3"}>
+                <div className={"col-4 offset-4 mb-3 mt-5"}>
                     <form onSubmit={this.handleSubmit}>
                         {this.getInput('searchedText', 'Taxon name')}
-                        <button className="btn btn-sm btn-custom col-sm-2 offset-sm-5" type='submit'>Submit</button>
+                        <p className={"text-center"}>
+                            <button className="btn btn-sm btn-primary" type='submit'>Submit</button>
+                        </p>
                     </form>
                     {result}
                 </div>
