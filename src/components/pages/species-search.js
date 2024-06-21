@@ -6,7 +6,7 @@ class Search extends Component {
 
     render() {
         return (
-            <main>
+            <main className={"beta"}>
                 <ChangePageTitle pageTitle="Taxon search" />
                 <h1>Taxon search</h1>
                 <SpeciesSearchForm />

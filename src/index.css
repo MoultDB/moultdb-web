@@ -932,3 +932,23 @@ a[target*="_blank"]::after {
 .simple-table tr:hover {
   background-color: rgba(0, 0, 0, 0.075);
 }
+
+/* Beta ribbon */
+.beta:after {
+  z-index: 10000;
+  content: "beta";
+  position: fixed;
+  width: 100px;
+  height: 25px;
+  background: darkred;
+  top: 12px;
+  left: -23px;
+  text-align: center;
+  font-size: 13px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fff;
+  line-height: 26px;
+  transform:rotate(-45deg);
+}
