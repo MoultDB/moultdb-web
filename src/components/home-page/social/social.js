@@ -23,7 +23,7 @@ function SocialMediaSection() {
           <div className="col-12">
             <div className="social-row">
               {config.socialMedia.map((item, index) => (
-                <SocialMediaItem key={index} icon={item.icon} link={item.link} />
+                <SocialMediaItem key={"hp-media-" + index} icon={item.icon} link={item.link} />
               ))}
             </div>
           </div>

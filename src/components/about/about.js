@@ -64,8 +64,8 @@ export default function About() {
                     <dt><h2 id={"who-are-we"}>Who are we?</h2></dt>
                     <dd>MoultDB is developed by :
                         <ul>
-                            {config.team.map((item) => (
-                                <li>the <a href={item.link} rel="noopener noreferrer" target="_blank">{item.name}</a>
+                            {config.team.map((item, idx) => (
+                                <li key={"group-" + idx}>the <a href={item.link} rel="noopener noreferrer" target="_blank">{item.name}</a>
                                     at {item.location}</li>
                             ))}
                         </ul>

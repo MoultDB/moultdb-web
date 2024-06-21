@@ -55,15 +55,15 @@ class SpeciesSearchForm extends Component {
 
     getInput(id, label) {
         var exampleLinks = [];
-        for (const el of examples[id]) {
+        examples[id].map((el, index) => (
             exampleLinks.push(
-                <button className="btn-link" type="button"
+                <button className="btn-link" type="button" key={"ex-"+index}
                         onClick={(e) => {
                             this.updateValue(id, el) }}>
                     {el}
                 </button>
             )
-        }
+        ))
         return <div>
             <input id={id} className="form-control form-control-sm" type="text"
                    placeholder="Taxon scientific name" aria-label="Taxon scientific name"

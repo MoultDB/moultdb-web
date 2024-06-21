@@ -37,8 +37,8 @@ function Footer() {
 
                     <div className="col-12 mt-4">
                         <div className="social-row">
-                            {config.socialMedia.map((item) => (
-                                <div className="soc-item">
+                            {config.socialMedia.map((item, index) => (
+                                <div className="soc-item" key={"fmedia-" + index}>
                                     <a href={item.link} target="_blank" rel="noopener noreferrer">
                                         <span className={"mbr-iconfont socicon display-7 " + item.icon }></span>
                                     </a>

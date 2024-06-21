@@ -19,13 +19,13 @@ function TeamSection() {
                 </h1>
                 <p className="mbr-text mbr-fonts-style mb-3 display-7">
                   MoultDB is developed by :
-                  <ul>
-                  {config.team.map((item) => (
-                      <li>the <a href={item.link} rel="noopener noreferrer" target="_blank">{item.name}</a>
+                </p>
+                <ul>
+                  {config.team.map((item, idx) => (
+                      <li key={"member-" + idx}>the <a href={item.link} rel="noopener noreferrer" target="_blank">{item.name}</a>
                         at {item.location}</li>
                   ))}
-                  </ul>
-                </p>
+                </ul>
               </div>
             </div>
           </div>
