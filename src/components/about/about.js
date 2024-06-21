@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import {Link} from "react-router-dom";
 import config from '../../config.json';
 
 export default function About() {
@@ -75,12 +76,12 @@ export default function About() {
                         Swiss National Science Foundation</a>.
                     </dd>
                     <dt><h2 id={"related-projects"}>Related projects</h2></dt>
-                    <dd>You can find projects related to the MoultDB <a href="/about/related-projects">here</a>.
+                    <dd>You can find projects related to the MoultDB <Link to="/about/related-projects">here</Link>.
                     </dd>
                     <dt><h2 id={"privacy-notice"}>Privacy notice</h2></dt>
                     <dd>This website requires cookies, and limited processing of your personal data in order to
                         function. By using the site you are agreeing to this as outlined in our&nbsp;
-                        <a href="/about/privacy-notice">privacy notice</a>.
+                        <Link to="/about/privacy-notice">privacy notice</Link>.
                     </dd>
                 </dl>
             </div>
