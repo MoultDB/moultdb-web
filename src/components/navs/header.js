@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import {Link} from "react-router-dom";
-
 import './header.css'
 import logo from '../../assets/images/logo.png';
 
 const Header = () => {
+
+  useEffect(() => {
+    const navLinks = document.querySelectorAll('.nav-item')
+    const menuToggle = document.getElementById('navbarSupportedContent')
+    navLinks.forEach((l) => {
+        l.addEventListener('click', () => {
+          menuToggle.classList.remove('show');
+        })
+    })
+  }, []);
+  
   return (
     <section className="menu menu2 header-section" >
       <nav className="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
