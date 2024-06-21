@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {getSpeciesLink} from "../../common/link-utils";
+import {getSpeciesUrl} from "../../common/link-utils";
 
 export const GeneData = ({ genes }) => {
 
@@ -56,10 +56,10 @@ export const GeneData = ({ genes }) => {
                     const taxon = JSON.parse(taxonKey);
                     return (
                         <tr key={taxon.id}>
-                            <td>{getSpeciesLink(taxon)}</td>
+                            <td><a href={getSpeciesUrl(taxon)}>{taxon.scientificName}</a></td>
                             {sortedOrthogroups.length > 0 ?
                                 (sortedOrthogroups.map(og =>
-                                    <td key={pathway + ""+og}>
+                                    <td key={pathway + "" + og}>
                                         {taxonCount > 1 && (genes[pathway][taxonKey][og] ? genes[pathway][taxonKey][og].length : 0)}
                                         {taxonCount === 1 && (genes[pathway][taxonKey][og]?.map(gene => renderGeneDetails(gene)) || '-')}
                                     </td>
