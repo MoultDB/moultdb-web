@@ -4,11 +4,13 @@ import MoultdbService from "../../services/moultdb.service";
 
 export const PhenotypicData = (props) => {
     const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             setError(null);
+            setLoading(true);
             MoultdbService.getTaxAnnotationsByTaxonPath(props.taxonPath)
                 .then(response => {
                     if (response.data) {
@@ -22,9 +24,9 @@ export const PhenotypicData = (props) => {
                     console.error('An error has occurred during moulting characters upload :', error);
                     setError('An error has occurred during moulting characters upload.');
                     setData(null);
-                });
+                })
+                .finally(setLoading(false));
         }
-
         fetchData();
     }, [props.taxonPath]);
 

@@ -7,6 +7,7 @@ import PhenotypicData from "../data/phenotypic-data";
 import MoultdbService from "../../services/moultdb.service";
 import GenomeData from "../data/genome-data";
 import GeneData from "../data/gene-data";
+import Loading from "../data/loading";
 
 function displayXref(taxon) {
     const groupedByDataSource = taxon.dbXrefs
@@ -170,16 +171,16 @@ const Species = () => {
                         <h2>Moulting characters <span className={"subtitle"}>(current taxon and its children)</span></h2>
                         <PhenotypicData taxonPath={taxon.path}/>
 
-                        {genes && Object.keys(genes).length > 0 &&
-                            <div>
-                                <h2>Gene(s) involved in a moulting pathway</h2>
-                                <GeneData genes={genes}/>
-                            </div>
+                        <h2>Gene(s) involved in a moulting pathway</h2>
+                        {genes && Object.keys(genes).length > 0 ?
+                            <GeneData genes={genes}/>
+                            :
+                            <Loading />
                         }
                     </div>
                 </div>
-                : <div>Unknown taxon</div> }
-            
+                : <div>Unknown taxon</div>}
+
         </main>
     );
 };
