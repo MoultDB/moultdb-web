@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import './species.css';
-import {getSpeciesLink} from "../../common/link-utils";
+import {getSpeciesUrl} from "../../common/link-utils";
 import ChangePageTitle from "../../common/change-page-title";
 import PhenotypicData from "../data/phenotypic-data";
 import MoultdbService from "../../services/moultdb.service";
@@ -157,7 +157,7 @@ const Species = () => {
                                     <ol className="lineage">
                                         {lineage.map((element, index) => (
                                             <li key={index}>
-                                                {getSpeciesLink(element)}
+                                                <a href={getSpeciesUrl(element)}>{element.scientificName}</a>
                                                 {index < lineage.length - 1 && <span className="lineage-separator"/>}
                                             </li>))}
                                     </ol>
