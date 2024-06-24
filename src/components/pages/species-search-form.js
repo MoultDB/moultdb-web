@@ -5,7 +5,7 @@ import {getSpeciesLink} from "../../common/link-utils";
 import Loading from "../data/loading";
 
 const examples = {
-    searchedText: ['Fuxianhuia protensa', 'Chionoecetes opilio', 'Arthropoda']
+    searchedText: ['Fuxianhuia protensa', 'Penaeus vannamei']
 };
 
 class SpeciesSearchForm extends Component {
