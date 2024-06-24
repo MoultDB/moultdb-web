@@ -2,8 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {getSpeciesUrl} from "../../common/link-utils";
 
-export const GeneData = ({ genes }) => {
-
+export const Genes = ({ genes }) => {
 
     const renderGeneDetails = (gene) => {
         const geneAcc = gene.name ?? gene.id ?? gene.locusTag;
@@ -100,4 +99,4 @@ export const GeneData = ({ genes }) => {
     );
 }
 
-export default GeneData;
+export default Genes;

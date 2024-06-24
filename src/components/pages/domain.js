@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import ChangePageTitle from "../../common/change-page-title";
 import MoultdbService from "../../services/moultdb.service";
-import GeneData from "../data/gene-data";
+import Genes from "../data/genes";
 import {getInterproDomainLink} from "../../common/link-utils";
 import Loading from "../data/loading";
 
@@ -64,7 +64,7 @@ const Domain = () => {
                         </div>
 
                         <h2>Gene(s) matching this domain</h2>
-                        { geneLoading ? <Loading /> : <GeneData genes={genes}/> }
+                        { geneLoading ? <Loading /> : <Genes genes={genes}/> }
                     </div>
                 </div>
                 : <div>Unknown domain</div>}

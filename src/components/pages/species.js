@@ -6,7 +6,7 @@ import ChangePageTitle from "../../common/change-page-title";
 import PhenotypicData from "../data/phenotypic-data";
 import MoultdbService from "../../services/moultdb.service";
 import GenomeData from "../data/genome-data";
-import GeneData from "../data/gene-data";
+import Genes from "../data/genes";
 import Loading from "../data/loading";
 
 function displayXref(taxon) {
@@ -177,7 +177,7 @@ const Species = () => {
 
                         <h2>Gene(s) involved in a moulting pathway</h2>
                         {genes && Object.keys(genes).length > 0 ?
-                            <GeneData genes={genes}/>
+                            <Genes genes={genes}/>
                             :
                             <div>{geneLoading ? <Loading/> : <div>No data</div>} </div>
                         }

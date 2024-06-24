@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import ChangePageTitle from "../../common/change-page-title";
 import MoultdbService from "../../services/moultdb.service";
-import GeneData from "../data/gene-data";
+import Genes from "../data/genes";
 
 const Orthogroup = () => {
     const [orthogroup, setOrthogroup] = useState(null);
@@ -43,7 +43,7 @@ const Orthogroup = () => {
                 <div className="row">
                     <div className="col-md-12">
                         <h2>Genes included in this orthogroup</h2>
-                        <GeneData genes={genes}/>
+                        <Genes genes={genes}/>
                     </div>
                 </div>
                 : <div>Unknown orthogroup</div> }
