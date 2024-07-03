@@ -83,7 +83,7 @@ const Pathway = () => {
                         {displayArticle(pathway.article)}
 
                         <h2>Gene(s) involved in a moulting pathway</h2>
-                        { geneLoading ? <Loading /> : <Genes genes={genes}/> }
+                        { geneLoading ? <Loading /> : <Genes genes={genes} startExpanded={false} /> }
                     </div>
                 </div>
                 : <div>Unknown pathway</div> }

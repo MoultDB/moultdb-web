@@ -150,7 +150,7 @@ const Gene = () => {
                         {orthologs &&
                             <>
                                 <h2>Ortholog(s)</h2>
-                                <Genes genes={orthologs}/>
+                                <Genes genes={orthologs} startExpanded={true} />
                             </>
                         }
                     </div>

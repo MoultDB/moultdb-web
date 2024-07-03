@@ -1,79 +1,114 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import {getSpeciesUrl} from "../../common/link-utils";
 
-export const Genes = ({ genes }) => {
+const GenesCell = ({ genes, isExpanded }) => {
 
-    const renderGeneDetails = (gene) => {
-        const geneAcc = gene.name ?? gene.id ?? gene.locusTag;
-        return (
-            <div key={`${geneAcc}`}>
-                <Link to={"/gene/" +  (gene.id ? "id/" + gene.id : "locus-tag/" + gene.locusTag)}>{geneAcc}</Link>
-            </div>
+    const expandContent = genes?.reduce((r, g, pos) => {
+        r.push(
+            <span className="display-8" key={g.id ?? g.locusTag}>
+                <Link to={"/gene/" +  (g.id ? "id/" + g.id : "locus-tag/" + g.locusTag)}>{g.name ?? g.id ?? g.locusTag}</Link>
+                {pos < genes.length && <br />}
+            </span>
         );
+        return r;
+    }, []);
+
+    if (!genes) {
+        return (<>0 gene</>);
+    }
+    return (
+        <div>
+            <span>{genes.length} gene{genes.length > 1 && "s"}</span>
+            {isExpanded && <div className="expand-content">{expandContent}</div>}
+        </div>
+    );
+};
+
+const GenesRow = ({ taxon, sortedOrthogroups, genes, pathway, startExpanded }) => {
+
+    const [isExpanded, setIsExpanded] = useState(startExpanded);
+
+    const toggleExpansion = () => {
+        setIsExpanded(!isExpanded);
     };
+    
+    const keyPrefix = (pathway? pathway.id : "pnull" + "-") + taxon.id;
+    
+    return (
+        <tr  className={"align-top"}>
+            <th>
+                <button onClick={toggleExpansion}>
+                    {isExpanded ? <span className="close-row"></span> : <span className="open-row"></span>}
+                </button>
+            </th>
+            <td>
+                <a href={getSpeciesUrl(taxon)}>{taxon.scientificName}</a>
+            </td>
+            {sortedOrthogroups.length > 0 ?
+                (sortedOrthogroups.map(og =>
+                    <td key={keyPrefix + "-" + og}>
+                        <GenesCell genes={genes[og]} isExpanded={isExpanded}/>
+                    </td>
+                ))
+                :
+                <td>
+                     <GenesCell genes={Object.values(genes).flatMap(list => list)} isExpanded={isExpanded}/> 
+                </td>
+            }
+        </tr>
+    );
+};
 
-    const renderTable = (pathway) => {
-        const taxa = Object.keys(genes[pathway]);
-        const taxonCount = taxa.length;
-        taxa.sort((a, b) => {
-            const taxonA = JSON.parse(a);
-            const taxonB = JSON.parse(b);
-            return taxonA.scientificName.localeCompare(taxonB.scientificName)
-            // return taxonA.path.localeCompare(taxonB.path)
-        })
+const GeneTable = ({ genes, pathway, startExpanded }) => {
+    const taxa = Object.keys(genes);
+    taxa.sort((a, b) => {
+        const taxonA = JSON.parse(a);
+        const taxonB = JSON.parse(b);
+        return taxonA.scientificName.localeCompare(taxonB.scientificName)
+    })
 
-        const orthogroups = new Set();
+    const orthogroups = new Set();
+    let tableKey = "pnull";
+    if (pathway) {
+        taxa.forEach(taxon => {
+            Object.keys(genes[taxon]).forEach(og => orthogroups.add(og));
+        });
+        tableKey = pathway.id;
+    }
 
-        if (pathway !== "null") {
-            taxa.forEach(taxon => {
-                Object.keys(genes[pathway][taxon]).forEach(og => orthogroups.add(og));
-            });
-        }
-        
-        const sortedOrthogroups = Array.from(orthogroups).sort();
+    const sortedOrthogroups = Array.from(orthogroups).sort();
 
-        return (
-            <table key={pathway} className="simple-table">
-                <thead>
-                <tr>
-                    <th>Species / Orthogroups</th>
-                    {sortedOrthogroups.length > 0 ?
-                        (sortedOrthogroups.map(ogKey => {
-                            const og = JSON.parse(ogKey);
-                            return (<th key={og.id}>
-                                <Link to={"/orthogroup/" + og.id}>{og.name}</Link>
-                            </th>);
-                        }))
-                        :
-                        <th key={"og-null"}></th>
-                    }
-                </tr>
-                </thead>
-                <tbody>
-                {taxa.map(taxonKey => {
-                    const taxon = JSON.parse(taxonKey);
-                    return (
-                        <tr key={taxon.id}>
-                            <td><a href={getSpeciesUrl(taxon)}>{taxon.scientificName}</a></td>
-                            {sortedOrthogroups.length > 0 ?
-                                (sortedOrthogroups.map(og =>
-                                    <td key={pathway + "" + og}>
-                                        {taxonCount > 1 && (genes[pathway][taxonKey][og] ? genes[pathway][taxonKey][og].length : 0)}
-                                        {taxonCount === 1 && (genes[pathway][taxonKey][og]?.map(gene => renderGeneDetails(gene)) || '-')}
-                                    </td>
-                                ))
-                                :
-                                <td key={"og-null"}>{Object.values(genes[pathway][taxonKey]).map(t => t.map(gene => renderGeneDetails(gene)))}
-                                </td>
-                            }
-                        </tr>
-                    );
-                })}
-                </tbody>
-            </table>
-        );
-    };
+    return (
+        <table key={tableKey} className="simple-table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Species / Orthogroups</th>
+                {sortedOrthogroups.length > 0 ?
+                    (sortedOrthogroups.map(ogKey => {
+                        const og = JSON.parse(ogKey);
+                        return (<th key={tableKey +"-" + og.id}><Link to={"/orthogroup/" + og.id}>{og.name}</Link></th>);
+                    }))
+                    :
+                    <th></th>
+                }
+            </tr>
+            </thead>
+            <tbody>
+            {taxa.map(taxonKey => {
+                const taxon = JSON.parse(taxonKey);
+                return (<GenesRow key={(pathway? pathway.id : "pnull" + "-") + taxon.id} 
+                                  taxon={taxon} sortedOrthogroups={sortedOrthogroups} genes={genes[taxonKey]}
+                                  pathway={pathway} startExpanded={startExpanded} />
+                );
+            })}
+            </tbody>
+        </table>
+    );
+}
+
+export const Genes = ({ genes, startExpanded}) => {
 
     return (
         <div>
@@ -82,16 +117,14 @@ export const Genes = ({ genes }) => {
                 if (pathway) {
                     return (
                         <div key={pathway.id}>
-                            <h3>Pathway&nbsp;
-                                <Link to={"/pathway/" + pathway.id}>{pathway.name} ({pathway.id})</Link>
-                            </h3>
-                            {renderTable(pathwayKey)}
+                            <h3>Pathway <Link to={"/pathway/" + pathway.id}>{pathway.name} ({pathway.id})</Link></h3>
+                            <GeneTable genes={genes[pathwayKey]} pathway={pathway} startExpanded={startExpanded} />
                         </div>)
                 } 
                 return (
                     <div key={"none"}>
                         <h3>Not involved in moulting pathway</h3>
-                        {renderTable(pathwayKey)}
+                        <GeneTable genes={genes[pathwayKey]} startExpanded={startExpanded} />
                     </div>
                 );
             })}

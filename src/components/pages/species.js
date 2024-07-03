@@ -177,7 +177,7 @@ const Species = () => {
 
                         <h2>Gene(s) involved in a moulting pathway</h2>
                         {genes && Object.keys(genes).length > 0 ?
-                            <Genes genes={genes}/>
+                            <Genes genes={genes} startExpanded={false} />
                             :
                             <div>{geneLoading ? <Loading/> : <div>No data</div>} </div>
                         }

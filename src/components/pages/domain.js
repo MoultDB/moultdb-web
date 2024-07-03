@@ -9,7 +9,7 @@ import Loading from "../data/loading";
 const Domain = () => {
     const [domain, setDomain] = useState(null);
     const [genes, setGenes] = useState(null);
-    const [geneLoading, setGeneLoading] = useState(null);
+    const [geneLoading, setGeneLoading] = useState(true);
     const [error, setError] = useState(null);
     let params = useParams()
 
@@ -64,7 +64,7 @@ const Domain = () => {
                         </div>
 
                         <h2>Gene(s) matching this domain</h2>
-                        { geneLoading ? <Loading /> : <Genes genes={genes}/> }
+                        { geneLoading ? <Loading /> : <Genes genes={genes} startExpanded={true} /> }
                     </div>
                 </div>
                 : <div>Unknown domain</div>}
