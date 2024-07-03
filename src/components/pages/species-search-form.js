@@ -5,7 +5,7 @@ import {getSpeciesLink} from "../../common/link-utils";
 import Loading from "../data/loading";
 
 const examples = {
-    searchedText: ['Fuxianhuia protensa', 'Penaeus vannamei']
+    searchedText: ['Fuxianhuia protensa', 'Penaeus vannamei', "Arthropoda"]
 };
 
 class SpeciesSearchForm extends Component {
@@ -64,7 +64,7 @@ class SpeciesSearchForm extends Component {
                 </button>
             )
         ))
-        return <div>
+        return <div className="text-center">
             <input id={id} className="form-control form-control-sm" type="text"
                    placeholder="Taxon scientific name" aria-label="Taxon scientific name"
                    onChange={(e) => {
@@ -75,19 +75,29 @@ class SpeciesSearchForm extends Component {
     }
 
     getResultDisplay() {
-        let self = this;
         let result = "";
         if (this.state.isLoaded) {
             if (this.state.data?.length > 0) {
                 result =
-                    <div>
-                        <ul>
+                    <table className="simple-table m-auto">
+                        <thead>
+                        <tr>
+                            <th>Taxon name</th>
+                            <th>Taxon cross-reference</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                             {this.state.data.map((element, index) => (
-                                <li key={index}>
-                                    {getSpeciesLink(element)}
-                                </li>))}
-                        </ul>
-                    </div>
+                                <tr key={index}>
+                                    <td>{getSpeciesLink(element)}</td>
+                                    <td>
+                                        <a href={element.dbXrefs[0].xrefURL} rel="noopener noreferrer" target="_blank">
+                                            {element.dbXrefs[0].dataSource.shortName}:{element.dbXrefs[0].accession}
+                                        </a>
+                                    </td>
+                                </tr>))}
+                        </tbody>
+                    </table>
             } else {
                 result =
                     <div className={"alert alert-danger"}>
@@ -106,7 +116,7 @@ class SpeciesSearchForm extends Component {
         let result = this.getResultDisplay();
         return (
             <div className='row'>
-                <div className={"col-4 offset-4 mb-3 mt-5"}>
+                <div className={"col-6 offset-3 mb-3 mt-5"}>
                     <form onSubmit={this.handleSubmit}>
                         {this.getInput('searchedText', 'Taxon name')}
                         <p className={"text-center"}>
