@@ -14,7 +14,7 @@ import Genes from "../data/genes";
 const Gene = () => {
     const [gene, setGene] = useState(null);
     const [orthologs, setOrthologs] = useState(null);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
     let params = useParams()
 
     useEffect(() => {

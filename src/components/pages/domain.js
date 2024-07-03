@@ -10,7 +10,7 @@ const Domain = () => {
     const [domain, setDomain] = useState(null);
     const [genes, setGenes] = useState(null);
     const [geneLoading, setGeneLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
     let params = useParams()
 
     useEffect(() => {

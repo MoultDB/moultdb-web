@@ -9,7 +9,7 @@ const Orthogroup = () => {
     const [orthogroup, setOrthogroup] = useState(null);
     const [orthogroupLoading, setOrthogroupLoading] = useState(true);
     const [genes, setGenes] = useState(null);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
     let params = useParams()
 
     useEffect(() => {
