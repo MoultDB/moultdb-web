@@ -904,6 +904,7 @@ a[target*="_blank"]::after {
 }
 
 .simple-table {
+  table-layout: fixed;
   color: black;
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -911,19 +912,23 @@ a[target*="_blank"]::after {
   max-width: fit-content;
   overflow-x: auto;
   display: block;
+  background-color: white;
+  width: 100%;
 }
 
-.simple-table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
+.simple-table thead th {
   background-color: white;
-  white-space: nowrap;
+}
+
+.simple-table tbody td {
+  min-width: 125px;
 }
 
 .simple-table th, .simple-table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 6px;
+  white-space: nowrap;
+  word-wrap: break-word;
 }
 
 .simple-table tr:nth-child(odd) {
@@ -932,6 +937,16 @@ a[target*="_blank"]::after {
 
 .simple-table tr:hover {
   background-color: rgba(0, 0, 0, 0.075);
+}
+
+.open-row::after, .close-row::after {
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.5);
+  content: "►";
+}
+
+.close-row::after {
+  transform: rotate(90deg);
 }
 
 /* Beta ribbon */

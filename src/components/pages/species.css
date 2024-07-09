@@ -34,9 +34,3 @@
 #species-page .synonyms-separator::after {
     content: " ; ";
 }
-
-#species-page .open-row::after {
-    display: inline-block;
-    color: rgba(0, 0, 0, 0.5);
-    content: "►";
-}

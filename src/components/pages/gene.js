@@ -8,13 +8,13 @@ import {
     getNCBITranscriptLink,
     getSpeciesLink
 } from "../../common/link-utils";
-import GeneData from "../data/gene-data";
+import Genes from "../data/genes";
 
 
 const Gene = () => {
     const [gene, setGene] = useState(null);
     const [orthologs, setOrthologs] = useState(null);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
     let params = useParams()
 
     useEffect(() => {
@@ -150,7 +150,7 @@ const Gene = () => {
                         {orthologs &&
                             <>
                                 <h2>Ortholog(s)</h2>
-                                <GeneData genes={orthologs}/>
+                                <Genes genes={orthologs} startExpanded={true} />
                             </>
                         }
                     </div>

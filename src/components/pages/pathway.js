@@ -2,16 +2,17 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import ChangePageTitle from "../../common/change-page-title";
 import MoultdbService from "../../services/moultdb.service";
-import GeneData from "../data/gene-data";
+import Genes from "../data/genes";
 import Loading from "../data/loading";
 
 function displayArticle(article) {
     if (article) {
         const v = article.dbXrefs.map((element, index) => (
-            <>{element.dataSource.name}: <a href={element.xrefURL} rel="noopener noreferrer"
-                                            target="_blank">{element.accession}</a>
+            <div key={"a-" + index}>
+                {element.dataSource.name}:&nbsp;
+                <a href={element.xrefURL} rel="noopener noreferrer" target="_blank">{element.accession}</a>
                 {index < article.dbXrefs.length - 1 && ', '}
-            </>
+            </div>
         ));
         return (
             <div className="key-value-pair">
@@ -25,8 +26,8 @@ function displayArticle(article) {
 const Pathway = () => {
     const [pathway, setPathway] = useState(null);
     const [genes, setGenes] = useState(null);
-    const [geneLoading, setGeneLoading] = useState(null);
-    const [error, setError] = useState(null);
+    const [geneLoading, setGeneLoading] = useState(true);
+    const [error, setError] = useState(false);
     let params = useParams()
 
     useEffect(() => {
@@ -83,7 +84,7 @@ const Pathway = () => {
                         {displayArticle(pathway.article)}
 
                         <h2>Gene(s) involved in a moulting pathway</h2>
-                        { geneLoading ? <Loading /> : <GeneData genes={genes}/> }
+                        { geneLoading ? <Loading /> : <Genes genes={genes} startExpanded={false} /> }
                     </div>
                 </div>
                 : <div>Unknown pathway</div> }
