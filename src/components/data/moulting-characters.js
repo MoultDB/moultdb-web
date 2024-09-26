@@ -63,7 +63,12 @@ const columns = [
       render: function ( article, type, full ) {
           if (article) {
               let v = article.dbXrefs
-                  .map((element, index) => (`<a href="${element.xrefURL}" rel="noopener noreferrer" target="_blank">${element.accession}</a>`))
+                  .map((element, index) => {
+                      if (element.xrefURL) {
+                          return `<a href="${element.xrefURL}" rel="noopener noreferrer" target="_blank">${element.accession}</a>`
+                      }
+                      return `<span>${element.accession}</span>`
+                  })
                   .join(', ');
               return `<div>${v}</div>`;
           }
