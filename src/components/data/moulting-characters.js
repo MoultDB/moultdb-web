@@ -5,7 +5,7 @@ import "datatables.net-buttons-dt/css/buttons.dataTables.min.css"
 import "datatables.net-responsive-dt/css/responsive.dataTables.css"
 import "datatables.net-searchbuilder-dt/css/searchBuilder.dataTables.css"
 import './data.css'
-import {getSpeciesUrl} from "../../common/link-utils";
+import {getSpeciesUrl, getUberonLink} from "../../common/link-utils";
 
 const $ = require('jquery');
 $.DataTable = require( 'datatables.net-dt' );
@@ -20,15 +20,23 @@ const columns = [
       render: function(data, type, full) {
           if (data) {
               let name = data.scientificName;
-              if (full.annotatedSpeciesName !== data.scientificName) {
-                  name = name + " (" + full.annotatedSpeciesName + ")";
+              if (full.authorSpeciesName !== data.scientificName) {
+                  name = name + " (" + full.authorSpeciesName + ")";
               }
               return '<a href=' + getSpeciesUrl(data) + '>' + name + '</a>';
           }
           return '';
       }
     },
-    { title: 'Observed moult stage', data: 'condition.devStage.name' },
+    { title: 'Moult stage', data: 'condition.devStage',
+        render: function(devStage, type, full) {
+            if (devStage) {
+                return getUberonLink(devStage);
+            }
+            return '';
+        }
+    },
+    { title: 'Moult stage author annotation', data: 'authorDevStage' },
     { title: 'Reproductive state', data: 'condition.reproductiveState' },
     { title: 'Type of specimens of interest', data: 'sampleSet.specimenTypes[, ]' },
     { title: 'Geological age', data: 'sampleSet.timePeriod',
