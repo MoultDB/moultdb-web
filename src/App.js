@@ -51,18 +51,18 @@ function CustomRoutes() {
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="about" element={<About />} />
-            <Route path="species/search" element={<Search />} />
-            <Route path="species/:datasource/:accession" element={<Species />} />
-            <Route path="pathway/:pathwayId" element={<Pathway />} />
-            <Route path="domain/:domainId" element={<Domain />} />
-            <Route path="orthogroup/:orthogroupId" element={<Orthogroup />} />
-            <Route path="gene/:type/:id" element={<Gene />} />
             {/*<Route path="species/search" element={<Maintenance />} />*/}
             {/*<Route path="species/:datasource/:accession" element={<Maintenance />} />*/}
+            <Route path="species/search" element={<Search />} />
+            <Route path="species/:datasource/:accession" element={<Species />} />
             {/*<Route path="pathway/:pathwayId" element={<Maintenance />} />*/}
+            <Route path="pathway/:pathwayId" element={<Pathway />} />
             {/*<Route path="domain/:domainId" element={<Maintenance />} />*/}
+            <Route path="domain/:domainId" element={<Domain />} />
             {/*<Route path="orthogroup/:orthogroupId" element={<Maintenance />} />*/}
+            <Route path="orthogroup/:orthogroupId" element={<Orthogroup />} />
             {/*<Route path="gene/:type/:id" element={<Maintenance />} />*/}
+            <Route path="gene/:type/:id" element={<Gene />} />
             <Route path="about/related-projects" element={<RelatedProjects />} />
             <Route path="about/privacy-notice" element={<PrivacyNotice />} />
             <Route path="404" element={<Notfound />} />

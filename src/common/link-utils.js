@@ -53,3 +53,11 @@ export const getInterproDomainLink = (domainId) => {
     return <a href={"https://www.ebi.ac.uk/interpro/entry/InterPro/" + domainId + "/"}
               target="_blank" rel="noopener noreferrer">{domainId}</a>
 }
+
+export const getUberonLink = (uberonTerm) => {
+    if (uberonTerm) {
+        const urlId = uberonTerm.id.replaceAll(":", "_");
+        return '<a href="http://purl.obolibrary.org/obo/' + urlId + '" target="_blank" rel="noopener noreferrer">' + uberonTerm.name + '</a>'
+    }
+    return "";
+};

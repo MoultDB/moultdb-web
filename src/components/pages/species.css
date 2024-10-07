@@ -3,7 +3,6 @@
     font-size: 0.8em;
 }
 
-
 #species-page ol,
 #species-page ul {
     list-style-type: none;
@@ -33,4 +32,13 @@
 
 #species-page .synonyms-separator::after {
     content: " ; ";
+}
+
+#species-page .dt-scroll-body {
+    transform: rotateX(180deg);
+    overflow-x: auto;
+}
+
+#species-page .dt-scroll-body table {
+    transform:rotateX(180deg);
 }

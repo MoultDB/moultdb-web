@@ -9,8 +9,9 @@ function displayArticle(article) {
     if (article) {
         const v = article.dbXrefs.map((element, index) => (
             <div key={"a-" + index}>
-                {element.dataSource.name}:&nbsp;
-                <a href={element.xrefURL} rel="noopener noreferrer" target="_blank">{element.accession}</a>
+                {element.dataSource.shortName}:&nbsp;
+                {element.xrefURL && <a href={element.xrefURL} rel="noopener noreferrer" target="_blank">{element.accession}</a>}
+                {!element.xrefURL && <div>{element.accession}</div>}
                 {index < article.dbXrefs.length - 1 && ', '}
             </div>
         ));
