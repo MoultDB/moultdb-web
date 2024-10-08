@@ -133,7 +133,7 @@ const Species = () => {
     }, [params.datasource, params.accession]);
 
     return (
-        <main id={"species-page"} className={"container beta"}>
+        <main id={"species-page"} className={"container"}>
             <ChangePageTitle pageTitle={`Taxon: ${taxon ? taxon.scientificName : params.datasource + ":" + params.accession}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
