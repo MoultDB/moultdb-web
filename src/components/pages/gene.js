@@ -68,7 +68,7 @@ const Gene = () => {
 
     const h1Text = gene ? <>: {gene.mainName} - <i>{gene.taxon.scientificName}</i></> : <>: {params.id}</>;
     return (
-        <main className={"container beta"}>
+        <main className={"container"}>
             <ChangePageTitle pageTitle={`Gene: ${gene ? gene.mainName + " - " + gene.taxon.scientificName : params.id}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">

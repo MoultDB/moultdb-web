@@ -59,7 +59,7 @@ const Pathway = () => {
     }, [params.pathwayId]);
 
     return (
-        <main className={"container beta"}>
+        <main className={"container"}>
             <ChangePageTitle pageTitle={`Pathway: ${pathway ? pathway.name : params.pathwayId}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
