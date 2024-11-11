@@ -615,10 +615,6 @@ nav .mbr-section-btn {
   -webkit-justify-content: center;
 }
 
-.form-inline {
-  display: -webkit-flex;
-}
-
 .card-wrapper {
   -webkit-flex: 1;
 }
@@ -634,10 +630,6 @@ nav .mbr-section-btn {
 
 .media {
   display: -webkit-flex;
-}
-
-.form-group:focus {
-  outline: none;
 }
 
 .jq-selectbox__select {
@@ -755,20 +747,6 @@ body {
   display: none;
 }
 
-.form-asterisk {
-  font-family: initial;
-  position: absolute;
-  top: -2px;
-  font-weight: normal;
-}
-
-.form-control-label {
-  position: relative;
-  cursor: pointer;
-  margin-bottom: 0.357em;
-  padding: 0;
-}
-
 .alert {
   color: #ffffff;
   border-radius: 0;
@@ -793,64 +771,13 @@ body {
   width: 14px;
 }
 
-.form-control {
-  background-color: #ffffff;
-  background-clip: border-box;
-  color: #232323;
-  line-height: 1rem !important;
-  height: auto;
-  padding: 1.2rem 2rem;
-  transition: border-color 0.25s ease 0s;
-  border: 1px solid transparent !important;
-  border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px 0px, rgba(0, 0, 0, 0.07) 0px 1px 3px 0px, rgba(0, 0, 0, 0.03) 0px 0px 0px 1px;
-}
-.form-active .form-control:invalid {
-  border-color: red;
-}
-
 .row > * {
   padding-right: 1rem;
   padding-left: 1rem;
 }
 
-form .row {
-  margin-left: -0.6rem;
-  margin-right: -0.6rem;
-}
-form .row [class*=col] {
-  padding-left: 0.6rem;
-  padding-right: 0.6rem;
-}
-
-form .mbr-section-btn {
-  padding-left: 0.6rem;
-  padding-right: 0.6rem;
-}
-
-form .form-check-input {
-  margin-top: 0.5;
-}
-
-textarea.form-control {
-  line-height: 1.5rem !important;
-}
-
-.form-group {
-  margin-bottom: 1.2rem;
-}
-
-.form-control,
-form .btn {
-  min-height: 48px;
-}
-
 .gdpr-block label span.textGDPR input[name=gdpr] {
   top: 7px;
-}
-
-.form-control:focus {
-  box-shadow: none;
 }
 
 :focus {

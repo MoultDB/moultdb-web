@@ -8,13 +8,13 @@ import Notfound from "./components/notfound";
 import CookieConsent from "react-cookie-consent";
 import Footer from "./components/navs/footer";
 import Species from "./components/pages/species";
-import Search from "./components/pages/species-search";
 import Pathway from "./components/pages/pathway";
 import Gene from "./components/pages/gene";
 import Domain from "./components/pages/domain";
 import Orthogroup from "./components/pages/orthogroup";
 import Maintenance from "./components/pages/maintenance";
 import {useLayoutEffect} from "react";
+import TaxonSearch from "./components/pages/taxon-search";
 
 function App() {
     return (
@@ -53,7 +53,7 @@ function CustomRoutes() {
             <Route path="about" element={<About />} />
             {/*<Route path="species/search" element={<Maintenance />} />*/}
             {/*<Route path="species/:datasource/:accession" element={<Maintenance />} />*/}
-            <Route path="species/search" element={<Search />} />
+            <Route path="species/search" element={<TaxonSearch />} />
             <Route path="species/:datasource/:accession" element={<Species />} />
             {/*<Route path="pathway/:pathwayId" element={<Maintenance />} />*/}
             <Route path="pathway/:pathwayId" element={<Pathway />} />

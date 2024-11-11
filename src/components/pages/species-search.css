@@ -1,8 +1,0 @@
-.btn-link {
-    text-decoration: none;
-    color: var(--primary-color, #9fe870);
-}
-
-.btn-link:hover {
-    color: var(--secondary-color);
-}

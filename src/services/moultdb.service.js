@@ -59,6 +59,15 @@ class TaxonAnnotationService {
     getGenesByDomain(domainId) {
         return axios.get("/genes?domainId=" + domainId);
     }
+
+    getTaxonAutocomplete(searchText) {
+        return axios.get("/search/taxon_autocomplete?q=" + searchText);
+    }
+    
+    getTaxonSearch(searchText) {
+        return axios.get("/search/taxon_search?q=" + searchText);
+    }
+
 }
 
 /* eslint import/no-anonymous-default-export: [2, {"allowNew": true}] */
