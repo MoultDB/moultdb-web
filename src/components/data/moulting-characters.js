@@ -20,7 +20,7 @@ const columns = [
       render: function(data, type, full) {
           if (data) {
               let name = data.scientificName;
-              if (full.authorSpeciesName !== data.scientificName) {
+              if (full.authorSpeciesName !== data.scientificName && full.authorSpeciesName !== null) {
                   name = name + " (" + full.authorSpeciesName + ")";
               }
               return '<a href=' + getSpeciesUrl(data) + '>' + name + '</a>';
