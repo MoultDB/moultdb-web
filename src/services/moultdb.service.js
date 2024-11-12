@@ -18,6 +18,10 @@ class TaxonAnnotationService {
         return axios.get("/taxon-annotations/species?taxonPath=" + taxonPath);
     }
     
+    getLastTaxAnnotation() {
+        return axios.get("/taxon-annotations/last-updated");
+    }
+    
     getGenomesByTaxonPath(taxonPath) {
         return axios.get("/genomes?withSubspeciesGenomes=true&taxonPath=" + taxonPath);
     }
