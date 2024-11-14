@@ -1,0 +1,59 @@
+.btn-link {
+    text-decoration: none;
+    color: var(--primary-color, #9fe870);
+}
+
+.btn-link:hover {
+    color: var(--secondary-color);
+}
+.autocomplete-options {
+    position: absolute;
+    max-height: 20em;
+    width: 50%;
+    padding: 0;
+    overflow-y: scroll;
+    background-color: #e9f3f5;
+    border-bottom-left-radius: 6px;
+    list-style: none;
+    z-index: 4;
+}
+
+.autocomplete-options li {
+    height: 30px;
+    padding: 5px 10px;
+}
+
+.autocomplete-options li.highlight {
+    background-color: #C3E2E9;
+}
+
+.search-table {
+    color: black;
+    border-collapse: collapse;
+    background-color: white;
+    width: 100%;
+}
+
+.search-table thead th {
+    background-color: white;
+}
+
+.search-table th, .search-table td {
+    border: 1px solid #ddd;
+    padding: 6px;
+    word-wrap: break-word;
+}
+
+.search-table tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.search-table tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.search-table td.synonyms {
+    white-space: nowrap;
+    max-width: 600px;
+    overflow-x: auto;
+}
