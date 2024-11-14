@@ -18,8 +18,8 @@ class TaxonAnnotationService {
         return axios.get("/taxon-annotations/species?taxonPath=" + taxonPath);
     }
     
-    getLastTaxAnnotation() {
-        return axios.get("/taxon-annotations/last-updated");
+    getReleaseInfo() {
+        return axios.get("/release/info");
     }
     
     getGenomesByTaxonPath(taxonPath) {

@@ -8,18 +8,10 @@ function Hero() {
     
     useEffect(() => {
         const fetchData = async () => {
-            MoultdbService.getLastTaxAnnotation()
+            MoultdbService.getReleaseInfo()
                 .then(response => {
                     if (response.data) {
-                        const date = new Date(response.data.data.version.lastUpdateDate);
-                        if (!isNaN(date)) {
-                            const year = date.getFullYear();
-                            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-                            const day = date.getDate().toString().padStart(2, '0');
-                            setVersion(`${year}-${month}-${day}`);
-                        } else {
-                            setVersion(null);
-                        }
+                        setVersion(response.data.data.releaseVersion.date);
                     }
                 })
                 .catch(error => {
