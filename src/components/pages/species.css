@@ -10,11 +10,23 @@
     margin: 0;
 }
 
+#species-page ul.xref {
+    margin-left: 1rem !important;
+}
+
 #species-page ul.xref li {
+    display: inline-block;
+    margin-right: 5px !important;
+}
+
+#species-page ul.xref > li {
     display: inline-block;
     margin-right: 5px;
 }
 
+#species-page ul.xrefs > li:not(:last-child) {
+    margin-bottom: 5px;
+}
 
 #species-page ul.synonyms li {
     display: inline-block;
