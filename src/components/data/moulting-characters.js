@@ -36,6 +36,7 @@ const columns = [
             return '';
         }
     },
+    { title: 'Sex', data: 'condition.sex' },
     { title: 'Moult stage author annotation', data: 'authorDevStage' },
     { title: 'Reproductive state', data: 'condition.reproductiveState' },
     { title: 'Type of specimens of interest', data: 'sampleSet.specimenTypes[, ]' },
@@ -51,7 +52,31 @@ const columns = [
       }
     },
     { title: 'Location: name', data: 'sampleSet.collectionLocations[, ]' },
-    { title : 'Contributor', data: 'version.creationUser',
+    { title: 'Published reference', data: 'article',
+        render: function ( article, type, full ) {
+            if (article) {
+                let v = article.dbXrefs
+                    .map((element, index) => {
+                        if (element.xrefURL) {
+                            return `<a href="${element.xrefURL}" rel="noopener noreferrer" target="_blank">${element.accession}</a>`
+                        }
+                        return `<span>${element.accession}</span>`
+                    })
+                    .join(', ');
+                return `<div>${v}</div>`;
+            }
+            return ''
+        }
+    },
+    { title: 'Image(s)', data: 'imageInfo',
+        render: function ( imageInfo, type, full ) {
+            if (imageInfo) {
+                return `<div><a href="${imageInfo.url}" rel="noopener noreferrer" target="_blank">iNaturalist observation</a></div>`;
+            }
+            return ''
+        }
+    },
+    { title: 'Contributor', data: 'version.creationUser',
       render: function ( data, type, full ) {
           if (data) {
               return '<a href="https://orcid.org/' + data.orcidId + '">' + data.name + '</a>'
@@ -67,21 +92,6 @@ const columns = [
     { title: 'Other behaviours associated with moulting', data: 'moultingCharacters.otherBehaviours[, ]' },
     { title: 'Consumption of exuviae', data: 'moultingCharacters.exuviaeConsumption' },
     { title: 'Reabsorption during moulting', data: 'moultingCharacters.reabsorption' },
-    { title: 'Published reference: citation', data: 'article',
-      render: function ( article, type, full ) {
-          if (article) {
-              let v = article.dbXrefs
-                  .map((element, index) => {
-                      if (element.xrefURL) {
-                          return `<a href="${element.xrefURL}" rel="noopener noreferrer" target="_blank">${element.accession}</a>`
-                      }
-                      return `<span>${element.accession}</span>`
-                  })
-                  .join(', ');
-              return `<div>${v}</div>`;
-          }
-      }
-    },
     { title: 'Museum collection', data: 'sampleSet.storageLocations[, ]' },
     // { title: 'Museum accession', data: 'sampleSet.storageAccessions[, ]' },
     { title: 'Geological formation', data: 'sampleSet.geologicalFormations[, ]' },
