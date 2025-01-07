@@ -15,8 +15,7 @@ $.DataTable = require( 'datatables.net-responsive-dt' )
 $.DataTable = require( 'datatables.net-searchbuilder-dt' );
 
 const columns = [
-    { title: 'Taxon', 
-      data: 'taxon',
+    { title: 'Taxon', data: 'taxon',
       render: function(data, type, full) {
           if (data) {
               let name = data.scientificName;
@@ -36,6 +35,7 @@ const columns = [
             return '';
         }
     },
+    { title: 'Moulting step', data: 'condition.moultingStep' },
     { title: 'Sex', data: 'condition.sex' },
     { title: 'Moult stage author annotation', data: 'authorDevStage' },
     { title: 'Reproductive state', data: 'condition.reproductiveState' },
@@ -52,34 +52,29 @@ const columns = [
       }
     },
     { title: 'Location: name', data: 'sampleSet.collectionLocations[, ]' },
-    { title: 'Published reference', data: 'article',
-        render: function ( article, type, full ) {
-            if (article) {
-                let v = article.dbXrefs
+    { title: 'Reference', data: null,
+        render: function ( data, type, full ) {
+            if (data?.article) {
+                let v = data.article.dbXrefs
                     .map((element, index) => {
                         if (element.xrefURL) {
                             return `<a href="${element.xrefURL}" rel="noopener noreferrer" target="_blank">${element.accession}</a>`
                         }
-                        return `<span>${element.accession}</span>`
+                        return `<span>${element.dataSource.shortName.toUpperCase()}: ${element.accession}</span>`
                     })
                     .join(', ');
                 return `<div>${v}</div>`;
             }
-            return ''
-        }
-    },
-    { title: 'Image(s)', data: 'imageInfo',
-        render: function ( imageInfo, type, full ) {
-            if (imageInfo) {
-                return `<div><a href="${imageInfo.url}" rel="noopener noreferrer" target="_blank">iNaturalist observation</a></div>`;
+            if (data?.observation) {
+                return `<div><a href="${data.observation.url}" rel="noopener noreferrer" target="_blank">iNaturalist: ${data.observation.id}</a></div>`;
             }
             return ''
         }
     },
-    { title: 'Contributor', data: 'version.creationUser',
-      render: function ( data, type, full ) {
-          if (data) {
-              return '<a href="https://orcid.org/' + data.orcidId + '">' + data.name + '</a>'
+    { title: 'Evidence type', data: 'ecoTerm',
+      render: function ( ecoTerm, type, full ) {
+          if (ecoTerm) {
+              return '<a href="https://evidenceontology.org/term/' + ecoTerm.id + '">' + ecoTerm.name + '</a>'
           }
           return '';
       }
