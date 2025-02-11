@@ -1,8 +1,27 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-import './hero.css'; 
+import './hero.css';
+import MoultdbService from "../../../services/moultdb.service";
 
 function Hero() {
+    const [version, setVersion] = useState(null);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            MoultdbService.getReleaseInfo()
+                .then(response => {
+                    if (response.data) {
+                        setVersion(response.data.data.releaseVersion.date);
+                    }
+                })
+                .catch(error => {
+                    console.error('An error has occurred during genome upload :', error);
+                    setVersion(null);
+                })
+        }
+        fetchData();
+    }, []);
+    
     return (
         <section className="custom-hero mbr-fullscreen" >
             <div className="mbr-overlay" style={{ opacity: 0.3, backgroundColor: 'rgb(0, 0, 0)' }}></div>
@@ -20,6 +39,9 @@ function Hero() {
                     </div>
                 </div>
             </div>
+            {version &&
+                <p className={"version"}>Current release was updated on {version}</p>
+            }
         </section>
     );
 }

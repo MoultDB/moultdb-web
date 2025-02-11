@@ -1,6 +1,6 @@
 {
   "name": "moultdb-web",
-  "version": "1.0.4-SNAPSHOT",
+  "version": "1.0.5",
   "license": "GPL-3.0",
   "private": true,
   "dependencies": {

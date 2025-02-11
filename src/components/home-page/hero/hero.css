@@ -44,3 +44,11 @@
   .custom-hero .mbr-section-btn {
     text-align: center;
   }
+
+  .custom-hero .version {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+    margin: 0;
+  }
