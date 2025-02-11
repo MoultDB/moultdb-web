@@ -71,7 +71,7 @@ export default function About() {
                         </ul>
                     </dd>
                     <dt><h2 id={"funding-sources"}>Funding source</h2></dt>
-                    <dd>MoultDB is the result of a <a href="http://p3.snf.ch/project-198691" rel="noopener noreferrer" target="_blank">
+                    <dd>MoultDB is the result of a <a href="https://data.snf.ch/grants/grant/198691" rel="noopener noreferrer" target="_blank">
                         Sinergia collaborative project</a> funded by the <a href="https://www.snf.ch/en" rel="noopener noreferrer" target="_blank">
                         Swiss National Science Foundation</a>.
                     </dd>
