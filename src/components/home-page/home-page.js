@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import './home-page.css';
 import Hero from './hero/hero';
 import MoultDBProject from './moultdb-project/moultdb-project';
 import Slider from './slider/slider';
@@ -14,7 +15,7 @@ export default function HomePage() {
     }, []);
 
   return (
-    <div>
+    <div className={"home-page"}>
         <Hero />
         <MoultDBProject />
         <Slider />

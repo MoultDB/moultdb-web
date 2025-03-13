@@ -23,30 +23,3 @@
 .contact-section .main-button {
   color: #000000;
 }
-.contact-section .google-map {
-  height: 30rem;
-  position: relative;
-  border-radius: 2rem;
-}
-.contact-section .google-map iframe {
-  height: 100%;
-  width: 100%;
-  border-radius: 2rem;
-}
-.contact-section .google-map [data-state-details] {
-  color: #6b6763;
-  height: 1.5em;
-  margin-top: -0.75em;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  position: absolute;
-  text-align: center;
-  top: 50%;
-  width: 100%;
-}
-.contact-section .google-map[data-state] {
-  background: #e9e5dc;
-}
-.contact-section .google-map[data-state="loading"] [data-state-details] {
-  display: none;
-}
