@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 import ChangePageTitle from "../../common/change-page-title";
 import MoultdbService from "../../services/moultdb.service";
 import Genes from "../data/genes";
 import Loading from "../data/loading";
+import './pathway.css'
 
 const Article = ({ article }) => {
     if (article) {
@@ -57,18 +58,23 @@ const ImageWithModal = ({ figureId }) => {
             <figure className="text-center">
                 {!imageError ? (
                         <>
-                            <img src={imgPath} alt={`Figure ${figureId}`} className="img-fluid"
-                                 onClick={() => setShow(true)} onError={handleImageError} />
+                            <span className={"pathway-figure"}>
+                                <img src={imgPath} alt={`Figure ${figureId}`} className="img-fluid"
+                                     onClick={() => setShow(true)} onError={handleImageError} />
+                            </span>
                             {show && (
-                                <div className="modal show d-block" tabIndex="-1" onClick={() => setShow(false)}>
-                                    <div className="modal-dialog modal-dialog-centered modal-xl">
-                                        <div className="modal-content">
-                                            <div className="modal-body text-center">
-                                                <img src={imgPath} alt={`Figure ${figureId}`} className="img-fluid"/>
+                                <>
+                                    <div className="modal-backdrop show"></div>
+                                    <div className="modal show d-block" tabIndex="-1" onClick={() => setShow(false)}>
+                                        <div className="modal-dialog modal-dialog-centered modal-xl">
+                                            <div className="modal-content">
+                                                <div className="modal-body text-center">
+                                                    <img src={imgPath} alt={`Figure ${figureId}`} className="img-fluid"/>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </>
                             )}
                         </>
                 ) : (
