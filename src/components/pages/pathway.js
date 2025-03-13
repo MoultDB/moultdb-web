@@ -1,28 +1,91 @@
-import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 import ChangePageTitle from "../../common/change-page-title";
 import MoultdbService from "../../services/moultdb.service";
 import Genes from "../data/genes";
 import Loading from "../data/loading";
+import './pathway.css'
 
-function displayArticle(article) {
+const Article = ({ article }) => {
     if (article) {
-        const v = article.dbXrefs.map((element, index) => (
-            <div key={"a-" + index}>
+        const xref = article.dbXrefs.map((element, index) => (
+            <span  key={index}>
                 {element.dataSource.shortName}:&nbsp;
                 {element.xrefURL && <a href={element.xrefURL} rel="noopener noreferrer" target="_blank">{element.accession}</a>}
                 {!element.xrefURL && <div>{element.accession}</div>}
                 {index < article.dbXrefs.length - 1 && ', '}
-            </div>
+            </span>
         ));
         return (
             <div className="key-value-pair">
                 <span className="key">Reference</span>
-                <span className="value">{article.citation} {v}</span>
+                <span className="value">{article.citation} {xref}</span>
             </div>);
     }
     return <></>;
-}
+};
+
+const Figures = ({ figureIds }) => {
+    if (figureIds && figureIds.length > 0) {
+        return (
+            <div className="key-value-pair">
+                <span className="key">Figure{figureIds.length > 1 && "s"}</span>
+                <span className="value">
+                    <div className={"row"}>
+                        {figureIds.map((figureId) => (
+                            <ImageWithModal figureId={figureId}/>
+                        ))}
+                    </div>
+                </span>
+            </div>
+        );
+    }
+    return <></>;
+};
+
+const ImageWithModal = ({ figureId }) => {
+    const [show, setShow] = useState(false);
+    const [imageError, setImageError] = useState(false);
+
+    const imgPath = `/pathways/fig${figureId}.jpg`;
+
+    const handleImageError = () => {
+        setImageError(true);
+    };
+
+    return (
+        <div key={figureId} className="col-md-4 col-sm-6 col-12 mb-3">
+            <figure className="text-center">
+                {!imageError ? (
+                        <>
+                            <span className={"pathway-figure"}>
+                                <img src={imgPath} alt={`Figure ${figureId}`} className="img-fluid"
+                                     onClick={() => setShow(true)} onError={handleImageError} />
+                            </span>
+                            {show && (
+                                <>
+                                    <div className="modal-backdrop show"></div>
+                                    <div className="modal show d-block" tabIndex="-1" onClick={() => setShow(false)}>
+                                        <div className="modal-dialog modal-dialog-centered modal-xl">
+                                            <div className="modal-content">
+                                                <div className="modal-body text-center">
+                                                    <img src={imgPath} alt={`Figure ${figureId}`} className="img-fluid"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                        </>
+                ) : (
+                    <div className="error-message">
+                    <p>Error loading image. Please try again later.</p>
+                        </div>
+                    )}
+            </figure>
+        </div>
+    );
+};
 
 const Pathway = () => {
     const [pathway, setPathway] = useState(null);
@@ -82,7 +145,8 @@ const Pathway = () => {
                                 <span className="value">{pathway.description}</span>
                             </div>
                         }
-                        {displayArticle(pathway.article)}
+                        <Article article={pathway.article} />
+                        <Figures figureIds={pathway.figureIds} />
 
                         <h2>Gene(s) involved in a moulting pathway</h2>
                         { geneLoading ? <Loading /> : <Genes genes={genes} startExpanded={false} /> }

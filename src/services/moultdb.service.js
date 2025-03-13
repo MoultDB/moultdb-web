@@ -1,11 +1,11 @@
 import axios from "./http-common";
 
 class TaxonAnnotationService {
-
-
+    
     getTaxonByText(searchedText) {
         return axios.get("/taxa/search?text=" + searchedText);
     }
+    
     getTaxonByDbXref(datasource, accession) {
         return axios.get("/taxa?datasource=" + datasource + "&accession=" + accession);
     }
@@ -34,12 +34,18 @@ class TaxonAnnotationService {
         return axios.get("/domains/" + domainId);
     }
 
+    getOrthogroup(orthogroupId) {
+        return axios.get("/orthogroups/" + orthogroupId);
+    }
+    
     getGeneByProteinId(proteinId) {
         return axios.get("/genes?proteinId=" + proteinId);
     }
+    
     getGeneByGeneId(geneId) {
         return axios.get("/genes?geneId=" + geneId);
     }
+    
     getGeneByLocusTag(locusTag) {
         return axios.get("/genes?locusTag=" + locusTag);
     }

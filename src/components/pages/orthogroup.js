@@ -14,22 +14,25 @@ const Orthogroup = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            setOrthogroupLoading(true);
             setError(null);
-            MoultdbService.getGenesByOrthogroup(params.orthogroupId)
-                .then(response => {
-                    setGenes(response.data?.data);
-                    if (response.data) {
-                        setOrthogroup(response.data.data);
-                    }
-                    setOrthogroupLoading(false);
-                })
-                .catch(error => {
-                    console.error('An error has occurred during orthogroup upload :', error);
-                    setError('An error has occurred during orthogroup upload.');
-                    setGenes(null);
-                    setOrthogroupLoading(false);
-                });
+            const response = await MoultdbService.getOrthogroup(params.orthogroupId);
+            const responseData = response?.data?.data;
+            setOrthogroup(responseData);
+
+            if (responseData) {
+                setOrthogroupLoading(true);
+                await MoultdbService.getGenesByOrthogroup(params.orthogroupId)
+                    .then(response => {
+                        setGenes(response?.data?.data);
+                        setOrthogroupLoading(false);
+                    })
+                    .catch(error => {
+                        console.error('An error has occurred during orthogroup genes upload :', error);
+                        setError('An error has occurred during orthogroup genes upload.');
+                        setGenes(null);
+                        setOrthogroupLoading(false);
+                    });
+            }
         }
         fetchData();
     }, [params.orthogroupId]);
@@ -39,7 +42,7 @@ const Orthogroup = () => {
             <ChangePageTitle pageTitle={`Orthogroup: ${params.orthogroupId}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
-                    <h1>Orthogroup: {params.orthogroupId}</h1>
+                    <h1>Orthogroup: {orthogroup?.name ? orthogroup.name : params.orthogroupId}</h1>
                 </div>
             </div>
 
@@ -47,12 +50,17 @@ const Orthogroup = () => {
 
             <div className="row">
                 <div className="col-md-12">
-                    <h2>Genes included in this orthogroup</h2>
-                    {orthogroup && Object.keys(genes).length > 0 ?
-                        <Genes genes={genes} startExpanded={true}/>
-                        :
-                        <>{orthogroupLoading ? <Loading/> : <div>Unknown orthogroup</div>} </>
-                }
+                    {!orthogroup && <div className={"container alert alert-danger"} role="alert">Unknown orthogroup</div>}
+                    {orthogroup &&
+                        <>
+                            <h2>Genes included in this orthogroup</h2>
+                            {genes && Object.keys(genes).length > 0 ?
+                                <Genes genes={genes} startExpanded={true}/>
+                                :
+                                <>{orthogroupLoading ? <Loading/> : <div>Unknown genes</div>} </>
+                            }
+                        </>
+                    }
                 </div>
             </div>
         </main>

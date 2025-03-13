@@ -5,7 +5,7 @@
 
     <groupId>org.moultdb.web</groupId>
     <artifactId>moultdb-web</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6-SNAPSHOT</version>
     <name>moultdb-web</name>
     <description>A webapp to access and search for MoultDB data</description>
     <packaging>war</packaging>

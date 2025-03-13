@@ -8,12 +8,13 @@ import MoultdbService from "../../services/moultdb.service";
 import GenomeData from "../data/genome-data";
 import Genes from "../data/genes";
 import Loading from "../data/loading";
+import InaturalistService from "../../services/inaturalist.service";
 
-function displayXref(taxon) {
+function displayXref(taxon, iNatCount, iNatXref) {
     const groupedByDataSource = taxon.dbXrefs
         .filter(element => element.accession !== null)
         .sort((a, b) => {
-            const comparisonByDataSource = b.dataSource.name.localeCompare(a.dataSource.name);
+            const comparisonByDataSource = a.dataSource.displayOrder - b.dataSource.displayOrder;
             const comparisonByName = a.name.localeCompare(b.name);
             const comparisonByMain = b.main - a.main;
             const comparisonByAccession = a.accession - b.accession;
@@ -31,12 +32,12 @@ function displayXref(taxon) {
             acc[key].push(element);
             return acc;
         }, {});
-
+    
     return (
         <div className="key-value-pair">
             <span className="key">Cross-reference(s)</span>
             <span className="value">
-                <ul>
+                <ul className="xrefs">
                     {Object.keys(groupedByDataSource).map(dataSourceName => (
                         <li key={dataSourceName}>
                             <strong>{dataSourceName}</strong>
@@ -46,17 +47,32 @@ function displayXref(taxon) {
                                         <a href={element.xrefURL} rel="noopener noreferrer" target="_blank">
                                             {element.name} ({element.accession})
                                         </a>
-                                        {index < groupedByDataSource[dataSourceName].length - 1 && '; '}
+                                        {index < groupedByDataSource[dataSourceName].length - 1 && <span>; </span>}
                                     </li>
                                 ))}
                             </ul>
                         </li>
                     ))}
+                    {iNatCount > 0 &&
+                        <li key="moulting.org">
+                            <strong>moulting.org</strong>
+                            <ul className="xref">
+                                <li>
+                                    <a href={"https://www.moulting.org/species/" + iNatXref.name.replaceAll(" ","-")} 
+                                       rel="noopener noreferrer" target="_blank">
+                                        {iNatXref.name} ({iNatXref.accession})
+                                    </a>
+                                    <span>({iNatCount} moulting observations has been captured by photo)</span>
+                                </li>
+                            </ul>
+                        </li>
+                    }
                 </ul>
             </span>
         </div>
     );
 }
+
 function displaySynonyms(taxon) {
     if (taxon.dbXrefs?.filter(element => element.accession == null).length > 0) {
         const filteredAndSortedElements = taxon.dbXrefs
@@ -90,6 +106,8 @@ const Species = () => {
     const [taxon, setTaxon] = useState(null);
     const [lineage, setLineage] = useState(null);
     const [genes, setGenes] = useState(null);
+    const [iNatCount, setINatCount] = useState(0);
+    const [iNatXref, setINatXref] = useState(null);
     const [geneLoading, setGeneLoading] = useState(true);
     const [error, setError] = useState(false);
     let params = useParams()
@@ -102,6 +120,21 @@ const Species = () => {
             setTaxon(responseData);
 
             if (responseData) {
+                const find = responseData.dbXrefs.find(xref => xref.dataSource?.shortName === "inaturalist");
+                setINatXref(find);
+                if (find) {
+                    await InaturalistService.getObservationsOfMoultingProject(find.accession)
+                        .then(response => {
+                            if (response?.data?.total_results) {
+                                setINatCount(response?.data?.total_results);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('An error has occurred during iNaturalist upload :', error);
+                            setError('An error has occurred during iNaturalist upload.');
+                            setINatCount(0);
+                        });
+                }
                 await MoultdbService.getTaxonLineage(responseData.path)
                     .then(response => {
                         if (response?.data?.data?.length > 0) {
@@ -151,7 +184,7 @@ const Species = () => {
                             <span className="key">Scientific name</span> <span
                             className="value">{taxon.scientificName}</span>
                         </div>
-                        {displayXref(taxon)}
+                        {displayXref(taxon, iNatCount, iNatXref)}
                         {displaySynonyms(taxon)}
                         
                         {lineage &&
