@@ -75,7 +75,7 @@ const columns = [
                       if (element.xrefURL) {
                           return `<a href="${element.xrefURL}" rel="noopener noreferrer" target="_blank">${element.accession}</a>`
                       }
-                      return `<span>${element.accession}</span>`
+                      return `<span>${element.dataSource.shortName}: ${element.accession}</span>`
                   })
                   .join(', ');
               return `<div>${v}</div>`;
