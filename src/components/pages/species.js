@@ -58,7 +58,7 @@ function displayXref(taxon, iNatCount, iNatXref) {
                             <strong>moulting.org</strong>
                             <ul className="xref">
                                 <li>
-                                    <a href={"https://www.moulting.org/species/" + iNatXref.name.replaceAll(" ","-")} 
+                                    <a href={"https://www.moulting.org/species/" + iNatXref.accession} 
                                        rel="noopener noreferrer" target="_blank">
                                         {iNatXref.name} ({iNatXref.accession})
                                     </a>
