@@ -30,6 +30,10 @@ class TaxonAnnotationService {
         return axios.get("/pathways?pathwayId=" + pathwayId);
     }
 
+    getPathwayOrthogroup() {
+        return axios.get("/pathways/with-orthogroups");
+    }
+
     getDomain(domainId) {
         return axios.get("/domains/" + domainId);
     }
