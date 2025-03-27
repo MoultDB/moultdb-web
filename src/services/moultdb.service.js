@@ -70,8 +70,8 @@ class TaxonAnnotationService {
         return axios.get("/genes?domainId=" + domainId);
     }
 
-    getTaxonAutocomplete(searchText) {
-        return axios.get("/search/taxon_autocomplete?q=" + searchText);
+    getTaxonAutocomplete(searchText, signal) {
+        return axios.get("/search/taxon_autocomplete?q=" + searchText, { signal });
     }
     
     getTaxonSearch(searchText) {
