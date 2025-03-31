@@ -30,6 +30,10 @@ class TaxonAnnotationService {
         return axios.get("/pathways?pathwayId=" + pathwayId);
     }
 
+    getPathwayOrthogroup() {
+        return axios.get("/pathways/with-orthogroups");
+    }
+
     getDomain(domainId) {
         return axios.get("/domains/" + domainId);
     }
@@ -70,8 +74,8 @@ class TaxonAnnotationService {
         return axios.get("/genes?domainId=" + domainId);
     }
 
-    getTaxonAutocomplete(searchText) {
-        return axios.get("/search/taxon_autocomplete?q=" + searchText);
+    getTaxonAutocomplete(searchText, signal) {
+        return axios.get("/search/taxon_autocomplete?q=" + searchText, { signal });
     }
     
     getTaxonSearch(searchText) {

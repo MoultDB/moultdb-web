@@ -15,6 +15,7 @@ import Orthogroup from "./components/pages/orthogroup";
 import Maintenance from "./components/pages/maintenance";
 import {useLayoutEffect} from "react";
 import TaxonSearch from "./components/pages/taxon-search";
+import PathwayOrthogroup from "./components/pages/pathway-orthogroup";
 
 function App() {
     return (
@@ -55,6 +56,7 @@ function CustomRoutes() {
             {/*<Route path="species/:datasource/:accession" element={<Maintenance />} />*/}
             <Route path="species/search" element={<TaxonSearch />} />
             <Route path="species/:datasource/:accession" element={<Species />} />
+            <Route path="pathways" element={<PathwayOrthogroup />} />
             {/*<Route path="pathway/:pathwayId" element={<Maintenance />} />*/}
             <Route path="pathway/:pathwayId" element={<Pathway />} />
             {/*<Route path="domain/:domainId" element={<Maintenance />} />*/}

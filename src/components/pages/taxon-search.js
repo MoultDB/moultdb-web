@@ -47,18 +47,36 @@ const examples = ['Fuxianhuia protensa', 'Penaeus vannamei', "Arthropoda"];
     };
 
     useEffect(() => {
-        const fetchData = async () => {
-            if (!inputValue.trim()) return;
+        
+        if (!inputValue.trim()) return;
 
-            const response = await MoultdbService.getTaxonAutocomplete(inputValue);
-            setItems(response.data?.data);
+        // Create a cancellation token for the current request
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        const fetchData = async () => {
+            try {
+                const response = await MoultdbService.getTaxonAutocomplete(inputValue, signal);
+                setItems(response.data?.data);
+            } catch (error) {
+                if (error.name === "AbortError") {
+                    console.log("Request cancelled:", error.message);
+                } else {
+                    console.error('Error fetching autocomplete taxon search:', error);
+                }
+            }
         };
 
         fetchData();
+
+        // Cancel the previous query if a new one is run
+        return () => {
+            controller.abort();
+        };
     }, [inputValue]);
 
      const updateValue = (newValue) => {
-         setInputValue(newValue); // Met à jour l'état
+         setInputValue(newValue);
      };
 
      return (

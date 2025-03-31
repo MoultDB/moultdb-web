@@ -12,7 +12,10 @@ function Footer() {
                     <div className="row-links">
                         <ul className="header-menu">
                             <li className="header-menu-item mbr-fonts-style display-5">
-                                <Link to="/species/gbif/54" className="text-white">Browse</Link>
+                                <Link to="/species/gbif/54" className="text-white">Species</Link>
+                            </li>
+                            <li className="header-menu-item mbr-fonts-style display-5">
+                                <Link to={"/pathways"} className="text-white">Pathways</Link>
                             </li>
                             <li className="header-menu-item mbr-fonts-style display-5">
                                 <Link to="/species/search" className="text-white">Search</Link>

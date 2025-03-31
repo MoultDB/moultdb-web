@@ -54,7 +54,7 @@ const columns = [
     { title : 'Contributor', data: 'version.creationUser',
       render: function ( data, type, full ) {
           if (data) {
-              return '<a href="https://orcid.org/' + data.orcidId + '">' + data.name + '</a>'
+              return '<a href="https://orcid.org/' + data.orcidId + '">' + data.fullName + '</a>'
           }
           return '';
       }
