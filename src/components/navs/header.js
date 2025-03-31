@@ -44,7 +44,10 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
               <li className="nav-item">
-                <Link to={"/species/gbif/54"} className="nav-link link text-black display-4">Browse</Link>
+                <Link to={"/species/gbif/54"} className="nav-link link text-black display-4">Species</Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/pathways"} className="nav-link link text-black display-4">Pathways</Link>
               </li>
               <li className="nav-item">
                 <Link to={"/species/search"} className="nav-link link text-black display-4">Search</Link>
