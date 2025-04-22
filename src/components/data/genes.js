@@ -33,7 +33,7 @@ const GenesRow = ({ taxon, sortedOrthogroups, genes, pathway, startExpanded }) =
         setIsExpanded(!isExpanded);
     };
     
-    const keyPrefix = (pathway? pathway.id : "pnull" + "-") + taxon.id;
+    const keyPrefix = (pathway? pathway.id : "pnull-") + taxon.id;
     
     return (
         <tr  className={"align-top"}>
@@ -98,7 +98,7 @@ const GeneTable = ({ genes, pathway, startExpanded }) => {
             <tbody>
             {taxa.map(taxonKey => {
                 const taxon = JSON.parse(taxonKey);
-                return (<GenesRow key={(pathway? pathway.id : "pnull" + "-") + taxon.id} 
+                return (<GenesRow key={(pathway? pathway.id : "pnull-") + taxon.id} 
                                   taxon={taxon} sortedOrthogroups={sortedOrthogroups} genes={genes[taxonKey]}
                                   pathway={pathway} startExpanded={startExpanded} />
                 );
