@@ -13,6 +13,10 @@ class TaxonAnnotationService {
     getTaxonLineage(taxonPath) {
         return axios.get("/taxa/" + taxonPath + "/lineage");
     }
+
+    getTaxonDirectChildren(taxonPath) {
+        return axios.get("/taxa/" + taxonPath + "/direct-children");
+    }
     
     getTaxAnnotationsByTaxonPath(taxonPath) {
         return axios.get("/taxon-annotations/species?taxonPath=" + taxonPath);

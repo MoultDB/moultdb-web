@@ -1,0 +1,45 @@
+{
+  "data": [
+    {
+      "id": "01",
+      "name": "Arthropoda",
+      "expanded": true,
+      "children": [
+        {
+          "id": "01-01",
+          "name": "Chelicerata (XXX species - 38 G - 17 MC)",
+          "children": [
+            {
+              "id": "01-01-01",
+              "name": "Arachnida (XXX species - 36 G - 11 MC)",
+              "children": [
+                {
+                  "id": "02-02-01",
+                  "name": "Arachnida 1 (1 G - 11 MC)"
+                },
+                {
+                  "id": "02-02-02",
+                  "name": "Arachnida 2 (1 G - 0 MC)"
+                }
+              ]
+            },
+
+            {
+              "id": "01-01-02",
+              "name": "Merostomata (XXX species - 0 G - 0 MC)"
+            }
+          ]
+        },
+        {
+          "id": "01-02",
+          "name": "Mandibulata (XXX species - 4 G - 8 MC)",
+          "expanded": true,
+          "children": [
+            { "id": "01-02-01", "name": "Mandibulata 1 (1 G - 11 MC)" },
+            { "id": "01-02-02", "name": "Mandibulata 2 (1 G - 11 MC)" }
+          ]
+        }
+      ]
+    }
+  ]
+}
