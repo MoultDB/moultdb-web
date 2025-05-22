@@ -124,7 +124,7 @@ const columns = [
 class MoultingCharacters extends Component {
     componentDidMount() {
         const table = $(this.refs.mcharacters).DataTable({
-            order: [[11, 'desc'], [0, 'asc'], [1, 'asc']],
+            order: [[10, 'asc'], [0, 'asc'], [1, 'asc']],
             scrollX: true,
             dom:"<'row'<'col'Q>>" +
                 "<'row'<'col'l><'col text-center'i><'col text-end'f>>" +
