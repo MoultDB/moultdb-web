@@ -57,9 +57,9 @@ function Footer() {
                             <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank"
                                rel="license noopener noreferrer">
                                 CC0 1.0
-                                <img className="cc_logo"
+                                <img className="cc_logo" alt="Creative Commons logo"
                                      src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"/>
-                                <img className="cc0_logo"
+                                <img className="cc0_logo" alt="CC0 Public Domain logo"
                                      src="https://mirrors.creativecommons.org/presskit/icons/zero.svg?ref=chooser-v1"/>
                             </a>
                         </p>

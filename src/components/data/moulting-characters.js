@@ -15,8 +15,7 @@ $.DataTable = require( 'datatables.net-responsive-dt' )
 $.DataTable = require( 'datatables.net-searchbuilder-dt' );
 
 const columns = [
-    { title: 'Taxon', 
-      data: 'taxon',
+    { title: 'Taxon', data: 'taxon',
       render: function(data, type, full) {
           if (data) {
               let name = data.scientificName;
@@ -36,6 +35,8 @@ const columns = [
             return '';
         }
     },
+    { title: 'Moulting step', data: 'condition.moultingStep' },
+    { title: 'Sex', data: 'condition.sex' },
     { title: 'Moult stage author annotation', data: 'authorDevStage' },
     { title: 'Reproductive state', data: 'condition.reproductiveState' },
     { title: 'Type of specimens of interest', data: 'sampleSet.specimenTypes[, ]' },
@@ -51,10 +52,29 @@ const columns = [
       }
     },
     { title: 'Location: name', data: 'sampleSet.collectionLocations[, ]' },
-    { title : 'Contributor', data: 'version.creationUser',
-      render: function ( data, type, full ) {
-          if (data) {
-              return '<a href="https://orcid.org/' + data.orcidId + '">' + data.fullName + '</a>'
+    { title: 'Reference', data: null,
+        render: function ( data, type, full ) {
+            if (data?.article) {
+                let v = data.article.dbXrefs
+                    .map((element, index) => {
+                        if (element.xrefURL) {
+                            return `<a href="${element.xrefURL}" rel="noopener noreferrer" target="_blank">${element.accession}</a>`
+                        }
+                        return `<span>${element.dataSource.shortName.toUpperCase()}: ${element.accession}</span>`
+                    })
+                    .join(', ');
+                return `<div>${v}</div>`;
+            }
+            if (data?.observation) {
+                return `<div><a href="${data.observation.url}" rel="noopener noreferrer" target="_blank">iNaturalist: ${data.observation.id}</a></div>`;
+            }
+            return ''
+        }
+    },
+    { title: 'Evidence type', data: 'ecoTerm',
+      render: function ( ecoTerm, type, full ) {
+          if (ecoTerm) {
+              return '<a href="https://evidenceontology.org/term/' + ecoTerm.id + '">' + ecoTerm.name + '</a>'
           }
           return '';
       }
@@ -67,21 +87,6 @@ const columns = [
     { title: 'Other behaviours associated with moulting', data: 'moultingCharacters.otherBehaviours[, ]' },
     { title: 'Consumption of exuviae', data: 'moultingCharacters.exuviaeConsumption' },
     { title: 'Reabsorption during moulting', data: 'moultingCharacters.reabsorption' },
-    { title: 'Published reference: citation', data: 'article',
-      render: function ( article, type, full ) {
-          if (article) {
-              let v = article.dbXrefs
-                  .map((element, index) => {
-                      if (element.xrefURL) {
-                          return `<a href="${element.xrefURL}" rel="noopener noreferrer" target="_blank">${element.accession}</a>`
-                      }
-                      return `<span>${element.dataSource.shortName}: ${element.accession}</span>`
-                  })
-                  .join(', ');
-              return `<div>${v}</div>`;
-          }
-      }
-    },
     { title: 'Museum collection', data: 'sampleSet.storageLocations[, ]' },
     // { title: 'Museum accession', data: 'sampleSet.storageAccessions[, ]' },
     { title: 'Geological formation', data: 'sampleSet.geologicalFormations[, ]' },
@@ -119,7 +124,7 @@ const columns = [
 class MoultingCharacters extends Component {
     componentDidMount() {
         const table = $(this.refs.mcharacters).DataTable({
-            order: [[0, 'asc'], [1, 'asc']],
+            order: [[10, 'asc'], [0, 'asc'], [1, 'asc']],
             scrollX: true,
             dom:"<'row'<'col'Q>>" +
                 "<'row'<'col'l><'col text-center'i><'col text-end'f>>" +

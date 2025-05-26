@@ -20,7 +20,6 @@ const examples = ['Fuxianhuia protensa', 'Penaeus vannamei', "Arthropoda"];
         getItemProps,
         isOpen,
         highlightedIndex,
-        selectedItem,
         inputValue,
         setInputValue
     } = useCombobox({
