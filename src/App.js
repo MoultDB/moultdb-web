@@ -53,9 +53,10 @@ function CustomRoutes() {
             <Route path="/" element={<HomePage />} />
             <Route path="about" element={<About />} />
             {/*<Route path="species/search" element={<Maintenance />} />*/}
-            {/*<Route path="species/:datasource/:accession" element={<Maintenance />} />*/}
             <Route path="species/search" element={<TaxonSearch />} />
+            {/*<Route path="species/:datasource/:accession" element={<Maintenance />} />*/}
             <Route path="species/:datasource/:accession" element={<Species />} />
+            {/*<Route path="pathways" element={<Maintenance />} />*/}
             <Route path="pathways" element={<PathwayOrthogroup />} />
             {/*<Route path="pathway/:pathwayId" element={<Maintenance />} />*/}
             <Route path="pathway/:pathwayId" element={<Pathway />} />
