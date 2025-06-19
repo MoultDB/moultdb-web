@@ -7,7 +7,7 @@ import {getSpeciesUrlFromAccession} from "../../common/link-utils";
 import {useCombobox} from 'downshift';
 import './taxon-search.css'
 
-const examples = ['Fuxianhuia protensa', 'Penaeus vannamei', "Arthropoda"];
+const examples = ['Fuxianhuia protensa', 'Manduca sexta', "Arthropoda"];
 
  const TaxonSearch = () => {
     const [items, setItems] = useState([]);
