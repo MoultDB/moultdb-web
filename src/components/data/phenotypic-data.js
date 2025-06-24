@@ -1,6 +1,7 @@
 import React, {useEffect, useState}  from "react";
 import MoultingCharacters from "./moulting-characters";
 import MoultdbService from "../../services/moultdb.service";
+import Loading from "./loading";
 
 export const PhenotypicData = (props) => {
     const [data, setData] = useState(null);
@@ -35,7 +36,8 @@ export const PhenotypicData = (props) => {
             { error && <div className={"container alert alert-danger"} role="alert">{error}</div> }
             { data && data.content?.length > 0 ?
                 <MoultingCharacters mcData={data.content}/>
-                : <div>No data</div> }
+                :
+                <div>{ loading ? <Loading/> : <div>No data</div> } </div> }
         </div>
     )
 }
