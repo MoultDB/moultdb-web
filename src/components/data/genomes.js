@@ -47,8 +47,13 @@ const columns = [
 
 class GenomeData extends Component {
 
+    constructor(props) {
+        super(props);
+        this.gdataRef = React.createRef();
+    }
+
     componentDidMount() {
-        $(this.refs.gdata).DataTable({
+        $(this.gdataRef.current).DataTable({
             order: [[0, 'asc']],
             scrollX: true,
             dom:"<'row'<'col'Q>>" +
@@ -94,7 +99,7 @@ class GenomeData extends Component {
 
     render() {
         return (<div>
-                <table id="genome-result" ref="gdata"
+                <table id="genome-result" ref={this.gdataRef}
                        className={'table table-sm table-striped table-bordered table-hover'}>
                 </table>
             </div>

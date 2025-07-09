@@ -122,8 +122,14 @@ const columns = [
 ];
 
 class MoultingCharacters extends Component {
+
+    constructor(props) {
+        super(props);
+        this.mcharactersRef = React.createRef();
+    }
+    
     componentDidMount() {
-        const table = $(this.refs.mcharacters).DataTable({
+        const table = $(this.mcharactersRef.current).DataTable({
             order: [[10, 'asc'], [0, 'asc'], [1, 'asc']],
             scrollX: true,
             dom:"<'row'<'col'Q>>" +
@@ -200,7 +206,7 @@ class MoultingCharacters extends Component {
                             </div>))}
                     </div>
                 </div>
-                <table id="mc-result" ref="mcharacters"
+                <table id="genome-result" ref={this.mcharactersRef}
                        className={'table table-sm table-striped table-bordered table-hover'}>
                 </table>
             </div>);
