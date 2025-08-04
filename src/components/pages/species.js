@@ -105,7 +105,8 @@ function displaySynonyms(taxon) {
 const Species = () => {
     const [taxon, setTaxon] = useState(null);
     const [lineage, setLineage] = useState(null);
-    const [genes, setGenes] = useState(null);
+    const [genesByPathwayTaxonOrthogroup, setGenesByPathwayTaxonOrthogroup] = useState(null);
+    const [genesURL, setGenesURL] = useState()
     const [iNatCount, setINatCount] = useState(0);
     const [iNatXref, setINatXref] = useState(null);
     const [geneLoading, setGeneLoading] = useState(true);
@@ -147,17 +148,19 @@ const Species = () => {
                         setLineage(null);
                     });
                 setGeneLoading(true);
+                setGenesURL(MoultdbService.getMoultingGenesByTaxonPathURL(responseData.path));
                 await MoultdbService.getMoultingGenesByTaxonPath(responseData.path)
                     .then(response => {
                         if (response?.data?.data) {
-                            setGenes(response.data.data);
+                            setGenesByPathwayTaxonOrthogroup(response.data.data);
                         }
                         setGeneLoading(false);
                     })
                     .catch(error => {
-                        console.error('An error has occurred during genes upload :', error);
-                        setError('An error has occurred during genes upload.');
-                        setGenes(null);
+                        console.error('An error has occurred during taxon genes upload :', error);
+                        setError('An error has occurred during taxon genes upload.');
+                        setGenesByPathwayTaxonOrthogroup(null);
+                        setGenesURL(null);
                         setGeneLoading(false);
                     });
             }
@@ -208,16 +211,25 @@ const Species = () => {
                         <h2>Moulting characters <span className={"subtitle"}>(current taxon and its children)</span></h2>
                         <PhenotypicData taxonPath={taxon.path}/>
 
-                        <h2>Gene(s) involved in a moulting pathway</h2>
-                        {genes && Object.keys(genes).length > 0 ?
-                            <Genes genes={genes} startExpanded={false} />
+                        <h2>Gene(s) involved in a moulting pathway
+                            {genesURL &&
+                                <span className={"subtitle"}>
+                                    &nbsp;(
+                                    <a href={genesURL} rel="noopener noreferrer" target="_blank">see API result</a>
+                                    )
+                                </span>
+                            }
+                        </h2>
+                        {genesByPathwayTaxonOrthogroup && Object.keys(genesByPathwayTaxonOrthogroup).length > 0 ?
+                            <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup} startExpanded={false} />
                             :
                             <div>{geneLoading ? <Loading/> : <div>No data</div>} </div>
                         }
                     </div>
                 </div>
-                : <div>Unknown taxon</div>}
-
+                :
+                <div>Unknown taxon</div>
+            }
         </main>
     );
 };

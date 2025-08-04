@@ -7,8 +7,9 @@ import Loading from "../data/loading";
 
 const Orthogroup = () => {
     const [orthogroup, setOrthogroup] = useState(null);
-    const [orthogroupLoading, setOrthogroupLoading] = useState(true);
-    const [genes, setGenes] = useState(null);
+    const [geneLoading, setGeneLoading] = useState(true);
+    const [genesByPathwayTaxonOrthogroup, setGenesByPathwayTaxonOrthogroup] = useState(null);
+    const [genesURL, setGenesURL] = useState()
     const [error, setError] = useState(false);
     let params = useParams()
 
@@ -20,17 +21,19 @@ const Orthogroup = () => {
             setOrthogroup(responseData);
 
             if (responseData) {
-                setOrthogroupLoading(true);
+                setGeneLoading(true);
+                setGenesURL(MoultdbService.getGenesByOrthogroupURL(params.orthogroupId));
                 await MoultdbService.getGenesByOrthogroup(params.orthogroupId)
                     .then(response => {
-                        setGenes(response?.data?.data);
-                        setOrthogroupLoading(false);
+                        setGenesByPathwayTaxonOrthogroup(response?.data?.data);
+                        setGeneLoading(false);
                     })
                     .catch(error => {
                         console.error('An error has occurred during orthogroup genes upload :', error);
                         setError('An error has occurred during orthogroup genes upload.');
-                        setGenes(null);
-                        setOrthogroupLoading(false);
+                        setGenesByPathwayTaxonOrthogroup(null);
+                        setGenesURL(null);
+                        setGeneLoading(false);
                     });
             }
         }
@@ -53,11 +56,19 @@ const Orthogroup = () => {
                     {!orthogroup && <div className={"container alert alert-danger"} role="alert">Unknown orthogroup</div>}
                     {orthogroup &&
                         <>
-                            <h2>Genes included in this orthogroup</h2>
-                            {genes && Object.keys(genes).length > 0 ?
-                                <Genes genes={genes} startExpanded={true}/>
+                            <h2>Genes included in this orthogroup 
+                                {genesURL && 
+                                    <span className={"subtitle"}> 
+                                        &nbsp;(
+                                        <a href={genesURL} rel="noopener noreferrer" target="_blank">see API result</a>
+                                        )
+                                    </span>
+                                }
+                            </h2>
+                            {genesByPathwayTaxonOrthogroup && Object.keys(genesByPathwayTaxonOrthogroup).length > 0 ?
+                                <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup} startExpanded={true}/>
                                 :
-                                <>{orthogroupLoading ? <Loading/> : <div>Unknown genes</div>} </>
+                                <>{geneLoading ? <Loading/> : <div>Unknown genes</div>}</>
                             }
                         </>
                     }

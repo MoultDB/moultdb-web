@@ -89,7 +89,8 @@ const ImageWithModal = ({ figureId }) => {
 
 const Pathway = () => {
     const [pathway, setPathway] = useState(null);
-    const [genes, setGenes] = useState(null);
+    const [genesByPathwayTaxonOrthogroup, setGenesByPathwayTaxonOrthogroup] = useState(null);
+    const [genesURL, setGenesURL] = useState()
     const [geneLoading, setGeneLoading] = useState(true);
     const [error, setError] = useState(false);
     let params = useParams()
@@ -103,17 +104,18 @@ const Pathway = () => {
 
             if (responseData) {
                 setGeneLoading(true);
+                setGenesURL(MoultdbService.getGenesByPathwayURL(params.pathwayId));
                 await MoultdbService.getGenesByPathway(params.pathwayId)
                     .then(response => {
                         if (response?.data?.data) {
-                            setGenes(response.data.data);
+                            setGenesByPathwayTaxonOrthogroup(response.data.data);
                         }
                         setGeneLoading(false);
                     })
                     .catch(error => {
                         console.error('An error has occurred during pathway genes upload :', error);
                         setError('An error has occurred during pathway genes upload.');
-                        setGenes(null);
+                        setGenesByPathwayTaxonOrthogroup(null);
                         setGeneLoading(false);
                     });
             }
@@ -148,11 +150,25 @@ const Pathway = () => {
                         <Article article={pathway.article} />
                         <Figures figureIds={pathway.figureIds} />
 
-                        <h2>Gene(s) involved in a moulting pathway</h2>
-                        { geneLoading ? <Loading /> : <Genes genes={genes} startExpanded={false} /> }
+                        <h2>Gene(s) involved in a moulting pathway 
+                            {genesURL && 
+                                <span className={"subtitle"}>
+                                    &nbsp;(
+                                    <a href={genesURL} rel="noopener noreferrer" target="_blank">see API result</a>
+                                    )
+                                </span>
+                            }
+                        </h2>
+                        { geneLoading ?
+                            <Loading />
+                            :
+                            <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup} startExpanded={false} />
+                        }
                     </div>
                 </div>
-                : <div>Unknown pathway</div> }
+                :
+                <div>Unknown pathway</div>
+            }
         </main>
     );
 };

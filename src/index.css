@@ -813,7 +813,7 @@ a[target*="_blank"]::after {
 }
 #moultdb-body main h3 {
   font-size: 1.1em;
-  margin: 2em 0 1em 0;
+  margin: 1em 0 1em 0;
 }
 #moultdb-body main h4 {
   font-size: 1em;
@@ -875,6 +875,7 @@ a[target*="_blank"]::after {
   display: block;
   background-color: white;
   width: 100%;
+  margin-bottom: 2em;
 }
 
 .simple-table thead th {
@@ -908,6 +909,11 @@ a[target*="_blank"]::after {
 
 .close-row::after {
   transform: rotate(90deg);
+}
+
+h2 span.subtitle {
+  color: var(--lightest-grey-color);
+  font-size: 0.8em;
 }
 
 /* Beta ribbon */
