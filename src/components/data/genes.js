@@ -91,13 +91,13 @@ const GeneTable = ({ genesByTaxonOrthogroup, pathway, startExpanded }) => {
             <thead>
             <tr>
                 <th></th>
-                <th>Species / Orthogroups</th>
+                <th>Species {pathway ? "/ Orthogroups" : ""}</th>
                 {allOrthogroups.length > 0 ?
                     (allOrthogroups.map(og => {
                         return (<th key={tableKey + "-" + og.id}><Link to={"/orthogroup/" + og.id}>{og.name}</Link></th>);
                     }))
                     :
-                    <th></th>
+                    <th>Genes</th>
                 }
             </tr>
             </thead>
