@@ -211,17 +211,10 @@ const Species = () => {
                         <h2>Moulting characters <span className={"subtitle"}>(current taxon and its children)</span></h2>
                         <PhenotypicData taxonPath={taxon.path}/>
 
-                        <h2>Gene(s) involved in a moulting pathway
-                            {genesURL &&
-                                <span className={"subtitle"}>
-                                    &nbsp;(
-                                    <a href={genesURL} rel="noopener noreferrer" target="_blank">see API result</a>
-                                    )
-                                </span>
-                            }
-                        </h2>
+                        <h2>Gene(s) involved in a moulting pathway</h2>
                         {genesByPathwayTaxonOrthogroup && Object.keys(genesByPathwayTaxonOrthogroup).length > 0 ?
-                            <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup} startExpanded={false} />
+                            <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup}
+                                   startExpanded={false} dataURL={genesURL} />
                             :
                             <div>{geneLoading ? <Loading/> : <div>No data</div>} </div>
                         }

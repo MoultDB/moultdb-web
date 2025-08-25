@@ -66,19 +66,12 @@ const Domain = () => {
                             <span className="value">{getInterproDomainLink(domain.id)}</span>
                         </div>
 
-                        <h2>Gene(s) matching this domain 
-                            {genesByDomainURL && 
-                                <span className={"subtitle"}>
-                                    &nbsp;(
-                                    <a href={genesByDomainURL} rel="noopener noreferrer" target="_blank">see API result</a>
-                                    )
-                                </span>
-                            }
-                        </h2>
+                        <h2>Gene(s) matching this domain</h2>
                         { geneLoading ?
                             <Loading />
                             : 
-                            <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup} startExpanded={true} />
+                            <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup}
+                                   startExpanded={true} dataURL={genesByDomainURL}/>
                         }
                     </div>
                 </div>

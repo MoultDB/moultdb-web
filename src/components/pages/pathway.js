@@ -150,19 +150,12 @@ const Pathway = () => {
                         <Article article={pathway.article} />
                         <Figures figureIds={pathway.figureIds} />
 
-                        <h2>Gene(s) involved in a moulting pathway 
-                            {genesURL && 
-                                <span className={"subtitle"}>
-                                    &nbsp;(
-                                    <a href={genesURL} rel="noopener noreferrer" target="_blank">see API result</a>
-                                    )
-                                </span>
-                            }
-                        </h2>
+                        <h2>Gene(s) involved in a moulting pathway</h2>
                         { geneLoading ?
                             <Loading />
                             :
-                            <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup} startExpanded={false} />
+                            <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup}
+                                   startExpanded={false} dataURL={genesURL}/>
                         }
                     </div>
                 </div>

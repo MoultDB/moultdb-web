@@ -154,19 +154,12 @@ const Gene = () => {
 
                         {genesByPathwayTaxonOrthogroup &&
                             <>
-                                <h2>Ortholog(s) 
-                                    {genesURL && 
-                                        <span className={"subtitle"}>
-                                            &nbsp;(
-                                            <a href={genesURL} rel="noopener noreferrer" target="_blank">see API result</a>
-                                            )
-                                        </span>
-                                    }
-                                </h2>
+                                <h2>Ortholog(s)</h2>
                                 { geneLoading ?
                                     <Loading />
                                     :
-                                    <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup} startExpanded={true} />
+                                    <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup}
+                                           startExpanded={true} dataURL={genesURL}/>
                                 }
                             </>
                         }

@@ -1,6 +1,7 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
-import {getSpeciesUrl} from "../../common/link-utils";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { getSpeciesUrl } from "../../common/link-utils";
+import { DownloadJsonButton } from "./download-json-button";
 
 const GenesCell = ({ genes, isExpanded }) => {
 
@@ -115,10 +116,11 @@ const GeneTable = ({ genesByTaxonOrthogroup, pathway, startExpanded }) => {
     );
 }
 
-export const Genes = ({ genesByPathwayTaxonOrthogroup, startExpanded}) => {
+export const Genes = ({ genesByPathwayTaxonOrthogroup, startExpanded, dataURL}) => {
 
     return (
         <div>
+            {dataURL && <DownloadJsonButton apiUrl={dataURL} />}
             {genesByPathwayTaxonOrthogroup && genesByPathwayTaxonOrthogroup.map(pathway => {
                 if (pathway.id !== "NOT_IN_MOULTING_PATHWAY") {
                     return (

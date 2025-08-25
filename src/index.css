@@ -16,7 +16,7 @@
   --primary-text: #FFFFFF;
   --secondary-text: #FFFFFF;
   --success-text: #FFFFFF;
-  --danger-text: #FFFFFF;
+  --danger-text: red;
   --warning-text: #000000;
   --info-text: #FFFFFF;
 }

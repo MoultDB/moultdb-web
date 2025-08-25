@@ -66,7 +66,8 @@ const Orthogroup = () => {
                                 }
                             </h2>
                             {genesByPathwayTaxonOrthogroup && Object.keys(genesByPathwayTaxonOrthogroup).length > 0 ?
-                                <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup} startExpanded={true}/>
+                                <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup}
+                                       startExpanded={true} dataURL={genesURL}/>
                                 :
                                 <>{geneLoading ? <Loading/> : <div>Unknown genes</div>}</>
                             }
