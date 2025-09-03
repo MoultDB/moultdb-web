@@ -1,18 +1,24 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
-import {getSpeciesUrl} from "../../common/link-utils";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { getSpeciesUrl } from "../../common/link-utils";
+import { DownloadJsonButton } from "./download-json-button";
 
 const GenesCell = ({ genes, isExpanded }) => {
 
-    const expandContent = genes?.reduce((r, g, pos) => {
-        r.push(
-            <span className="display-8" key={g.id ?? g.locusTag}>
-                <Link to={"/gene/" +  (g.id ? "id/" + g.id : "locus-tag/" + g.locusTag)}>{g.name ?? g.id ?? g.locusTag}</Link>
-                {pos < genes.length && <br />}
-            </span>
-        );
-        return r;
-    }, []);
+    const expandContent = genes?.sort((a, b) => {
+        const labelA = a.name || a.id || a.locusTag;
+        const labelB = b.name || b.id || b.locusTag;
+        return labelA.localeCompare(labelB);
+    })
+        .reduce((r, g, pos) => {
+            r.push(
+                <span className="display-8" key={g.id ?? g.locusTag}>
+                    <Link to={"/gene/" + (g.id ? "id/" + g.id : "locus-tag/" + g.locusTag)}>{g.name || g.id || g.locusTag}</Link>
+                    {pos < genes.length && <br />}
+                </span>
+            );
+            return r;
+        }, []);
 
     if (!genes) {
         return (<>0 gene</>);
@@ -25,7 +31,7 @@ const GenesCell = ({ genes, isExpanded }) => {
     );
 };
 
-const GenesRow = ({ taxon, sortedOrthogroups, genes, pathway, startExpanded }) => {
+const GenesRow = ({ taxon, allOrthogroups, genesByOrthogroup, pathway, startExpanded }) => {
 
     const [isExpanded, setIsExpanded] = useState(startExpanded);
 
@@ -33,7 +39,7 @@ const GenesRow = ({ taxon, sortedOrthogroups, genes, pathway, startExpanded }) =
         setIsExpanded(!isExpanded);
     };
     
-    const keyPrefix = (pathway? pathway.id : "pnull-") + taxon.id;
+    const keyPrefix = (pathway? pathway.id : "pnull") + "-" + taxon.id;
     
     return (
         <tr  className={"align-top"}>
@@ -45,61 +51,63 @@ const GenesRow = ({ taxon, sortedOrthogroups, genes, pathway, startExpanded }) =
             <td>
                 <a href={getSpeciesUrl(taxon)}>{taxon.scientificName}</a>
             </td>
-            {sortedOrthogroups.length > 0 ?
-                (sortedOrthogroups.map(og =>
-                    <td key={keyPrefix + "-" + og}>
-                        <GenesCell genes={genes[og]} isExpanded={isExpanded}/>
-                    </td>
-                ))
+            
+            {allOrthogroups?.length > 0 ?
+                allOrthogroups.map((ao) => {
+                    const matchingOrthogroup = genesByOrthogroup.find(o => o.id === ao.id);
+                    return (
+                        <td key={keyPrefix + "-" + ao.id}>
+                            <GenesCell genes={matchingOrthogroup?.genes} isExpanded={isExpanded}/>
+                        </td>
+                    );
+                })
                 :
-                <td>
-                     <GenesCell genes={Object.values(genes).flatMap(list => list)} isExpanded={isExpanded}/> 
+                <td key={keyPrefix}>
+                    <GenesCell genes={genesByOrthogroup.map(genes => genes.genes).flatMap(list => list)} isExpanded={isExpanded}/>
                 </td>
             }
         </tr>
     );
 };
 
-const GeneTable = ({ genes, pathway, startExpanded }) => {
-    const taxa = Object.keys(genes);
-    taxa.sort((a, b) => {
-        const taxonA = JSON.parse(a);
-        const taxonB = JSON.parse(b);
-        return taxonA.scientificName.localeCompare(taxonB.scientificName)
-    })
+const GeneTable = ({ genesByTaxonOrthogroup, pathway, startExpanded }) => {
 
-    const orthogroups = new Set();
     let tableKey = "pnull";
+    let allOrthogroups = [];
     if (pathway) {
-        taxa.forEach(taxon => {
-            Object.keys(genes[taxon]).forEach(og => orthogroups.add(og));
-        });
         tableKey = pathway.id;
+        // Remove duplicates and order by name
+        allOrthogroups = Array.from(
+            new Map(genesByTaxonOrthogroup
+                .flatMap(taxon => taxon.orthogroups)
+                .map(({ id, name }) => [`${name}`, { id, name }])
+            ).values()
+        ).sort((a, b) => {
+            return a.name.localeCompare(b.name);
+        });
     }
-
-    const sortedOrthogroups = Array.from(orthogroups).sort();
 
     return (
         <table key={tableKey} className="simple-table">
             <thead>
             <tr>
                 <th></th>
-                <th>Species / Orthogroups</th>
-                {sortedOrthogroups.length > 0 ?
-                    (sortedOrthogroups.map(ogKey => {
-                        const og = JSON.parse(ogKey);
-                        return (<th key={tableKey +"-" + og.id}><Link to={"/orthogroup/" + og.id}>{og.name}</Link></th>);
+                <th>Species {pathway ? "/ Orthogroups" : ""}</th>
+                {allOrthogroups.length > 0 ?
+                    (allOrthogroups.map(og => {
+                        return (<th key={tableKey + "-" + og.id}><Link to={"/orthogroup/" + og.id}>{og.name}</Link></th>);
                     }))
                     :
-                    <th></th>
+                    <th>Genes</th>
                 }
             </tr>
             </thead>
             <tbody>
-            {taxa.map(taxonKey => {
-                const taxon = JSON.parse(taxonKey);
-                return (<GenesRow key={(pathway? pathway.id : "pnull-") + taxon.id} 
-                                  taxon={taxon} sortedOrthogroups={sortedOrthogroups} genes={genes[taxonKey]}
+            {genesByTaxonOrthogroup.map(taxon => {
+                return (<GenesRow key={tableKey + "-" + taxon.id}
+                                  taxon={taxon}
+                                  allOrthogroups={allOrthogroups}
+                                  genesByOrthogroup={taxon.orthogroups}
                                   pathway={pathway} startExpanded={startExpanded} />
                 );
             })}
@@ -108,23 +116,23 @@ const GeneTable = ({ genes, pathway, startExpanded }) => {
     );
 }
 
-export const Genes = ({ genes, startExpanded}) => {
+export const Genes = ({ genesByPathwayTaxonOrthogroup, startExpanded, dataURL}) => {
 
     return (
         <div>
-            {genes && Object.keys(genes).map(pathwayKey => {
-                const pathway = JSON.parse(pathwayKey);
-                if (pathway) {
+            {dataURL && <DownloadJsonButton apiUrl={dataURL} />}
+            {genesByPathwayTaxonOrthogroup && genesByPathwayTaxonOrthogroup.map(pathway => {
+                if (pathway.id !== "NOT_IN_MOULTING_PATHWAY") {
                     return (
                         <div key={pathway.id}>
                             <h3>Pathway <Link to={"/pathway/" + pathway.id}>{pathway.name} ({pathway.id})</Link></h3>
-                            <GeneTable genes={genes[pathwayKey]} pathway={pathway} startExpanded={startExpanded} />
+                            <GeneTable genesByTaxonOrthogroup={pathway.taxa} pathway={pathway} startExpanded={startExpanded} />
                         </div>)
                 } 
                 return (
                     <div key={"none"}>
                         <h3>Not involved in moulting pathway</h3>
-                        <GeneTable genes={genes[pathwayKey]} startExpanded={startExpanded} />
+                        <GeneTable genesByTaxonOrthogroup={pathway.taxa} startExpanded={startExpanded} />
                     </div>
                 );
             })}

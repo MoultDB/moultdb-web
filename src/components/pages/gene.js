@@ -9,11 +9,14 @@ import {
     getSpeciesLink
 } from "../../common/link-utils";
 import Genes from "../data/genes";
+import Loading from "../data/loading";
 
 
 const Gene = () => {
     const [gene, setGene] = useState(null);
-    const [orthologs, setOrthologs] = useState(null);
+    const [genesByPathwayTaxonOrthogroup, setGenesByPathwayTaxonOrthogroup] = useState(null);
+    const [genesURL, setGenesURL] = useState(null);
+    const [geneLoading, setGeneLoading] = useState()
     const [error, setError] = useState(false);
     let params = useParams()
 
@@ -50,16 +53,18 @@ const Gene = () => {
             setGene(responseData);
 
             if (responseData?.orthogroup?.id) {
+                setGenesURL(MoultdbService.getGenesByOrthogroupURL(responseData.orthogroup.id, responseData.proteinId));
                 await MoultdbService.getGenesByOrthogroup(responseData.orthogroup.id, responseData.proteinId)
                     .then(response => {
                         if (response?.data?.data) {
-                            setOrthologs(response.data.data);
+                            setGenesByPathwayTaxonOrthogroup(response.data.data);
                         }
                     })
                     .catch(error => {
                         console.error('An error has occurred during orthologous genes upload :', error);
                         setError('An error has occurred during orthologous genes upload.');
-                        setOrthologs(null);
+                        setGenesURL(null);
+                        setGenesByPathwayTaxonOrthogroup(null);
                     });
             }
         }
@@ -147,10 +152,15 @@ const Gene = () => {
                                 </table>
                             </>}
 
-                        {orthologs &&
+                        {genesByPathwayTaxonOrthogroup &&
                             <>
                                 <h2>Ortholog(s)</h2>
-                                <Genes genes={orthologs} startExpanded={true} />
+                                { geneLoading ?
+                                    <Loading />
+                                    :
+                                    <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup}
+                                           startExpanded={true} dataURL={genesURL}/>
+                                }
                             </>
                         }
                     </div>
