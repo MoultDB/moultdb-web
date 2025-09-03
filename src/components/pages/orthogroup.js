@@ -7,6 +7,7 @@ import Loading from "../data/loading";
 
 const Orthogroup = () => {
     const [orthogroup, setOrthogroup] = useState(null);
+    const [orthogroupLoading, setOrthogroupLoading] = useState(true);
     const [geneLoading, setGeneLoading] = useState(true);
     const [genesByPathwayTaxonOrthogroup, setGenesByPathwayTaxonOrthogroup] = useState(null);
     const [genesURL, setGenesURL] = useState()
@@ -16,9 +17,11 @@ const Orthogroup = () => {
     useEffect(() => {
         const fetchData = async () => {
             setError(null);
+            setOrthogroupLoading(true);
             const response = await MoultdbService.getOrthogroup(params.orthogroupId);
             const responseData = response?.data?.data;
             setOrthogroup(responseData);
+            setOrthogroupLoading(false);
 
             if (responseData) {
                 setGeneLoading(true);
@@ -53,23 +56,22 @@ const Orthogroup = () => {
 
             <div className="row">
                 <div className="col-md-12">
-                    {!orthogroup && <div className={"container alert alert-danger"} role="alert">Unknown orthogroup</div>}
-                    {orthogroup &&
+                    {orthogroup ?
                         <>
-                            <h2>Genes included in this orthogroup 
-                                {genesURL && 
-                                    <span className={"subtitle"}> 
-                                        &nbsp;(
-                                        <a href={genesURL} rel="noopener noreferrer" target="_blank">see API result</a>
-                                        )
-                                    </span>
-                                }
-                            </h2>
+                            <h2>Genes included in this orthogroup</h2>
                             {genesByPathwayTaxonOrthogroup && Object.keys(genesByPathwayTaxonOrthogroup).length > 0 ?
                                 <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup}
                                        startExpanded={true} dataURL={genesURL}/>
                                 :
                                 <>{geneLoading ? <Loading/> : <div>Unknown genes</div>}</>
+                            }
+                        </>
+                        :
+                        <>
+                            {orthogroupLoading ?
+                                <Loading/> 
+                                :
+                                <div className={"container alert alert-danger"} role="alert">Unknown orthogroup</div>
                             }
                         </>
                     }
