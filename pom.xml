@@ -95,7 +95,7 @@
                         <artifactId>exec-maven-plugin</artifactId>
                         <configuration>
                             <environmentVariables>
-                                <PUBLIC_URL>https://moultdb.org</PUBLIC_URL>
+                                <PUBLIC_URL>https://www.moultdb.org</PUBLIC_URL>
                             </environmentVariables>
                         </configuration>
                     </plugin>
