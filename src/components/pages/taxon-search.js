@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import ChangePageTitle from "../../common/change-page-title";
 import MoultdbService from "../../services/moultdb.service";
 import Loading from "../data/loading";
-import {getSpeciesUrlFromAccession} from "../../common/link-utils";
+import {getTaxonUrlFromAccession} from "../../common/link-utils";
 import {useCombobox} from 'downshift';
 import './taxon-search.css'
 
@@ -134,7 +134,7 @@ const examples = ['Fuxianhuia protensa', 'Manduca sexta', "Arthropoda"];
                                     {searchResults.map((element, index) => (
                                         <tr key={index}>
                                             <td><Link
-                                                to={getSpeciesUrlFromAccession(element.accession)}>{element.scientificName}</Link>
+                                                to={getTaxonUrlFromAccession(element.accession)}>{element.scientificName}</Link>
                                             </td>
                                             <td className={"synonyms"}>{element.synonyms}</td>
                                             <td>

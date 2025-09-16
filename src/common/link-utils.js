@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 
-export const getSpeciesUrlFromAccession = (accession) => {
+export const getTaxonUrlFromAccession = (accession) => {
     if (accession) {
         return "/taxon/" + accession;
     }
@@ -8,13 +8,13 @@ export const getSpeciesUrlFromAccession = (accession) => {
     return "/";
 }
 
-export const getSpeciesUrl = (taxon) => {
-    return getSpeciesUrlFromAccession(taxon.accession);
+export const getTaxonUrl = (taxon) => {
+    return getTaxonUrlFromAccession(taxon.accession);
 }
 
-export const getSpeciesLink = (taxon) => {
+export const getTaxonLink = (taxon) => {
     if (taxon.accession)
-        return <Link to={getSpeciesUrl(taxon)}>{taxon.scientificName}</Link>;
+        return <Link to={getTaxonUrl(taxon)}>{taxon.scientificName}</Link>;
     // This should never happen, but it prevents errors
     return taxon.scientificName;
 }

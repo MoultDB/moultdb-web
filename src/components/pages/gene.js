@@ -6,7 +6,7 @@ import {
     getNCBIGeneLink,
     getNCBIProteinLink,
     getNCBITranscriptLink,
-    getSpeciesLink
+    getTaxonLink
 } from "../../common/link-utils";
 import Genes from "../data/genes";
 import Loading from "../data/loading";
@@ -108,7 +108,7 @@ const Gene = () => {
                         </div>
                         <div className="key-value-pair">
                             <span className="key">Species</span>
-                            <span className="value">{getSpeciesLink(gene.taxon)}</span>
+                            <span className="value">{getTaxonLink(gene.taxon)}</span>
                         </div>
 
                         <h2>Moulting information</h2>

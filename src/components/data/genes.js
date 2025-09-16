@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { getSpeciesUrl } from "../../common/link-utils";
+import { getTaxonUrl } from "../../common/link-utils";
 import { DownloadJsonButton } from "./download-json-button";
 
 const GenesCell = ({ genes, isExpanded }) => {
@@ -49,7 +49,7 @@ const GenesRow = ({ taxon, allOrthogroups, genesByOrthogroup, pathway, startExpa
                 </button>
             </th>
             <td>
-                <a href={getSpeciesUrl(taxon)}>{taxon.scientificName}</a>
+                <a href={getTaxonUrl(taxon)}>{taxon.scientificName}</a>
             </td>
             
             {allOrthogroups?.length > 0 ?

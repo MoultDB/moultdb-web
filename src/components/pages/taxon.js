@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
-import './species.css';
-import {getSpeciesUrl} from "../../common/link-utils";
+import './taxon.css';
+import {getTaxonUrl} from "../../common/link-utils";
 import ChangePageTitle from "../../common/change-page-title";
 import PhenotypicData from "../data/phenotypic-data";
 import MoultdbService from "../../services/moultdb.service";
@@ -102,7 +102,7 @@ function displaySynonyms(taxon) {
     return null;
 }
 
-const Species = () => {
+const Taxon = () => {
     const [taxon, setTaxon] = useState(null);
     const [lineage, setLineage] = useState(null);
     const [genesByPathwayTaxonOrthogroup, setGenesByPathwayTaxonOrthogroup] = useState(null);
@@ -169,7 +169,7 @@ const Species = () => {
     }, [params.datasource, params.accession]);
 
     return (
-        <main id={"species-page"} className={"container"}>
+        <main id={"taxon-page"} className={"container"}>
             <ChangePageTitle pageTitle={`Taxon: ${taxon ? taxon.scientificName : params.datasource + ":" + params.accession}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
@@ -197,7 +197,7 @@ const Species = () => {
                                     <ol className="lineage">
                                         {lineage.map((element, index) => (
                                             <li key={index}>
-                                                <a href={getSpeciesUrl(element)}>{element.scientificName}</a>
+                                                <a href={getTaxonUrl(element)}>{element.scientificName}</a>
                                                 {index < lineage.length - 1 && <span className="lineage-separator"/>}
                                             </li>))}
                                     </ol>
@@ -227,4 +227,4 @@ const Species = () => {
     );
 };
 
-export default Species;
+export default Taxon;
