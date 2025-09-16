@@ -175,7 +175,7 @@ const Species = () => {
                 <div className="col-8 offset-2 text-center">
                     <h1>Taxon: {taxon ? taxon.scientificName : params.datasource + ":" + params.accession}</h1>
                 </div>
-                <div className="col-2 pt-2 text-end"><Link to="/species/search">New taxon search</Link></div>
+                <div className="col-2 pt-2 text-end"><Link to="/search/taxa">New taxon search</Link></div>
             </div>
 
             { error && <div className={"container alert alert-danger"} role="alert">{error}</div> }

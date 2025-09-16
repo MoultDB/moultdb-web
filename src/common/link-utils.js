@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 
 export const getSpeciesUrlFromAccession = (accession) => {
     if (accession) {
-        return "/species/" + accession;
+        return "/taxon/" + accession;
     }
     // This should never happen, but it prevents errors
     return "/";
