@@ -89,16 +89,10 @@ function displaySynonyms(taxon) {
         return (
             <div className="key-value-pair">
                 <span className="key">Synonym(s)</span>
-                <span className="value">
-                    <ul className="xref">
-                        {jsxElements}
-                    </ul>
-                </span>
+                <span className="value">{jsxElements}</span>
             </div>
         );
     }
-
-    // Retourner null ou un autre élément React vide si nécessaire
     return null;
 }
 
