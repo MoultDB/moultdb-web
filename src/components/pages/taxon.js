@@ -58,7 +58,7 @@ function displayXref(taxon, iNatCount, iNatXref) {
                             <strong>moulting.org</strong>
                             <ul className="xref">
                                 <li>
-                                    <a href={"https://www.moulting.org/species/" + iNatXref.accession} 
+                                    <a href={process.env.REACT_APP_MOULTING_URL + "/taxon/" + iNatXref.accession} 
                                        rel="noopener noreferrer" target="_blank">
                                         {iNatXref.name} ({iNatXref.accession})
                                     </a>
