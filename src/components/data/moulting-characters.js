@@ -6,7 +6,7 @@ import "datatables.net-responsive-dt/css/responsive.dataTables.css"
 import "datatables.net-searchbuilder-dt/css/searchBuilder.dataTables.css"
 import * as bootstrap from 'bootstrap';
 import './data.css'
-import { getSpeciesUrl, getUberonLink } from "../../common/link-utils";
+import { getTaxonUrl, getUberonLink } from "../../common/link-utils";
 
 const $ = require('jquery');
 $.DataTable = require( 'datatables.net-dt' );
@@ -35,7 +35,7 @@ const columns = [
                 if (full.authorSpeciesName !== data.scientificName && full.authorSpeciesName !== null) {
                     name = name + " (" + full.authorSpeciesName + ")";
                 }
-                return '<a href=' + getSpeciesUrl(data) + '>' + name + '</a>';
+                return '<a href=' + getTaxonUrl(data) + '>' + name + '</a>';
             }
             return '';
         }

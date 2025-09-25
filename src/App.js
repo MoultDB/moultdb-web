@@ -7,7 +7,7 @@ import PrivacyNotice from "./components/privacy-notice/privacy-notice";
 import Notfound from "./components/notfound";
 import CookieConsent from "react-cookie-consent";
 import Footer from "./components/navs/footer";
-import Species from "./components/pages/species";
+import Taxon from "./components/pages/taxon";
 import Pathway from "./components/pages/pathway";
 import Gene from "./components/pages/gene";
 import Domain from "./components/pages/domain";
@@ -52,10 +52,10 @@ function CustomRoutes() {
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="about" element={<About />} />
-            {/*<Route path="species/search" element={<Maintenance />} />*/}
-            <Route path="species/search" element={<TaxonSearch />} />
-            {/*<Route path="species/:datasource/:accession" element={<Maintenance />} />*/}
-            <Route path="species/:datasource/:accession" element={<Species />} />
+            {/*<Route path="search/taxa" element={<Maintenance />} />*/}
+            <Route path="search/taxa" element={<TaxonSearch />} />
+            {/*<Route path="taxon/:datasource/:accession" element={<Maintenance />} />*/}
+            <Route path="taxon/:datasource/:accession" element={<Taxon />} />
             {/*<Route path="pathways" element={<Maintenance />} />*/}
             <Route path="pathways" element={<PathwayOrthogroup />} />
             {/*<Route path="pathway/:pathwayId" element={<Maintenance />} />*/}

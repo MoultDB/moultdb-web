@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
-import './species.css';
-import {getSpeciesUrl} from "../../common/link-utils";
+import './taxon.css';
+import {getTaxonUrl} from "../../common/link-utils";
 import ChangePageTitle from "../../common/change-page-title";
 import PhenotypicData from "../data/phenotypic-data";
 import MoultdbService from "../../services/moultdb.service";
@@ -58,7 +58,7 @@ function displayXref(taxon, iNatCount, iNatXref) {
                             <strong>moulting.org</strong>
                             <ul className="xref">
                                 <li>
-                                    <a href={"https://www.moulting.org/species/" + iNatXref.accession} 
+                                    <a href={process.env.REACT_APP_MOULTING_URL + "/taxon/" + iNatXref.accession} 
                                        rel="noopener noreferrer" target="_blank">
                                         {iNatXref.name} ({iNatXref.accession})
                                     </a>
@@ -89,20 +89,14 @@ function displaySynonyms(taxon) {
         return (
             <div className="key-value-pair">
                 <span className="key">Synonym(s)</span>
-                <span className="value">
-                    <ul className="xref">
-                        {jsxElements}
-                    </ul>
-                </span>
+                <span className="value">{jsxElements}</span>
             </div>
         );
     }
-
-    // Retourner null ou un autre élément React vide si nécessaire
     return null;
 }
 
-const Species = () => {
+const Taxon = () => {
     const [taxon, setTaxon] = useState(null);
     const [lineage, setLineage] = useState(null);
     const [genesByPathwayTaxonOrthogroup, setGenesByPathwayTaxonOrthogroup] = useState(null);
@@ -169,13 +163,13 @@ const Species = () => {
     }, [params.datasource, params.accession]);
 
     return (
-        <main id={"species-page"} className={"container"}>
+        <main id={"taxon-page"} className={"container"}>
             <ChangePageTitle pageTitle={`Taxon: ${taxon ? taxon.scientificName : params.datasource + ":" + params.accession}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
                     <h1>Taxon: {taxon ? taxon.scientificName : params.datasource + ":" + params.accession}</h1>
                 </div>
-                <div className="col-2 pt-2 text-end"><Link to="/species/search">New taxon search</Link></div>
+                <div className="col-2 pt-2 text-end"><Link to="/search/taxa">New taxon search</Link></div>
             </div>
 
             { error && <div className={"container alert alert-danger"} role="alert">{error}</div> }
@@ -197,7 +191,7 @@ const Species = () => {
                                     <ol className="lineage">
                                         {lineage.map((element, index) => (
                                             <li key={index}>
-                                                <a href={getSpeciesUrl(element)}>{element.scientificName}</a>
+                                                <a href={getTaxonUrl(element)}>{element.scientificName}</a>
                                                 {index < lineage.length - 1 && <span className="lineage-separator"/>}
                                             </li>))}
                                     </ol>
@@ -227,4 +221,4 @@ const Species = () => {
     );
 };
 
-export default Species;
+export default Taxon;
