@@ -15,7 +15,7 @@ class TaxonAnnotationService {
     }
     
     getTaxAnnotationsByTaxonPath(taxonPath) {
-        return axios.get("/taxon-annotations/species?taxonPath=" + taxonPath);
+        return axios.get("/taxon-annotations/taxa?taxonPath=" + taxonPath);
     }
     
     getReleaseInfo() {
