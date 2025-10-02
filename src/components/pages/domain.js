@@ -8,7 +8,8 @@ import Loading from "../data/loading";
 
 const Domain = () => {
     const [domain, setDomain] = useState(null);
-    const [genes, setGenes] = useState(null);
+    const [genesByPathwayTaxonOrthogroup, setGenesByPathwayTaxonOrthogroup] = useState(null);
+    const [genesByDomainURL, setGenesByDomainURL] = useState(null);
     const [geneLoading, setGeneLoading] = useState(true);
     const [error, setError] = useState(false);
     let params = useParams()
@@ -22,24 +23,26 @@ const Domain = () => {
 
             if (responseData) {
                 setGeneLoading(true);
+                setGenesByDomainURL(MoultdbService.getGenesByDomainURL(params.domainId));
                 await MoultdbService.getGenesByDomain(params.domainId)
                     .then(response => {
                         if (response?.data?.data) {
-                            setGenes(response.data.data);
+                            setGenesByPathwayTaxonOrthogroup(response.data.data);
                         }
                         setGeneLoading(false);
                     })
                     .catch(error => {
                         console.error('An error has occurred during domain genes upload :', error);
                         setError('An error has occurred during domain genes upload.');
-                        setGenes(null);
+                        setGenesByPathwayTaxonOrthogroup(null);
+                        setGenesByDomainURL(null);
                         setGeneLoading(false);
                     });
             }
         }
         fetchData();
     }, [params.domainId]);
-
+    
     return (
         <main className={"container "}>
             <ChangePageTitle pageTitle={`Domain: ${domain ? domain.description : params.domainId}`} />
@@ -64,10 +67,17 @@ const Domain = () => {
                         </div>
 
                         <h2>Gene(s) matching this domain</h2>
-                        { geneLoading ? <Loading /> : <Genes genes={genes} startExpanded={true} /> }
+                        { geneLoading ?
+                            <Loading />
+                            : 
+                            <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup}
+                                   startExpanded={true} dataURL={genesByDomainURL}/>
+                        }
                     </div>
                 </div>
-                : <div>Unknown domain</div>}
+                :
+                <div>Unknown domain</div>
+            }
         </main>
     );
 };

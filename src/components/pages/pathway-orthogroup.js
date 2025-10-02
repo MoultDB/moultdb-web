@@ -40,7 +40,6 @@ const PathwayOrthogroup = () => {
             </div>
 
             { error && <div className={"container alert alert-danger"} role="alert">{error}</div> }
-            { pathwaysLoading && <Loading /> }
             { pathways && pathways.length > 0 ?
                 <div className="row">
                     <div className="col-md-12">
@@ -65,7 +64,9 @@ const PathwayOrthogroup = () => {
                         </ul>
                     </div>
                 </div>
-                : <div>No pathway</div> }
+                :
+                pathwaysLoading ? <Loading /> : <div>No pathway</div>
+            }
         </main>
     );
 };

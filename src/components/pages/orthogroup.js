@@ -8,29 +8,35 @@ import Loading from "../data/loading";
 const Orthogroup = () => {
     const [orthogroup, setOrthogroup] = useState(null);
     const [orthogroupLoading, setOrthogroupLoading] = useState(true);
-    const [genes, setGenes] = useState(null);
+    const [geneLoading, setGeneLoading] = useState(true);
+    const [genesByPathwayTaxonOrthogroup, setGenesByPathwayTaxonOrthogroup] = useState(null);
+    const [genesURL, setGenesURL] = useState()
     const [error, setError] = useState(false);
     let params = useParams()
 
     useEffect(() => {
         const fetchData = async () => {
             setError(null);
+            setOrthogroupLoading(true);
             const response = await MoultdbService.getOrthogroup(params.orthogroupId);
             const responseData = response?.data?.data;
             setOrthogroup(responseData);
+            setOrthogroupLoading(false);
 
             if (responseData) {
-                setOrthogroupLoading(true);
+                setGeneLoading(true);
+                setGenesURL(MoultdbService.getGenesByOrthogroupURL(params.orthogroupId));
                 await MoultdbService.getGenesByOrthogroup(params.orthogroupId)
                     .then(response => {
-                        setGenes(response?.data?.data);
-                        setOrthogroupLoading(false);
+                        setGenesByPathwayTaxonOrthogroup(response?.data?.data);
+                        setGeneLoading(false);
                     })
                     .catch(error => {
                         console.error('An error has occurred during orthogroup genes upload :', error);
                         setError('An error has occurred during orthogroup genes upload.');
-                        setGenes(null);
-                        setOrthogroupLoading(false);
+                        setGenesByPathwayTaxonOrthogroup(null);
+                        setGenesURL(null);
+                        setGeneLoading(false);
                     });
             }
         }
@@ -50,14 +56,22 @@ const Orthogroup = () => {
 
             <div className="row">
                 <div className="col-md-12">
-                    {!orthogroup && <div className={"container alert alert-danger"} role="alert">Unknown orthogroup</div>}
-                    {orthogroup &&
+                    {orthogroup ?
                         <>
                             <h2>Genes included in this orthogroup</h2>
-                            {genes && Object.keys(genes).length > 0 ?
-                                <Genes genes={genes} startExpanded={true}/>
+                            {genesByPathwayTaxonOrthogroup && Object.keys(genesByPathwayTaxonOrthogroup).length > 0 ?
+                                <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup}
+                                       startExpanded={true} dataURL={genesURL}/>
                                 :
-                                <>{orthogroupLoading ? <Loading/> : <div>Unknown genes</div>} </>
+                                <>{geneLoading ? <Loading/> : <div>Unknown genes</div>}</>
+                            }
+                        </>
+                        :
+                        <>
+                            {orthogroupLoading ?
+                                <Loading/> 
+                                :
+                                <div className={"container alert alert-danger"} role="alert">Unknown orthogroup</div>
                             }
                         </>
                     }

@@ -34,7 +34,7 @@ function Hero() {
                         <p className="mbr-fonts-style mbr-text mbr-white mb-4 display-7">An integrated view
                             of arthropod moulting, combining morphological, genomic, and fossil data.</p>
                         <div className="mbr-section-btn">
-                            <Link to={"/species/search"} className="btn btn-white-outline display-7">Search</Link>
+                            <Link to={"/search/taxa"} className="btn btn-white-outline display-7">Search</Link>
                         </div>
                     </div>
                 </div>

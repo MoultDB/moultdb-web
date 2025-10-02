@@ -1,56 +1,52 @@
-#species-page span.subtitle {
-    color: var(--lightest-grey-color);
-    font-size: 0.8em;
-}
 
-#species-page ol,
-#species-page ul {
+#taxon-page ol,
+#taxon-page ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-#species-page ul.xref {
+#taxon-page ul.xref {
     margin-left: 1rem !important;
 }
 
-#species-page ul.xref li {
+#taxon-page ul.xref li {
     display: inline-block;
     margin-right: 5px !important;
 }
 
-#species-page ul.xref > li {
+#taxon-page ul.xref > li {
     display: inline-block;
     margin-right: 5px;
 }
 
-#species-page ul.xrefs > li:not(:last-child) {
+#taxon-page ul.xrefs > li:not(:last-child) {
     margin-bottom: 5px;
 }
 
-#species-page ul.synonyms li {
+#taxon-page ul.synonyms li {
     display: inline-block;
     margin-right: 5px;
 }
 
-#species-page ol.lineage li {
+#taxon-page ol.lineage li {
     display: inline-block;
     margin-right: 5px;
 }
 
-#species-page .lineage-separator::after {
+#taxon-page .lineage-separator::after {
     content: " > ";
 }
 
-#species-page .synonyms-separator::after {
+#taxon-page .synonyms-separator::after {
     content: " ; ";
 }
 
-#species-page .dt-scroll-body {
+#taxon-page .dt-scroll-body {
     transform: rotateX(180deg);
     overflow-x: auto;
 }
 
-#species-page .dt-scroll-body table {
+#taxon-page .dt-scroll-body table {
     transform:rotateX(180deg);
 }

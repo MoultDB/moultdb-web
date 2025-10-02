@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getNCBIGenomeLink, getSpeciesUrl} from "../../common/link-utils";
+import {getNCBIGenomeLink, getTaxonUrl} from "../../common/link-utils";
 import "datatables.net-dt/css/dataTables.dataTables.min.css"
 import "datatables.net-buttons-dt/css/buttons.dataTables.min.css"
 import "datatables.net-searchbuilder-dt/css/searchBuilder.dataTables.css"
@@ -18,7 +18,7 @@ const columns = [
     { title: 'Species', data: 'taxon',
         render: function ( data ) {
             if (data) {
-                return '<a href=' + getSpeciesUrl(data) + '>' + data.scientificName + '</a>'
+                return '<a href=' + getTaxonUrl(data) + '>' + data.scientificName + '</a>'
             }
             return '';
         }
@@ -47,8 +47,13 @@ const columns = [
 
 class GenomeData extends Component {
 
+    constructor(props) {
+        super(props);
+        this.gdataRef = React.createRef();
+    }
+
     componentDidMount() {
-        $(this.refs.gdata).DataTable({
+        $(this.gdataRef.current).DataTable({
             order: [[0, 'asc']],
             scrollX: true,
             dom:"<'row'<'col'Q>>" +
@@ -94,7 +99,7 @@ class GenomeData extends Component {
 
     render() {
         return (<div>
-                <table id="genome-result" ref="gdata"
+                <table id="genome-result" ref={this.gdataRef}
                        className={'table table-sm table-striped table-bordered table-hover'}>
                 </table>
             </div>
