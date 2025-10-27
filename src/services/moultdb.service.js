@@ -14,8 +14,16 @@ class TaxonAnnotationService {
         return axios.get("/taxa/" + taxonPath + "/lineage");
     }
 
-    getTaxonDirectChildren(taxonPath) {
-        return axios.get("/taxa/" + taxonPath + "/direct-children");
+    async getTaxonStats(datasource, accession) {
+        const response = await this.getTaxonByDbXref(datasource, accession);
+        const taxonPath = response?.data?.data?.path;
+        if (taxonPath) {
+            return axios.get("/taxa/" + taxonPath + "/stats");
+        }
+    }
+    
+    getTaxonDirectChildrenStats(taxonPath) {
+        return axios.get("/taxa/" + taxonPath + "/direct-children-stats");
     }
     
     getTaxAnnotationsByTaxonPath(taxonPath) {

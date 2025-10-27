@@ -1,81 +1,127 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Tree } from "react-arborist";
+import { Link, useParams } from "react-router-dom";
+import MoultdbService from "../../services/moultdb.service";
+import { getTaxonUrlFromAccession } from "../../common/link-utils";
 import "./taxonomy.css";
+import Loading from "../data/loading";
 import ChangePageTitle from "../../common/change-page-title";
 
-// Function to simulate the API call (replace with a real API call)
-const fetchChildren = (nodeId) => {
-    // Example: call to an API, here we simulate a response
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const data = {
-                "beverages": [
-                    { id: "water", label: "Water" },
-                    { id: "coffee", label: "Coffee" },
-                    { id: "tea", label: "Tea" },
-                ],
-                "tea": [
-                    { id: "black_tea", label: "Black Tea" },
-                    { id: "white_tea", label: "White Tea" },
-                    { id: "green_tea", label: "Green Tea" },
-                ],
-                "green_tea": [
-                    { id: "sencha", label: "Sencha" },
-                    { id: "gyokuro", label: "Gyokuro" },
-                    { id: "matcha", label: "Matcha" },
-                    { id: "pi_lo_chun", label: "Pi Lo Chun" },
-                ]
-            };
-            resolve(data[nodeId] || []);
-        }, 500); // Simulated response time
-    });
-};
+function Node({ node, style }) {
 
-const TreeNode = ({ nodeId, label }) => {
-    const [expanded, setExpanded] = useState(false);
-    const [children, setChildren] = useState([]);
+    const icon = node.isLoading ? "⏳" : node.data.isBranch ? (node.isOpen ? "📂" : "📁") : "🍃";
 
-    const toggle = async () => {
-        if (!expanded && children.length === 0) {
-            // If the node is not yet extended, the children are retrieved via the API
-            const fetchedChildren = await fetchChildren(nodeId);
-            setChildren(fetchedChildren);
-        }
-        setExpanded(!expanded);
+    // Stop propagation to prevent node toggle when link is clicked
+    const handleLinkClick = (e) => {
+        e.stopPropagation();
     };
 
     return (
-        <li>
-            <span className={`caret ${expanded ? "caret-down" : ""}`} onClick={toggle}>
-                {label}
-            </span>
-            {children.length > 0 && (
-                <ul className={`nested ${expanded ? "active" : ""}`}>
-                    {children.map((child) => (
-                        <TreeNode key={child.id} nodeId={child.id} label={child.label} />
-                    ))}
-                </ul>
-            )}
-        </li>
+        <div className="node-container" style={style} >
+            <div className="node-content" onClick={() => node.data.isBranch && node.toggle()}>
+                {icon}
+                <span className="node-text"> {node.data.name}</span>
+                <span className="node-counts">
+                    (
+                    {node.data.isBranch &&
+                        <>{node.data.statistics.speciesCount} species, </>
+                    }
+                    {node.data.statistics.genomeCount} genome{node.data.statistics.genomeCount>1 && "s"}, {node.data.statistics.taxonAnnotationCount} moult. charac.
+                    )
+                </span>
+                <Link to={getTaxonUrlFromAccession(node.data.accession)} className="node-link" onClick={handleLinkClick}>
+                    see details
+                </Link>
+            </div>
+        </div>
     );
-};
+}
 
-const Taxonomy = () => {
+export default function Taxonomy() {
+    const [treeData, setTreeData] = useState([]);
+    const [root, setRoot] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const treeRef = useRef(null);
+    const { datasource, accession } = useParams();
+
+    useEffect(() => {
+        const fetchRoot = async () => {
+            setLoading(true);
+            try {
+                const isValidParams = datasource && accession;
+                const source = isValidParams ? datasource : "ncbi";
+                const acc = isValidParams ? accession : "2585208";
+                const response = await MoultdbService.getTaxonStats(source, acc);
+                const rootTaxon = response?.data?.data;
+
+                // Set data only if rootTaxon exists, otherwise empty array
+                setTreeData(rootTaxon ? [rootTaxon] : []);
+                setRoot(rootTaxon ? rootTaxon : null);
+            } catch (err) {
+                console.error("Error loading root:", err);
+                setTreeData([]); // Set empty on error to prevent crash
+                setRoot(null);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchRoot();
+    }, [datasource, accession]);
+
+    // Utility function: add children to a node by ID in the data tree
+    const addChildrenToNode = useCallback((treeData, nodeId, children) => {
+        return treeData.map((node) => {
+            if (node.id === nodeId) {
+                return { ...node, children, loaded: true };
+            } else if (node.children?.length) {
+                return {
+                    ...node,
+                    children: addChildrenToNode(node.children, nodeId, children),
+                };
+            }
+            return node;
+        });
+    }, []);
+    
+    const handleLoadChildren = useCallback(
+        async (nodeId) => {
+            const treeApi = treeRef.current;
+            if (!treeApi) return;
+            
+            const node = treeApi.get(nodeId);
+            
+            if (!node || !node.data.isBranch || node.data.children) return;
+            
+            try {
+                const children = await MoultdbService.getTaxonDirectChildrenStats(node.id);
+                setTreeData((prev) => addChildrenToNode(prev, node.id, children.data));
+            } catch (err) {
+                console.error("Error loading children :", err);
+            }
+        },
+        [addChildrenToNode]
+    );
+
+    if (loading) return <Loading />
+    
     return (
         <main id={"taxonomy-page"} className={"container"}>
-            <ChangePageTitle pageTitle={`Taxonomy`} />
+            <ChangePageTitle pageTitle={`Taxonomy${root?.name && `: ${root.name}`}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
-                    <h1>Taxonomy</h1>
+                    <h1>Taxonomy{root?.name && `: ${root.name}`}</h1>
                 </div>
-                <div className="col-2 pt-2 text-end"><Link to="/species/search">Taxon search</Link></div>
             </div>
 
-            <ul id="myUL">
-                <TreeNode nodeId="beverages" label="Beverages" />
-            </ul>
+            <Tree
+                ref={treeRef}
+                data={treeData}
+                openByDefault={false}
+                onToggle={handleLoadChildren}
+                width={"100%"}
+            >
+                {Node}
+            </Tree>
         </main>
     );
-};
-
-export default Taxonomy;
+}

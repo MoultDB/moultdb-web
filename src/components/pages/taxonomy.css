@@ -1,33 +1,22 @@
-ul, #myUL {
-    list-style-type: none;
-}
-
-#myUL {
-    margin: 0;
-    padding: 0;
-}
-
-.caret {
+.node-content {
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    user-select: none;
 }
 
-.caret::before {
-    content: "\25B6";
-    color: black;
-    display: inline-block;
-    margin-right: 6px;
+.node-text {
+    margin: 0 4px; /* Space between icon and text */
 }
 
-.caret-down::before {
-    transform: rotate(90deg);
-}
-
-.nested {
-    display: none;
+.node-counts {
+    color: gray;
+    font-size: 10px;
     margin-left: 10px;
+    white-space: nowrap;
 }
 
-.active {
-    display: block;
+.node-link {
+    font-size: 10px;
+    margin-left: 5px;
+    white-space: nowrap;
 }
