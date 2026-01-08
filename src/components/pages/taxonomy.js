@@ -49,11 +49,11 @@ export default function Taxonomy() {
             setLoading(true);
             try {
                 const isValidParams = datasource && accession;
-                const source = isValidParams ? datasource : "ncbi";
-                const acc = isValidParams ? accession : "2585208";
+                const source = isValidParams ? datasource : "gbif";
+                const acc = isValidParams ? accession : "54";
                 const response = await MoultdbService.getTaxonStats(source, acc);
                 const rootTaxon = response?.data?.data;
-
+                
                 // Set data only if rootTaxon exists, otherwise empty array
                 setTreeData(rootTaxon ? [rootTaxon] : []);
                 setRoot(rootTaxon ? rootTaxon : null);
