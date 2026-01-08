@@ -8,14 +8,14 @@ import Loading from "../data/loading";
 import ChangePageTitle from "../../common/change-page-title";
 
 function Node({ node, style }) {
-
+    
     const icon = node.isLoading ? "⏳" : node.data.isBranch ? (node.isOpen ? "📂" : "📁") : "🍃";
-
+    
     // Stop propagation to prevent node toggle when link is clicked
     const handleLinkClick = (e) => {
         e.stopPropagation();
     };
-
+    
     return (
         <div className="node-container" style={style} >
             <div className="node-content" onClick={() => node.data.isBranch && node.toggle()}>
@@ -43,7 +43,7 @@ export default function Taxonomy() {
     const [loading, setLoading] = useState(true);
     const treeRef = useRef(null);
     const { datasource, accession } = useParams();
-
+    
     useEffect(() => {
         const fetchRoot = async () => {
             setLoading(true);
@@ -67,7 +67,7 @@ export default function Taxonomy() {
         };
         fetchRoot();
     }, [datasource, accession]);
-
+    
     // Utility function: add children to a node by ID in the data tree
     const addChildrenToNode = useCallback((treeData, nodeId, children) => {
         return treeData.map((node) => {
@@ -91,7 +91,6 @@ export default function Taxonomy() {
             const node = treeApi.get(nodeId);
             
             if (!node || !node.data.isBranch || node.data.children) return;
-            
             try {
                 const children = await MoultdbService.getTaxonDirectChildrenStats(node.id);
                 setTreeData((prev) => addChildrenToNode(prev, node.id, children.data));
@@ -101,8 +100,6 @@ export default function Taxonomy() {
         },
         [addChildrenToNode]
     );
-
-    if (loading) return <Loading />
     
     return (
         <main id={"taxonomy-page"} className={"container"}>
@@ -113,15 +110,18 @@ export default function Taxonomy() {
                 </div>
             </div>
 
-            <Tree
-                ref={treeRef}
-                data={treeData}
-                openByDefault={false}
-                onToggle={handleLoadChildren}
-                width={"100%"}
-            >
-                {Node}
-            </Tree>
+            {loading ?
+                <Loading /> :
+                <Tree
+                    ref={treeRef}
+                    data={treeData}
+                    openByDefault={false}
+                    onToggle={handleLoadChildren}
+                    width={"100%"}
+                >
+                    {Node}
+                </Tree>
+            }
         </main>
     );
 }
