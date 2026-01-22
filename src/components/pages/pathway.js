@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ChangePageTitle from "../../common/change-page-title";
 import MoultdbService from "../../services/moultdb.service";
 import Genes from "../data/genes";
@@ -160,7 +160,11 @@ const Pathway = () => {
                     </div>
                 </div>
                 :
-                <div>Unknown pathway</div>
+                <div className="alert alert-warning" role="alert">
+                    Pathway not found.<br/>
+                    Please check the pathway accession in the URL or go to the page <Link to={"/pathways/"}>Pathways</Link> to 
+                    browse all moulting pathways.
+                </div>
             }
         </main>
     );

@@ -30,19 +30,19 @@ const Gene = () => {
             if (params.type === "id") {
                 response = await MoultdbService.getGeneByGeneId(params.id)
                     .catch(error => {
-                        setError('An error has occurred during gene upload.');
+                        setError('An error has occurred during gene upload by gene ID.');
                         setGene(null);
                     });
             } else if (params.type === "protein-id") {
                 response = await MoultdbService.getGeneByProteinId(params.id)
                     .catch(error => {
-                        setError('An error has occurred during gene upload.');
+                        setError('An error has occurred during gene upload by protein ID.');
                         setGene(null);
                     });
             } else if (params.type === "locus-tag") {
                 response = await MoultdbService.getGeneByLocusTag(params.id)
                     .catch(error => {
-                        setError('An error has occurred during gene upload.');
+                        setError('An error has occurred during gene upload by locus tag.');
                         setGene(null);
                     });
             } else {
@@ -71,10 +71,14 @@ const Gene = () => {
         fetchData();
     }, [params.type, params.id]);
 
-    const h1Text = gene ? <>: {gene.mainName} - <i>{gene.taxon.scientificName}</i></> : <>: {params.id}</>;
+
+    const hasGeneData = gene && gene.length > 0;
+    const h1Text = hasGeneData ?
+        <>: {gene.mainName} - <i>{gene.taxon.scientificName}</i></>
+        : <>: {params.id}</>;
     return (
         <main className={"container"}>
-            <ChangePageTitle pageTitle={`Gene: ${gene ? gene.mainName + " - " + gene.taxon.scientificName : params.id}`} />
+            <ChangePageTitle pageTitle={`Gene: ${hasGeneData ? gene.mainName + " - " + gene.taxon.scientificName : params.id}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
                     <h1>Gene{h1Text}</h1>
@@ -82,8 +86,14 @@ const Gene = () => {
             </div>
 
             { error && <div className={"container alert alert-danger"} role="alert">{error}</div> }
-            { !gene && !error && <div>Unknown gene</div>}
-            { gene &&
+            { !hasGeneData && !error && 
+                <div className="alert alert-warning" role="alert">
+                    Gene not found.<br/>
+                    Please check the gene accession in the URL or go to the <Link to={"/taxon/" + process.env.REACT_APP_ROOT_TAXON_ACCESSION}>
+                    Arthropoda page</Link> to browse all genes.
+                </div>
+            }
+            { hasGeneData &&
                 <div className="row">
                     <div className="col-md-12">
                         <h2>General information</h2>
