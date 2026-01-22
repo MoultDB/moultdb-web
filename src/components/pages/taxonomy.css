@@ -1,22 +1,43 @@
 .node-content {
-    display: flex;
-    align-items: center;
     cursor: pointer;
 }
 
-.node-text {
-    margin: 0 4px; /* Space between icon and text */
+.taxonomy-tree {
+    margin: 30px;
 }
 
-.node-counts {
-    color: gray;
-    font-size: 10px;
-    margin-left: 10px;
-    white-space: nowrap;
+.taxonomy-tree-header {
+    margin: 10px 0;
 }
 
-.node-link {
-    font-size: 10px;
-    margin-left: 5px;
-    white-space: nowrap;
+.taxonomy-tree-header span {
+    font-weight: bold ;
+    text-align: center;
+}
+
+[role="treeitem"]:hover {
+    background-color: #C3E2E9;
+}
+
+.ttn-cell {
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-color: var(--primary-color, #000000);
+    padding: 5px;
+}
+
+.count-col {
+    width: 130px;
+}
+
+.text-col {
+    width: 150px;
+}
+
+.ttn-cell.count-col {
+    text-align: right;
+}
+
+.ttn-cell.text-col {
+    text-align: center;
 }

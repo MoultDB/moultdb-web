@@ -3,35 +3,33 @@ import { Tree } from "react-arborist";
 import { Link, useParams } from "react-router-dom";
 import MoultdbService from "../../services/moultdb.service";
 import { getTaxonUrlFromAccession } from "../../common/link-utils";
-import "./taxonomy.css";
 import Loading from "../data/loading";
 import ChangePageTitle from "../../common/change-page-title";
+import "./taxonomy.css";
 
 function Node({ node, style }) {
     
-    const icon = node.isLoading ? "⏳" : node.data.isBranch ? (node.isOpen ? "📂" : "📁") : "🍃";
+    const icon = node.data.isBranch ?
+        (node.isOpen ? <span className="close-row"></span> : <span className="open-row"></span>)
+        : <span className="leaf-row"></span>;
     
-    // Stop propagation to prevent node toggle when link is clicked
+    // Stop propagation to prevent node toggle when the link is clicked
     const handleLinkClick = (e) => {
         e.stopPropagation();
     };
     
     return (
-        <div className="node-container" style={style} >
-            <div className="node-content" onClick={() => node.data.isBranch && node.toggle()}>
-                {icon}
-                <span className="node-text"> {node.data.name}</span>
-                <span className="node-counts">
-                    (
-                    {node.data.isBranch &&
-                        <>{node.data.statistics.speciesCount} species, </>
-                    }
-                    {node.data.statistics.genomeCount} genome{node.data.statistics.genomeCount>1 && "s"}, {node.data.statistics.taxonAnnotationCount} moult. charac.
-                    )
+        <div className="taxonomy-tree-node" style={style} onClick={() => node.data.isBranch && node.toggle()}>
+            <div className="row ttn-row">
+                <span className="ttn-cell col " >{icon} {node.data.name}</span>
+                <span className="ttn-cell col-auto count-col">{node.data.statistics.speciesCount}</span>
+                <span className="ttn-cell col-auto count-col">{node.data.statistics.genomeCount}</span>
+                <span className="ttn-cell col-auto count-col">{node.data.statistics.taxonAnnotationCount}</span>
+                <span className="ttn-cell col-auto text-col">
+                    <Link to={getTaxonUrlFromAccession(node.data.accession)} className="node-link" onClick={handleLinkClick}>
+                        see taxon page
+                    </Link>
                 </span>
-                <Link to={getTaxonUrlFromAccession(node.data.accession)} className="node-link" onClick={handleLinkClick}>
-                    see details
-                </Link>
             </div>
         </div>
     );
@@ -41,6 +39,7 @@ export default function Taxonomy() {
     const [treeData, setTreeData] = useState([]);
     const [root, setRoot] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [childrenLoading, setChildrenLoading] = useState(false);
     const treeRef = useRef(null);
     const { datasource, accession } = useParams();
     
@@ -91,11 +90,15 @@ export default function Taxonomy() {
             const node = treeApi.get(nodeId);
             
             if (!node || !node.data.isBranch || node.data.children) return;
+            
+            setChildrenLoading(true);
             try {
                 const children = await MoultdbService.getTaxonDirectChildrenStats(node.id);
                 setTreeData((prev) => addChildrenToNode(prev, node.id, children.data));
             } catch (err) {
                 console.error("Error loading children :", err);
+            } finally {
+                setChildrenLoading(false);
             }
         },
         [addChildrenToNode]
@@ -112,15 +115,36 @@ export default function Taxonomy() {
 
             {loading ?
                 <Loading /> :
-                <Tree
-                    ref={treeRef}
-                    data={treeData}
-                    openByDefault={false}
-                    onToggle={handleLoadChildren}
-                    width={"100%"}
-                >
-                    {Node}
-                </Tree>
+                <>
+                    {!root && treeData.length === 0 ?
+                            <div className="alert alert-warning" role="alert">
+                                Taxon not found.<br/>
+                                Please check the taxon accession in the URL or go to the page 
+                                <Link to="/taxonomy">Taxonomy</Link> to browse all Arthropoda taxa.
+                            </div>
+                        :
+                        <div className="taxonomy-tree">
+                            <div className="taxonomy-tree-header">
+                                <div className="row">
+                                    <span className="col">{childrenLoading && <Loading text={"Fetching children..."} />}</span>
+                                    <span className="col-auto count-col">Species</span>
+                                    <span className="col-auto count-col">Genomes</span>
+                                    <span className="col-auto count-col">Moulting characters</span>
+                                    <span className="col-auto text-col">Link to taxon details</span>
+                                </div>
+                            </div>
+                            <Tree
+                                ref={treeRef}
+                                data={treeData}
+                                openByDefault={false}
+                                onToggle={handleLoadChildren}
+                                width={"100%"}
+                            >
+                                {Node}
+                            </Tree>
+                        </div>
+                    }
+                </>
             }
         </main>
     );
