@@ -44,7 +44,9 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
               <li className="nav-item">
-                <Link to={"/taxon/gbif/54"} className="nav-link link text-black display-4">Arthropoda data</Link>
+                <Link to={"/taxon/" + process.env.REACT_APP_ROOT_TAXON_ACCESSION} className="nav-link link text-black display-4">
+                    Arthropoda data
+                </Link>
               </li>
               <li className="nav-item">
                 <Link to={"/pathways"} className="nav-link link text-black display-4">Pathways</Link>

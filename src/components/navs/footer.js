@@ -12,7 +12,9 @@ function Footer() {
                     <div className="row-links">
                         <ul className="header-menu">
                             <li className="header-menu-item mbr-fonts-style display-5">
-                                <Link to="/taxon/gbif/54" className="text-white">Arthropoda data</Link>
+                                <Link to={"/taxon/" + process.env.REACT_APP_ROOT_TAXON_ACCESSION} className="text-white">
+                                    Arthropoda data
+                                </Link>
                             </li>
                             <li className="header-menu-item mbr-fonts-style display-5">
                                 <Link to={"/pathways"} className="text-white">Pathways</Link>
