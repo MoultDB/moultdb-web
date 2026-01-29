@@ -13,6 +13,10 @@ class TaxonAnnotationService {
     getTaxonLineage(taxonPath) {
         return axios.get("/taxa/" + taxonPath + "/lineage");
     }
+    
+    getTaxonStatistics(taxonPath) {
+        return axios.get("/taxa/" + taxonPath + "/stats");
+    }
 
     async getTaxonStats(datasource, accession) {
         const response = await this.getTaxonByDbXref(datasource, accession);

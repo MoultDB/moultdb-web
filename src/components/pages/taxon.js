@@ -99,6 +99,7 @@ function displaySynonyms(taxon) {
 const Taxon = () => {
     const [taxon, setTaxon] = useState(null);
     const [lineage, setLineage] = useState(null);
+    const [statistics, setStatistics] = useState(null);
     const [genesByPathwayTaxonOrthogroup, setGenesByPathwayTaxonOrthogroup] = useState(null);
     const [genesURL, setGenesURL] = useState()
     const [iNatCount, setINatCount] = useState(0);
@@ -130,6 +131,18 @@ const Taxon = () => {
                             setINatCount(0);
                         });
                 }
+                await MoultdbService.getTaxonStatistics(responseData.path)
+                    .then(response => {
+                        if (response?.data?.data?.statistics) {
+                            setStatistics(response?.data.data.statistics);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('An error has occurred during taxon lineage upload :', error);
+                        setError('An error has occurred during taxon statistics upload.');
+                        setStatistics(null);
+                    });
+
                 await MoultdbService.getTaxonLineage(responseData.path)
                     .then(response => {
                         if (response?.data?.data?.length > 0) {
@@ -141,6 +154,7 @@ const Taxon = () => {
                         setError('An error has occurred during taxon lineage upload.');
                         setLineage(null);
                     });
+
                 setGeneLoading(true);
                 setGenesURL(MoultdbService.getMoultingGenesByTaxonPathURL(responseData.path));
                 await MoultdbService.getMoultingGenesByTaxonPath(responseData.path)
@@ -183,7 +197,14 @@ const Taxon = () => {
                         </div>
                         {displayXref(taxon, iNatCount, iNatXref)}
                         {displaySynonyms(taxon)}
-                        
+                        {statistics &&
+                            <div className="key-value-pair">
+                                <span className="key">Species count</span>
+                                <span className="value">{statistics.speciesCount} species (
+                                    <Link to={"/browse/taxa/" + taxon.accession}>browse</Link>)
+                                </span>
+                            </div>
+                        }
                         {lineage &&
                             <div className="key-value-pair">
                                 <span className="key">Lineage</span>
