@@ -106,10 +106,10 @@ export default function Taxonomy() {
     
     return (
         <main id={"taxonomy-page"} className={"container"}>
-            <ChangePageTitle pageTitle={`Taxonomy${root?.name && `: ${root.name}`}`} />
+            <ChangePageTitle pageTitle={`Browse taxonomy${root?.name && `: ${root.name}`}`} />
             <div className="row">
                 <div className="col-8 offset-2 text-center">
-                    <h1>Taxonomy{root?.name && `: ${root.name}`}</h1>
+                    <h1>Browse taxonomy{root?.name && `: ${root.name}`}</h1>
                 </div>
             </div>
 
@@ -120,7 +120,7 @@ export default function Taxonomy() {
                             <div className="alert alert-warning" role="alert">
                                 Taxon not found.<br/>
                                 Please check the taxon accession in the URL or go to the page 
-                                <Link to="/taxonomy">Taxonomy</Link> to browse all Arthropoda taxa.
+                                <Link to="/taxonomy">Browse</Link> to discover all Arthropoda taxa.
                             </div>
                         :
                         <div className="taxonomy-tree">

@@ -58,8 +58,8 @@ function CustomRoutes() {
             {/*<Route path="taxon/:datasource/:accession" element={<Maintenance />} />*/}
             <Route path="taxon/:datasource/:accession" element={<Taxon />} />
             {/*<Route path="pathways" element={<Maintenance />} />*/}
-            <Route path="taxonomy" element={<Taxonomy />} />
-            <Route path="taxonomy/:datasource/:accession" element={<Taxonomy />} />
+            <Route path="browse/taxa" element={<Taxonomy />} />
+            <Route path="browse/taxa/:datasource/:accession" element={<Taxonomy />} />
             <Route path="pathways" element={<PathwayOrthogroup />} />
             {/*<Route path="pathway/:pathwayId" element={<Maintenance />} />*/}
             <Route path="pathway/:pathwayId" element={<Pathway />} />

@@ -217,8 +217,8 @@ const Taxon = () => {
                 :
                 <div className="alert alert-warning" role="alert">
                     Taxon not found.<br/>
-                    Please check the taxon accession in the URL or go to the page <Link to={"/taxonomy"}>
-                    Taxonomy</Link> to browse all Arthropoda taxa.
+                    Please check the taxon accession in the URL or go to the page <Link to={"/browse/taxa"}>
+                    Browse</Link> to discover all Arthropoda taxa.
                 </div>
 
             }

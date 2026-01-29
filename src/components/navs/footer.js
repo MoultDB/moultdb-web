@@ -12,15 +12,13 @@ function Footer() {
                     <div className="row-links">
                         <ul className="header-menu">
                             <li className="header-menu-item mbr-fonts-style display-5">
-                                <Link to={"/taxon/" + process.env.REACT_APP_ROOT_TAXON_ACCESSION} className="text-white">
-                                    Arthropoda data
-                                </Link>
-                            </li>
-                            <li className="header-menu-item mbr-fonts-style display-5">
-                                <Link to={"/pathways"} className="text-white">Pathways</Link>
+                                <Link to={"/browse/taxa"} className="text-white">Browse</Link>
                             </li>
                             <li className="header-menu-item mbr-fonts-style display-5">
                                 <Link to="/search/taxa" className="text-white">Search</Link>
+                            </li>
+                            <li className="header-menu-item mbr-fonts-style display-5">
+                                <Link to={"/pathways"} className="text-white">Pathways</Link>
                             </li>
                             <li className="header-menu-item mbr-fonts-style display-5">
                                 <a className="text-white" href="https://www.moulting.org" aria-expanded="false">

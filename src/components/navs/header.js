@@ -44,15 +44,13 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav nav-dropdown" data-app-modern-menu="true">
               <li className="nav-item">
-                <Link to={"/taxon/" + process.env.REACT_APP_ROOT_TAXON_ACCESSION} className="nav-link link text-black display-4">
-                    Arthropoda data
-                </Link>
+                <Link to={"/browse/taxa"} className="nav-link link text-black display-4">Browse</Link>
               </li>
+                <li className="nav-item">
+                    <Link to={"/search/taxa"} className="nav-link link text-black display-4">Search</Link>
+                </li>
               <li className="nav-item">
                 <Link to={"/pathways"} className="nav-link link text-black display-4">Pathways</Link>
-              </li>
-              <li className="nav-item">
-                <Link to={"/search/taxa"} className="nav-link link text-black display-4">Search</Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link link text-black display-4" href="https://www.moulting.org" aria-expanded="false">Citizen
