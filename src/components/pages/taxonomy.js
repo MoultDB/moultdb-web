@@ -21,13 +21,13 @@ function Node({ node, style }) {
     return (
         <div className="taxonomy-tree-node" style={style} onClick={() => node.data.isBranch && node.toggle()}>
             <div className="row ttn-row">
-                <span className="ttn-cell col " >{icon} {node.data.name}</span>
-                <span className="ttn-cell col-auto count-col">{node.data.statistics.speciesCount}</span>
-                <span className="ttn-cell col-auto count-col">{node.data.statistics.genomeCount}</span>
-                <span className="ttn-cell col-auto count-col">{node.data.statistics.taxonAnnotationCount}</span>
+                <span className="ttn-cell col" >{icon} {node.data.name} {node.data.isSpecies && <span className={"species-tag"} data-tooltip="Species"/>}</span>
+                <span className="ttn-cell col-auto count-col lg-col">{node.data.statistics.speciesCount}</span>
+                <span className="ttn-cell col-auto count-col sm-col">{node.data.statistics.genomeCount}</span>
+                <span className="ttn-cell col-auto count-col sm-col">{node.data.statistics.taxonAnnotationCount}</span>
                 <span className="ttn-cell col-auto text-col">
                     <Link to={getTaxonUrlFromAccession(node.data.accession)} className="node-link" onClick={handleLinkClick}>
-                        see taxon page
+                        see data
                     </Link>
                 </span>
             </div>
@@ -127,9 +127,9 @@ export default function Taxonomy() {
                             <div className="taxonomy-tree-header">
                                 <div className="row">
                                     <span className="col">{childrenLoading && <Loading text={"Fetching children..."} />}</span>
-                                    <span className="col-auto count-col">Species</span>
-                                    <span className="col-auto count-col">Genomes</span>
-                                    <span className="col-auto count-col">Moulting characters</span>
+                                    <span className="col-auto count-col lg-col">Species</span>
+                                    <span className="col-auto count-col sm-col">Genomes</span>
+                                    <span className="col-auto count-col sm-col">Moulting characters</span>
                                     <span className="col-auto text-col">Link to taxon details</span>
                                 </div>
                             </div>
