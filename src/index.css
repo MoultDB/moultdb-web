@@ -911,6 +911,15 @@ a[target*="_blank"]::after {
   transform: rotate(90deg);
 }
 
+.leaf-row::after {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 1px;
+    background-color: currentColor;
+    vertical-align: middle;
+}
+
 h2 span.subtitle {
   color: var(--lightest-grey-color);
   font-size: 0.8em;
