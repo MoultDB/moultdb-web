@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from "react-router-dom";
 import ChangePageTitle from "../../common/change-page-title";
 import MoultdbService from "../../services/moultdb.service";
 import Genes from "../data/genes";
@@ -63,7 +63,7 @@ const Orthogroup = () => {
                                 <Genes genesByPathwayTaxonOrthogroup={genesByPathwayTaxonOrthogroup}
                                        startExpanded={true} dataURL={genesURL}/>
                                 :
-                                <>{geneLoading ? <Loading/> : <div>Unknown genes</div>}</>
+                                <>{geneLoading ? <Loading/> : <div>No data</div>}</>
                             }
                         </>
                         :
@@ -71,7 +71,11 @@ const Orthogroup = () => {
                             {orthogroupLoading ?
                                 <Loading/> 
                                 :
-                                <div className={"container alert alert-danger"} role="alert">Unknown orthogroup</div>
+                                <div className="alert alert-warning" role="alert">
+                                    Orthogroup not found.<br/>
+                                    Please check the orthogroup accession in the URL or go to the page <Link to={"/pathways/"}>
+                                    Pathways</Link> to browse all orthogroups involved in moulting.
+                                </div>
                             }
                         </>
                     }

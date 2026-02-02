@@ -1,6 +1,6 @@
 {
   "name": "moultdb-web",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "license": "GPL-3.0",
   "private": true,
   "dependencies": {
@@ -19,6 +19,7 @@
     "embla-carousel-react": "^8.0.2",
     "jquery": "^3.7.1",
     "react": "^19.1.0",
+    "react-arborist": "^3.4.3",
     "react-cookie-consent": "^9.0.0",
     "react-dom": "^19.1.0",
     "react-obfuscate": "^3.6.8",

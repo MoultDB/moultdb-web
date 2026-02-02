@@ -76,7 +76,9 @@ const Domain = () => {
                     </div>
                 </div>
                 :
-                <div>Unknown domain</div>
+                <div className="alert alert-warning" role="alert">
+                    Domain not found.
+                </div>
             }
         </main>
     );
