@@ -59,8 +59,13 @@
     }
 }
 
+.ttn-cell.count-col, .ttn-cell.text-col  {
+    font-size: 0.9rem;
+}
+
 .ttn-cell.count-col {
     text-align: right;
+    font-family: monospace;
 }
 
 .ttn-cell.text-col {
